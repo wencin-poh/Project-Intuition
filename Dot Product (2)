@@ -91,14 +91,7 @@
   background-color: yellow;
   text-align: center;}
   
-    #M21 {
-  position: absolute;
-  height: 20px;
-  width: 70px;
-  left: 180px;
-  top: 30px;
-  background-color: blue;
-  text-align: center;}
+
   
   
   #M12 {
@@ -197,10 +190,10 @@ Enter module instructions here
 </p>
 <div>
 <div id="question">
-<p>
 
-1. Find two vectors with length approximately equal to 1 and dot product approximately equal to 1
-</p>
+
+Click the "Start" button when you are ready to begin.
+
 
 </div>
 </div>
@@ -243,7 +236,7 @@ Enter module instructions here
 
 
 <div id="sub">
-<button  onclick="submit()">Submit</button>
+<button  onclick="submit()">Start</button>
 </div>
 <div id="try">
 
@@ -604,43 +597,76 @@ draw()
 
 
 </script>
+
+
 <script>
-var page=0
-var quests=[
-"1.Excellent, now find two vectors with length approximately equal to 1 and dot product approximately equal to 1",
-"2. Good job, now find two vectors with length approximately equal to 1 and dot product approximately equal to 0.5",
-"3. Excellent,  now find two vectors with length approximately equal to 1 and dot product approximately equal to 0",
-"4. Good job,  now find two vectors with length approximately equal to 1 and dot product approximately equal to -0.5",
-"5. Excellent, now find two vectors with length approximately equal to 1 and dot product approximately equal to -1",
+
+  var initialized=0
+  var page=0
+  var quests=[
+"0. Find two vectors with length approximately equal to 1 and dot product approximately equal to 1",
+"1. Good job, now find two vectors with length approximately equal to 1 and dot product approximately equal to 0.5",
+"2. Excellent,  now find two vectors with length approximately equal to 1 and dot product approximately equal to 0",
+"3. Good job,  now find two vectors with length approximately equal to 1 and dot product approximately equal to -0.5",
+"4. Excellent, now find two vectors with length approximately equal to 1 and dot product approximately equal to -1",
 "Good job!!!"]
-var ans=[
-[1,1,1,0.1,0.1,0.1],
-[1,1,0.5,0.1,0.1,0.1],
-[1,1,0,0.1,0.1,0.1],
-[1,1,-0.5,0.1,0.1,0.1],
-[1,1,-1,0.1,0.1,0.1]
-]
+  
+  
+  
+  
+  
+  function grade(p,g1,g2,r1,r2,d,G,R){
+  correct=0
+  
+  if (p==0){ if (Math.abs(G-1)<=0.1 && Math.abs(R-1)<=0.1 && Math.abs(d-1)<=0.1){correct=1}}
+  if (p==1){ if (Math.abs(G-1)<=0.1 && Math.abs(R-1)<=0.1 && Math.abs(d-0.5)<=0.1){correct=1}}
+  if (p==2){ if (Math.abs(G-1)<=0.1 && Math.abs(R-1)<=0.1 && Math.abs(d-0)<=0.1){correct=1}}
+  if (p==3){ if (Math.abs(G-1)<=0.1 && Math.abs(R-1)<=0.1 && Math.abs(d-(-0.5))<=0.1){correct=1}}
+  if (p==4){ if (Math.abs(G-1)<=0.1 && Math.abs(R-1)<=0.1 && Math.abs(d-(-1))<=0.1){correct=1}}
 
-function submit(){
-
-D=document.getElementById("m11").value
-G=document.getElementById("gl").value
-R=document.getElementById("rl").value
-var feed=document.getElementById("try").innerText
-if (feed==""){
-document.getElementById("try").innerText="Try Again"}
-if (feed=="Not Quite"){
-document.getElementById("try").innerText="Try Again"}
-if (feed=="Try Again"){
-document.getElementById("try").innerText="Not Quite"}
-if (Math.abs(G-ans[page][0])<ans[page][3]
-&& Math.abs(R-ans[page][1])<ans[page][4]
-&& Math.abs(D-ans[page][2])<ans[page][5]){
-document.getElementById("try").innerText=""
-page+=1
-document.getElementById("question").innerText=quests[page]
-
-}
+  return(correct)
+  }
+  
+  
+  
+  
+  
+  function submit(){
+  if (initialized==0){
+  document.getElementById("sub").getElementsByTagName("button")[0].innerText="Submit"
+  document.getElementById("question").innerText=quests[page]
+ 
+  }
+  
+  if (initialized==1){
+  
+  gx=(document.getElementById("m12").value)
+  gy=(document.getElementById("m22").value)
+  rx=(document.getElementById("v1").value)
+  ry=(document.getElementById("v2").value)
+  dot=(document.getElementById("m11").value)
+  gL=(document.getElementById("gl").value)
+  rL=(document.getElementById("rl").value)
+  
+  var feed=document.getElementById("try").innerText
+  if (feed==""){
+  document.getElementById("try").innerText="Try Again"}
+  if (feed=="Not Quite"){
+  document.getElementById("try").innerText="Try Again"}
+  if (feed=="Try Again"){
+  document.getElementById("try").innerText="Not Quite"}
+  
+  
+  
+  
+  if (grade(page,gx,gy,rx,ry,dot,gL,rL)==1)
+  {
+  document.getElementById("try").innerText=""
+  page+=1
+  document.getElementById("question").innerText=quests[page]
+  }
+  }
+  initialized=1
 }
 </script>
 
