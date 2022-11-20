@@ -201,12 +201,13 @@
 <body>
 <div>
 
-
-<div id="question">
 <p>
+Enter module directions here.
+</p>
+<div id="question">
 
 Ready to begin?  Click "Start" to view your first question.
-</p>
+
 
 </div>
 
@@ -325,10 +326,8 @@ style="border:1px solid #c3c3c3;">
 
 
 
-<!--Then we include the scripts, written in javaScript, needed to bring the page to life-->
 
 
-<!--The function below is called whenever any change is made to the three objects "greentip", "bluetip", and "redtip" which appear in the page as grey squares.  It redraws the green, blue, and red lines so that they end at these objects.-->
 
 <script>
 function draw(){
@@ -456,7 +455,6 @@ ctx.stroke();
 </script>
 
 
-<!--The function below is called whenever any change is made to the three objects "greentip", "bluetip", and "redtip" which appear in the page as grey squares.  It fills the entries inside the object "matrix" with new values corresponding to the new positions.-->
 
 
 
@@ -499,7 +497,6 @@ document.getElementById("m22").value=Math.round(G2/10)/10
 </script>
 
 
-<!--Now call the draw function to draw the lines in the initial positions.-->
 
 
 
@@ -539,7 +536,6 @@ draw()
 
 
 
-<!--Below we define the function "mobilize" that makes an object draggable and apply it to each of the objects "greentip", "bluetip", and "redtip".-->
 
 
 
@@ -603,7 +599,6 @@ mobilize(gt)
 
 
 
-<!--Next we include the function "match" that checks the values appearing in "matrix" and moves  "greentip", "bluetip", and "redtip" to the corresponding position (needed if the user wants to enter values into the text boxes).-->
 
 
 
@@ -651,7 +646,6 @@ purp()
 
 
 
-<!--This just applies the matrix multiplication.  It is run whenever the button object "but"  (appearing as the button with text content "Apply LInear Transformation") is clicked.-->
 
 
 <script>
@@ -691,8 +685,8 @@ document.getElementById("w2").value=Y
 var initialized=0
 var page=0
 var quests=[
-"1.Find a two vectors in the fourth quadrant, and a linear combination of them which lies in the first quadrant.",
-"2. Good job, now find a vecto in the first quadrant and a vector in the third quadrant along with a linear combination of them in the second quadrant.",
+"0. Find a two vectors in the second quadrant, and a linear combination of them which lies in the first quadrant.",
+"1. Good job, now find a vector in the first quadrant and a vector in the third quadrant along with a linear combination of them in the fourth quadrant.",
 "Good job!!!"]
 
 
@@ -765,6 +759,4 @@ return(correct)
 
 </body>
 </html>
-
-
 
