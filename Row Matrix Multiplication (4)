@@ -200,13 +200,15 @@
  
 <body>
 <div>
-
+<p>
+    Enter module directions here.
+</p>
 
 <div id="question">
-<p>
+
 
 Ready to begin?  Click "Start" to view your first question.
-</p>
+
 
 </div>
 
@@ -310,21 +312,6 @@ style="border:1px solid #c3c3c3;">
 
 
 
-
-
-
-
-
-
-
-
-
-
-<!--Then we include the scripts, written in javaScript, needed to bring the page to life-->
-
-
-<!--The function below is called whenever any change is made to the three objects "greentip", "bluetip", and "redtip" which appear in the page as grey squares.  It redraws the green, blue, and red lines so that they end at these objects.-->
-
 <script>
 draw()
 function draw(){
@@ -410,20 +397,13 @@ document.getElementById("v2").value=''}
 </script>
 
 
-<!--The function below is called whenever any change is made to the three objects "greentip", "bluetip", and "redtip" which appear in the page as grey squares.  It fills the entries inside the object "matrix" with new values corresponding to the new positions.-->
-
-
-
-
-
-
 
 <script>
 var initialized=0
 var page=0
 var quests=[
-"1. Find a two lines with negative slope that intersect in the second quadrant.",
-"2. FInd two lines with positive y-intercept that intersect in the third quadrant.",
+"0. Find a two lines with negative slope that intersect in the fourth quadrant.",
+"1. Find two lines with positive y-intercept that intersect in the third quadrant.",
 "Good job!!!"]
 
 
@@ -494,6 +474,5 @@ return(correct)
 
 </body>
 </html>
-
 
 
