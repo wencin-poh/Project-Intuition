@@ -388,6 +388,10 @@ ctx.lineWidth=2
 ctx.moveTo(200, 200);
 ctx.lineTo(cr1, cr2);
 ctx.stroke();
+ctx.beginPath();
+ctx.arc(cr1, cr2, 4, 0, 7);
+ctx.stroke();
+ctx.fill();
 }
 
 
@@ -699,4 +703,3 @@ return(correct)
 
 </body>
 </html>
-
