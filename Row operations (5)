@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html>
+
+
+<style>
+
+
+#blank {
+  position: relative;
+}
+
+
+#outer {
+  position: absolute;
+  height: 300px;
+  width: 475px;
+  left: 0px;
+  top: 90px;
+  background-color: white;
+  text-align: center}
+
+ 
+ 
+ #bluetip {
+  position: absolute;
+  height: 55px;
+  width: 375px;
+  left: 100px;
+  top: 0px;
+  opacity: 0.8;
+  background-color: blue;}
+
+
+
+  #blue1 {
+  position: absolute;
+  height: 45px;
+  width: 75px;
+  left: 0px;
+  top: 10px;
+  background-color: blue;
+  text-align: center}
+  #blue2 {
+  position: absolute;
+  height: 45px;
+  width: 75px;
+  left: 75px;
+  top: 10px;
+  background-color: blue;}
+  #blue3 {
+  position: absolute;
+  height: 45px;
+  width: 75px;
+  left: 150px;
+  top: 10px;
+  background-color: blue;}
+  #blue4 {
+  position: absolute;
+  height: 45px;
+  width: 75px;
+  left: 225px;
+  top: 10px;
+  background-color: blue;}
+  #blue5 {
+  position: absolute;
+  height: 45px;
+  width: 75px;
+  left: 300px;
+  top: 10px;
+  background-color: blue;}
+
+
+
+
+  #greentip {
+  position: absolute;
+  height: 55px;
+  width: 375px;
+  left: 100px;
+  top: 75px;
+  opacity: 0.8;
+  background-color: green;}
+
+
+
+  #green1 {
+  position: absolute;
+  height: 45px;
+  width: 75px;
+  left: 0px;
+  top: 10px;
+  background-color: green;}
+  #green2 {
+  position: absolute;
+  height: 45px;
+  width: 75px;
+  left: 75px;
+  top: 10px;
+  background-color: green;}
+  #green3 {
+  position: absolute;
+  height: 45px;
+  width: 75px;
+  left: 150px;
+  top: 10px;
+  background-color: green;}
+  #green4 {
+  position: absolute;
+  height: 45px;
+  width: 75px;
+  left: 225px;
+  top: 10px;
+  background-color: green;}
+  #green5 {
+  position: absolute;
+  height: 45px;
+  width: 75px;
+  left: 300px;
+  top: 10px;
+  background-color: green;}
+
+
+
+
+
+
+  
+  
+     #redtip {
+  position: absolute;
+  height: 55px;
+  width: 375px;
+  left: 100px;
+  top: 150px;
+  opacity: 0.8;
+  background-color: red;}
+
+
+  #red1 {
+  position: absolute;
+  height: 45px;
+  width: 75px;
+  left: 0px;
+  top: 10px;
+  background-color: red;}
+  #red2 {
+  position: absolute;
+  height: 45px;
+  width: 75px;
+  left: 75px;
+  top: 10px;
+  background-color: red;}
+  #red3 {
+  position: absolute;
+  height: 45px;
+  width: 75px;
+  left: 150px;
+  top: 10px;
+  background-color: red;}
+  #red4 {
+  position: absolute;
+  height: 45px;
+  width: 75px;
+  left: 225px;
+  top: 10px;
+  background-color: red;}
+  #red5 {
+  position: absolute;
+  height: 45px;
+  width: 75px;
+  left: 300px;
+  top: 10px;
+  background-color: red;}
+
+
+  
+
+  #yellowtip {
+  position: absolute;
+  height: 55px;
+  width: 375px;
+  left: 100px;
+  top: 225px;
+  opacity: 0.8;
+  background-color: yellow;}
+
+
+  
+  #yellow1 {
+  position: absolute;
+  height: 45px;
+  width: 75px;
+  left: 0px;
+  top: 10px;
+  background-color: yellow;}
+  #yellow2 {
+  position: absolute;
+  height: 45px;
+  width: 75px;
+  left: 75px;
+  top: 10px;
+  background-color: yellow;}
+  #yellow3 {
+  position: absolute;
+  height: 45px;
+  width: 75px;
+  left: 150px;
+  top: 10px;
+  background-color: yellow;}
+  #yellow4 {
+  position: absolute;
+  height: 45px;
+  width: 75px;
+  left: 225px;
+  top: 10px;
+  background-color: yellow;}
+  #yellow5 {
+  position: absolute;
+  height: 45px;
+  width: 75px;
+  left: 300px;
+  top: 10px;
+  background-color: yellow;}
+  
+  #line {
+  position: absolute;
+  height: 280px;
+  width: 5px;
+  left: 400px;
+  top: 0px;
+  background-color: black;}
+
+
+ #sub {
+  position: absolute;
+  height: 30px;
+  width: 90px;
+  left: 290px;
+  top: 50px;
+  background-color: white;
+  text-align: center;}
+
+     #try {
+  position: absolute;
+  height: 30px;
+  width: 90px;
+  left: 290px;
+  top: 10px;
+  background-color: white;
+  text-align: center;}
+
+  .center {
+  text-align: center;
+  font-size: 30px;
+}
+
+
+
+
+#switch12 {
+  position: absolute;
+  height: 20px;
+  width: 375px;
+  left: 100px;
+  top: 55px;
+  background-color: white;}
+
+  #switch23 {
+  position: absolute;
+  height: 20px;
+  width: 375px;
+  left: 100px;
+  top: 130px;
+  background-color: white;}
+
+  #switch34 {
+  position: absolute;
+  height: 20px;
+  width: 375px;
+  left: 100px;
+  top: 205px;
+  background-color: white;}
+
+  #in1 {
+  position: absolute;
+  height: 40px;
+  width: 55px;
+  left: 5px;
+  top: 5px;
+  background-color: white;}
+
+  #in2 {
+  position: absolute;
+  height: 40px;
+  width: 55px;
+  left: 5px;
+  top: 80px;
+  background-color: white;}
+
+  #in3 {
+  position: absolute;
+  height: 40px;
+  width: 55px;
+  left: 5px;
+  top: 155px;
+  background-color: white;}
+
+  #in4 {
+  position: absolute;
+  height: 40px;
+  width: 55px;
+  left: 5px;
+  top: 230px;
+  background-color: white;}
+
+
+
+  #mult1 {
+  position: absolute;
+  height: 46px;
+  width: 28px;
+  left: 70px;
+  top: 5px;
+  background-color: rgb(179, 172, 172);}
+
+  #mult2 {
+  position: absolute;
+  height: 46px;
+  width: 28px;
+  left: 70px;
+  top: 80px;
+  background-color: rgb(179, 172, 172);}
+
+
+  #mult3 {
+  position: absolute;
+  height: 46px;
+  width: 28px;
+  left: 70px;
+  top: 155px;
+  background-color: rgb(179, 172, 172);}
+
+
+  #mult4 {
+  position: absolute;
+  height: 46px;
+  width: 28px;
+  left: 70px;
+  top: 230px;
+  background-color: rgb(179, 172, 172);}
+
+
+
+ </style>
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+<body>
+<p>
+Enter module instructions here
+</p>
+<div>
+<div id="question">
+<p>
+
+1. Find two vectors with length approximately equal to 1 and dot product approximately equal to 1
+</p>
+
+</div>
+</div>
+<div id="blank">
+
+
+<div id="sub">
+<button  onclick="submit()">Submit</button>
+</div>
+<div id="try">
+
+</div>
+
+<div id="outer">
+    <input id = "in1"  type='text' style='font-size: 22px'></input>
+    <input id = "in2"  type='text' style='font-size: 22px'></input>
+
+    <input id = "in3"  type='text' style='font-size: 22px'></input>
+    <input id = "in4"  type='text' style='font-size: 22px'></input>
+
+    <button id="switch12" onclick="swi(1)"></button>
+    <button id="switch23" onclick="swi(2)"></button>
+    <button id="switch34" onclick="swi(3)"></button>
+
+
+    <button id="mult1" style='font-size: 22px' onclick="mult(1)">&times</button>
+    <button id="mult2" style='font-size: 22px' onclick="mult(2)">&times</button>
+    <button id="mult3" style='font-size: 22px' onclick="mult(3)">&times</button>
+    <button id="mult4" style='font-size: 22px' onclick="mult(4)">&times</button>
+
+<div id="bluetip">
+    <div id="blue1" class="center"></div>
+    <div id="blue2" class="center"></div>
+    <div id="blue3" class="center"></div>
+    <div id="blue4" class="center"></div>
+    <div id="blue5" class="center"></div>
+</div>
+
+<div id="greentip">
+    <div id="green1" class="center"></div>
+    <div id="green2" class="center"></div>
+    <div id="green3" class="center"></div>
+    <div id="green4" class="center"></div>
+    <div id="green5" class="center"></div>
+</div>
+
+<div id="redtip">
+    <div id="red1" class="center"></div>
+    <div id="red2" class="center"></div>
+    <div id="red3" class="center"></div>
+    <div id="red4" class="center"></div>
+    <div id="red5" class="center"></div>
+</div>
+
+<div id="yellowtip">
+    <div id="yellow1" class="center"></div>
+    <div id="yellow2" class="center"></div>
+    <div id="yellow3" class="center"></div>
+    <div id="yellow4" class="center"></div>
+    <div id="yellow5" class="center"></div>
+</div>
+
+<div id="line">
+</div>
+
+</div>
+
+
+</div>
+
+
+
+
+
+<script>
+
+document.getElementById("blue1").innerHTML="1"
+document.getElementById("blue2").innerHTML="1"
+document.getElementById("blue3").innerHTML="3"
+document.getElementById("blue4").innerHTML="4"
+document.getElementById("blue5").innerHTML="5"
+document.getElementById("green1").innerHTML="5"
+document.getElementById("green2").innerHTML="4"
+document.getElementById("green3").innerHTML="3"
+document.getElementById("green4").innerHTML="2"
+document.getElementById("green5").innerHTML="1"
+document.getElementById("red1").innerHTML="6"
+document.getElementById("red2").innerHTML="5"
+document.getElementById("red3").innerHTML="6"
+document.getElementById("red4").innerHTML="5"
+document.getElementById("red5").innerHTML="6"
+document.getElementById("yellow1").innerHTML="7"
+document.getElementById("yellow2").innerHTML="8"
+document.getElementById("yellow3").innerHTML="8"
+document.getElementById("yellow4").innerHTML="8"
+document.getElementById("yellow5").innerHTML="7"
+
+
+function test(){
+    document.getElementById("yellow5").innerHTML="999"}
+
+function swi(i){
+    b1=document.getElementById("blue1")
+    b2=document.getElementById("blue2")
+    b3=document.getElementById("blue3")
+    b4=document.getElementById("blue4")
+    b5=document.getElementById("blue5")
+    g1=document.getElementById("green1")
+    g2=document.getElementById("green2")
+    g3=document.getElementById("green3")
+    g4=document.getElementById("green4")
+    g5=document.getElementById("green5")
+    r1=document.getElementById("red1")
+    r2=document.getElementById("red2")
+    r3=document.getElementById("red3")
+    r4=document.getElementById("red4")
+    r5=document.getElementById("red5")
+    y1=document.getElementById("yellow1")
+    y2=document.getElementById("yellow2")
+    y3=document.getElementById("yellow3")
+    y4=document.getElementById("yellow4")
+    y5=document.getElementById("yellow5")  
+    
+    B=[b1,b2,b3,b4,b5]
+    G=[g1,g2,g3,g4,g5]
+    R=[r1,r2,r3,r4,r5]
+    Y=[y1,y2,y3,y4,y5]
+    Colors=[B,G,R,Y]
+    
+    First=Colors[i-1]
+    Second=Colors[i]
+    var FirstHTML=[]
+    var SecondHTML=[]
+    for (var j=0; j<5; j++){
+    FirstHTML.push(First[j].innerHTML)
+    SecondHTML.push(Second[j].innerHTML)
+    }
+
+    for (var j=0; j<5; j++){
+    First[j].innerHTML=SecondHTML[j]
+    Second[j].innerHTML=FirstHTML[j]
+    }
+    }
+
+
+
+
+
+    function mult(i){
+    b1=document.getElementById("blue1")
+    b2=document.getElementById("blue2")
+    b3=document.getElementById("blue3")
+    b4=document.getElementById("blue4")
+    b5=document.getElementById("blue5")
+    g1=document.getElementById("green1")
+    g2=document.getElementById("green2")
+    g3=document.getElementById("green3")
+    g4=document.getElementById("green4")
+    g5=document.getElementById("green5")
+    r1=document.getElementById("red1")
+    r2=document.getElementById("red2")
+    r3=document.getElementById("red3")
+    r4=document.getElementById("red4")
+    r5=document.getElementById("red5")
+    y1=document.getElementById("yellow1")
+    y2=document.getElementById("yellow2")
+    y3=document.getElementById("yellow3")
+    y4=document.getElementById("yellow4")
+    y5=document.getElementById("yellow5")  
+
+    b=document.getElementById("in1")
+    g=document.getElementById("in2")
+    r=document.getElementById("in3")
+    y=document.getElementById("in4")
+
+    constants=[b,g,r,y]
+    
+    B=[b1,b2,b3,b4,b5]
+    G=[g1,g2,g3,g4,g5]
+    R=[r1,r2,r3,r4,r5]
+    Y=[y1,y2,y3,y4,y5]
+    Colors=[B,G,R,Y]
+    
+    Row=Colors[i-1]
+    Second=Colors[i]
+    var rowHTML=[]
+    for (var j=0; j<5; j++){
+    rowHTML.push(Row[j].innerHTML)
+    }
+
+    for (var j=0; j<5; j++){
+    Row[j].innerHTML=rowHTML[j]*constants[i-1].value
+    }
+    constants[i-1].value=''
+    }
+
+
+
+    function add(Z0,Z1){
+    
+
+    if (155<Z0 && Z0<205){start=0}
+    if (235<Z0 && Z0<280){start=1}
+    if (305<Z0 && Z0<355){start=2}
+    if (380<Z0 && Z0<430){start=3}
+
+    if (155<Z1 && Z1<205){end=0}
+    if (235<Z1 && Z1<280){end=1}
+    if (305<Z1 && Z1<355){end=2}
+    if (380<Z1 && Z1<430){end=3}
+
+    b1=document.getElementById("blue1")
+    b2=document.getElementById("blue2")
+    b3=document.getElementById("blue3")
+    b4=document.getElementById("blue4")
+    b5=document.getElementById("blue5")
+    g1=document.getElementById("green1")
+    g2=document.getElementById("green2")
+    g3=document.getElementById("green3")
+    g4=document.getElementById("green4")
+    g5=document.getElementById("green5")
+    r1=document.getElementById("red1")
+    r2=document.getElementById("red2")
+    r3=document.getElementById("red3")
+    r4=document.getElementById("red4")
+    r5=document.getElementById("red5")
+    y1=document.getElementById("yellow1")
+    y2=document.getElementById("yellow2")
+    y3=document.getElementById("yellow3")
+    y4=document.getElementById("yellow4")
+    y5=document.getElementById("yellow5")  
+
+    b=document.getElementById("in1")
+    g=document.getElementById("in2")
+    r=document.getElementById("in3")
+    y=document.getElementById("in4")
+
+    constants=[b,g,r,y]
+    
+    B=[b1,b2,b3,b4,b5]
+    G=[g1,g2,g3,g4,g5]
+    R=[r1,r2,r3,r4,r5]
+    Y=[y1,y2,y3,y4,y5]
+    Colors=[B,G,R,Y]
+    
+    AddHTML=[]
+    TakeHTML=[]
+    for (j=0; j<5; j++){
+        AddHTML.push(Colors[start][j].innerHTML)
+        TakeHTML.push(Colors[end][j].innerHTML)
+    }
+
+
+    for (j=0; j<5; j++){
+        Colors[end][j].innerHTML=constants[start].value*AddHTML[j]+1*TakeHTML[j]
+    }
+    constants[start].value=''
+    }
+
+
+
+
+
+
+
+
+
+
+
+function clear()
+{
+ if (window.getSelection) {window.getSelection().removeAllRanges();}
+ else if (document.selection) {document.selection.empty();}
+}
+
+
+
+function mobilize(tip) {
+    tip.onmousedown = move;  
+
+  function move(e) {
+    Y0 = e.clientY;
+    x0 = e.clientX;
+    y0 = e.clientY;
+    document.onmousemove = drag;
+    document.onmouseup = close;
+  }
+
+function drag(e) {
+    dx = e.clientX-x0;
+    dy = e.clientY-y0;
+    x0 = e.clientX;
+    y0 = e.clientY;
+    tip.style.left = (tip.offsetLeft + dx) + "px";
+    tip.style.top = (tip.offsetTop + dy) + "px";
+    clear()
+  }
+
+function close(e) {
+	document.onmouseup = null;
+	document.onmousemove = null;
+    document.getElementById("bluetip").style.left="100px";
+    document.getElementById("bluetip").style.top="0px";
+    document.getElementById("greentip").style.left="100px";
+    document.getElementById("greentip").style.top="75px";
+    document.getElementById("redtip").style.left="100px";
+    document.getElementById("redtip").style.top="150px";
+    document.getElementById("yellowtip").style.left="100px";
+    document.getElementById("yellowtip").style.top="225px";
+    Y1=e.clientY
+    add(Y0,Y1)
+ }
+  
+  
+}
+
+
+
+bt=document.getElementById("bluetip")
+mobilize(bt)
+
+gt=document.getElementById("greentip")
+mobilize(gt)
+rt=document.getElementById("redtip")
+mobilize(rt)
+
+yt=document.getElementById("yellowtip")
+mobilize(yt)
+
+
+</script>
+<script>
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+</script>
+<script>
+var page=0
+var quests=[
+"1.Excellent, now find two vectors with length approximately equal to 1 and dot product approximately equal to 1",
+"2. Good job, now find two vectors with length approximately equal to 1 and dot product approximately equal to 0.5",
+"3. Excellent,  now find two vectors with length approximately equal to 1 and dot product approximately equal to 0",
+"4. Good job,  now find two vectors with length approximately equal to 1 and dot product approximately equal to -0.5",
+"5. Excellent, now find two vectors with length approximately equal to 1 and dot product approximately equal to -1",
+"Good job!!!"]
+var ans=[
+[1,1,1,0.1,0.1,0.1],
+[1,1,0.5,0.1,0.1,0.1],
+[1,1,0,0.1,0.1,0.1],
+[1,1,-0.5,0.1,0.1,0.1],
+[1,1,-1,0.1,0.1,0.1]
+]
+
+function submit(){
+
+D=document.getElementById("m11").value
+G=document.getElementById("gl").value
+R=document.getElementById("rl").value
+var feed=document.getElementById("try").innerText
+if (feed==""){
+document.getElementById("try").innerText="Try Again"}
+if (feed=="Not Quite"){
+document.getElementById("try").innerText="Try Again"}
+if (feed=="Try Again"){
+document.getElementById("try").innerText="Not Quite"}
+if (Math.abs(G-ans[page][0])<ans[page][3]
+&& Math.abs(R-ans[page][1])<ans[page][4]
+&& Math.abs(D-ans[page][2])<ans[page][5]){
+document.getElementById("try").innerText=""
+page+=1
+document.getElementById("question").innerText=quests[page]
+
+}
+}
+</script>
+
+
+
+</body>
+</html>
+
+
+
+
