@@ -1,15 +1,9 @@
 <!DOCTYPE html>
 <html>
-
-
-
 <style>
-
-
 #blank {
   position: relative;
 }
-
 
 #outer {
   position: absolute;
@@ -22,8 +16,7 @@
   border: 9px solid #d3d3d3;}
 
  
- 
- #bluetip {
+#bluetip {
   position: absolute;
   height: 20px;
   width: 20px;
@@ -31,19 +24,16 @@
   top: 90px;
   background-color: grey;}
   
-   #greentip {
+#greentip {
   position: absolute;
   height: 20px;
   width: 20px;
   left: 290px;
   top: 90px;
   background-color: grey;}
-  
-  
 
   
-  
- #matrix {
+#matrix {
   position: absolute;
   height: 60px;
   width: 350px;
@@ -53,7 +43,7 @@
   text-align: center;
   border: 9px solid #d3d3d3;}
   
-  #M11 {
+#M11 {
   position: absolute;
   height: 20px;
   width: 60px;
@@ -62,7 +52,7 @@
   background-color: blue;
   text-align: center;}
   
-    #M21 {
+#M21 {
   position: absolute;
   height: 20px;
   width: 60px;
@@ -71,10 +61,7 @@
   background-color: red;
   text-align: center;}
   
-
-  
-  
-  #M12 {
+#M12 {
   position: absolute;
   height: 20px;
   width: 60px;
@@ -83,10 +70,7 @@
   background-color: blue;
   text-align: center;}
   
-
-  
-  
-    #M22 {
+#M22 {
   position: absolute;
   height: 20px;
   width: 60px;
@@ -94,8 +78,9 @@
   top: 30px;
   background-color: red;
   text-align: center;}
-  
-     #times {
+
+
+#times {
   position: absolute;
   height: 20px;
   width: 20px;
@@ -103,9 +88,8 @@
   top: 20px;
   background-color: white;
   text-align: center;}
-  
-  
-       #equals {
+
+#equals {
   position: absolute;
   height: 20px;
   width: 20px;
@@ -113,9 +97,9 @@
   top: 20px;
   background-color: white;
   text-align: center;}
+
   
-  
-  #V1 {
+#V1 {
   position: absolute;
   height: 20px;
   width: 60px;
@@ -124,9 +108,7 @@
   background-color: purple;
   text-align: center;}
   
-  
-  
-    #V2 {
+#V2 {
   position: absolute;
   height: 20px;
   width: 60px;
@@ -135,7 +117,7 @@
   background-color: purple;
   text-align: center;}
   
-  #W1 {
+#W1 {
   position: absolute;
   height: 20px;
   width: 65px;
@@ -144,9 +126,7 @@
   background-color: blue;
   text-align: center;}
   
-  
-  
-    #W2 {
+#W2 {
   position: absolute;
   height: 20px;
   width: 65px;
@@ -155,7 +135,7 @@
   background-color: red;
   text-align: center;}
  
-    #but {
+#but {
   position: absolute;
   height: 30px;
   width: 30px;
@@ -163,7 +143,8 @@
   top:30px;
   background-color: black;
   text-align: center;}
-  #but2 {
+
+#but2 {
   position: absolute;
   height: 30px;
   width: 30px;
@@ -172,8 +153,7 @@
   background-color: black;
   text-align: center;}
 
-
- #sub {
+#sub {
   position: absolute;
   height: 30px;
   width: 80px;
@@ -182,7 +162,7 @@
   background-color: white;
   text-align: center;}
 
-     #try {
+#try {
   position: absolute;
   height: 30px;
   width: 80px;
@@ -190,212 +170,155 @@
   top: 10px;
   background-color: white;
   text-align: center;}
-  
  </style>
- 
- 
- 
-
- 
  
 <body>
 <div>
 <p>
-    Enter module directions here.
+  Enter module directions here.
 </p>
 
-<div id="question">
+  <div id="question">
 
 
-Ready to begin?  Click "Start" to view your first question.
+  Ready to begin?  Click "Start" to view your first question.
 
 
+  </div>
 </div>
 
-
-
-</div>
 <div id="blank">
+  <div id="matrix">
 
-<div id="matrix">
+    <div id="M11">
+    <input type="number" id="m11"   style="width: 3em" value="-1" step=0.1 onChange="draw()">
+    </div>
 
-<div id="M11">
-<input type="number" id="m11"   style="width: 3em" value="-1" step=0.1 onChange="draw()">
+    <div id="M12">
+    <input type="number" id="m12"   style="width: 3em" value="1" step=0.1 onChange="draw()">
+    </div>
+
+    <div id="M21">
+    <input type="number" id="m21"   style="width: 3em" value="1" step=0.1 onChange="draw()">
+    </div>
+
+    <div id="M22">
+    <input type="number" id="m22"   style="width: 3em" value="1" step=0.1 onChange="draw()">
+    </div>
+
+    <div id="times">
+    <b>
+    &times
+    </b>
+    </div>
+
+    <div id="V1">
+    <input type="text" id="v1"   style="width: 3em" value="x" step=0.1 >
+    </div>
+
+    <div id="V2">
+    <input type="text" id="v2"   style="width: 3em" value="y"  >
+    </div>
+
+    <div id="equals">
+    <b>
+    =
+    </b>
+    </div>
+
+    <div id="W1">
+    <input type="number" id="w1"   style="width: 3.5em" value="0" step=0.1 onChange="draw()">
+    </div>
+
+    <div id="W2">
+    <input type="number" id="w2"   style="width: 3.5em" value="1" step=0.1 onChange="draw()">
+    </div>
+  </div>
+
+  <div id="sub">
+  <button  onclick="submit()">Start</button>
+  </div>
+
+  <div id="try">
+  </div>
+
+  <div id="outer">
+  <canvas id="myCanvas" width="400" height="400"
+  style="border:1px solid #c3c3c3;">
+  </canvas>
+  </div>
 </div>
-
-
-<div id="M12">
-<input type="number" id="m12"   style="width: 3em" value="1" step=0.1 onChange="draw()">
-</div>
-
-
-<div id="M21">
-<input type="number" id="m21"   style="width: 3em" value="1" step=0.1 onChange="draw()">
-</div>
-
-
-<div id="M22">
-<input type="number" id="m22"   style="width: 3em" value="1" step=0.1 onChange="draw()">
-</div>
-
-
-
-<div id="times">
-<b>
-&times
-</b>
-</div>
-
-<div id="V1">
-<input type="text" id="v1"   style="width: 3em" value="x" step=0.1 >
-</div>
-
-<div id="V2">
-<input type="text" id="v2"   style="width: 3em" value="y"  >
-</div>
-
-<div id="equals">
-<b>
-=
-</b>
-</div>
-
-<div id="W1">
-<input type="number" id="w1"   style="width: 3.5em" value="0" step=0.1 onChange="draw()">
-</div>
-
-<div id="W2">
-<input type="number" id="w2"   style="width: 3.5em" value="1" step=0.1 onChange="draw()">
-</div>
-
-
-
-</div>
-
-
-
-
-<div id="sub">
-<button  onclick="submit()">Start</button>
-</div>
-<div id="try">
-
-</div>
-
-
-
-
-<div id="outer">
-
-
-
-
-<canvas id="myCanvas" width="400" height="400"
-style="border:1px solid #c3c3c3;">
-</canvas>
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <script>
 draw()
 function draw(){
 
-a11=document.getElementById("m11").value
-a21=document.getElementById("m21").value
+  a11=document.getElementById("m11").value
+  a21=document.getElementById("m21").value
+
+  a12=document.getElementById("m12").value
+  a22=document.getElementById("m22").value
+
+  var c1=document.getElementById("w1").value
+  var c2=document.getElementById("w2").value
 
 
-a12=document.getElementById("m12").value
-a22=document.getElementById("m22").value
+  y0=(1*c1+2*a11)/(1*a12+0.001)
+  y1=(1*c1-2*a11)/(1*a12+0.001)
+
+  y2=(1*c2+2*a21)/(1*a22+0.001)
+  y3=(1*c2-2*a21)/(1*a22+0.001)
+
+  Y0=200-100*y0
+  Y1=200-100*y1
+  Y2=200-100*y2
+  Y3=200-100*y3
+
+  var canvas = document.getElementById("myCanvas");
+  var ctx = canvas.getContext("2d");
+  ctx.clearRect(0, 0, canvas.width, canvas.height)
+  ctx.beginPath();
+  ctx.strokeStyle="black"
+  ctx.lineWidth=1
+  ctx.moveTo(0, 200);
+  ctx.lineTo(400, 200);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.strokeStyle="black"
+  ctx.lineWidth=1
+  ctx.moveTo(200, 0);
+  ctx.lineTo(200, 400);
+  ctx.stroke();
 
 
-var c1=document.getElementById("w1").value
-var c2=document.getElementById("w2").value
+  ctx.beginPath();
+  ctx.strokeStyle="blue"
+  ctx.lineWidth=2
+  ctx.moveTo(0, Y0);
+  ctx.lineTo(400, Y1);
+  ctx.stroke();
 
 
+  ctx.beginPath();
+  ctx.strokeStyle="red"
+  ctx.lineWidth=2
+  ctx.moveTo(0, Y2);
+  ctx.lineTo(400, Y3);
+  ctx.stroke();
 
 
-y0=(1*c1+2*a11)/(1*a12+0.001)
-y1=(1*c1-2*a11)/(1*a12+0.001)
+  if (a11*a22!=a12*a21){
+    var x=(a22*c1-a12*c2)/(a11*a22-a12*a21)
+    var y=(a11*c2-a21*c1)/(a11*a22-a12*a21)
+    document.getElementById("v1").value=x.toFixed(2)
+    document.getElementById("v2").value=y.toFixed(2)}
 
-
-y2=(1*c2+2*a21)/(1*a22+0.001)
-y3=(1*c2-2*a21)/(1*a22+0.001)
-
-Y0=200-100*y0
-Y1=200-100*y1
-Y2=200-100*y2
-Y3=200-100*y3
-
-var canvas = document.getElementById("myCanvas");
-var ctx = canvas.getContext("2d");
-ctx.clearRect(0, 0, canvas.width, canvas.height)
-ctx.beginPath();
-ctx.strokeStyle="black"
-ctx.lineWidth=1
-ctx.moveTo(0, 200);
-ctx.lineTo(400, 200);
-ctx.stroke();
-ctx.beginPath();
-ctx.strokeStyle="black"
-ctx.lineWidth=1
-ctx.moveTo(200, 0);
-ctx.lineTo(200, 400);
-ctx.stroke();
-
-
-ctx.beginPath();
-ctx.strokeStyle="blue"
-ctx.lineWidth=2
-ctx.moveTo(0, Y0);
-ctx.lineTo(400, Y1);
-ctx.stroke();
-
-
-ctx.beginPath();
-ctx.strokeStyle="red"
-ctx.lineWidth=2
-ctx.moveTo(0, Y2);
-ctx.lineTo(400, Y3);
-ctx.stroke();
-
-
-
-if (a11*a22!=a12*a21){
-var x=(a22*c1-a12*c2)/(a11*a22-a12*a21)
-var y=(a11*c2-a21*c1)/(a11*a22-a12*a21)
-document.getElementById("v1").value=x.toFixed(2)
-document.getElementById("v2").value=y.toFixed(2)}
-
-if (a11*a22==a12*a21){
-
-document.getElementById("v1").value=''
-document.getElementById("v2").value=''}
-
-
-
-
+  if (a11*a22==a12*a21){
+    document.getElementById("v1").value=''
+    document.getElementById("v2").value=''}
 }
-
-
-
 </script>
-
 
 
 <script>
@@ -406,73 +329,57 @@ var quests=[
 "1. Find two lines with positive y-intercept that intersect in the third quadrant.",
 "Good job!!!"]
 
-
 function submit(){
-if (initialized==0){
-document.getElementById("sub").getElementsByTagName("button")[0].innerText="Submit"
-document.getElementById("question").innerText=quests[page]
+  if (initialized==0){
+  document.getElementById("sub").getElementsByTagName("button")[0].innerText="Submit"
+  document.getElementById("question").innerText=quests[page]
+  }
+
+  if (initialized==1){
+    M11=document.getElementById("m11").value
+    M21=document.getElementById("m21").value
+    M12=document.getElementById("m12").value
+    M22=document.getElementById("m22").value
+    V1=document.getElementById("v1").value
+    V2=document.getElementById("v2").value
+    W1=document.getElementById("w1").value
+    W2=document.getElementById("w2").value
+    var feed=document.getElementById("try").innerText
+    if (feed==""){
+      document.getElementById("try").innerText="Try Again"
+    }
+    if (feed=="Not Quite"){
+      document.getElementById("try").innerText="Try Again"
+    }
+    if (feed=="Try Again"){
+      document.getElementById("try").innerText="Not Quite"
+    }
+
+    if (grade(page,M11,M21,M12,M22,V1,V2,W1,W2)==1){
+      document.getElementById("try").innerText=""
+      page+=1
+      document.getElementById("question").innerText=quests[page]
+    }
+  }
+  initialized=1
 }
-
-if (initialized==1){
-M11=document.getElementById("m11").value
-M21=document.getElementById("m21").value
-M12=document.getElementById("m12").value
-M22=document.getElementById("m22").value
-V1=document.getElementById("v1").value
-V2=document.getElementById("v2").value
-W1=document.getElementById("w1").value
-W2=document.getElementById("w2").value
-var feed=document.getElementById("try").innerText
-if (feed==""){
-document.getElementById("try").innerText="Try Again"}
-if (feed=="Not Quite"){
-document.getElementById("try").innerText="Try Again"}
-if (feed=="Try Again"){
-document.getElementById("try").innerText="Not Quite"}
-
-
-
-
-if (grade(page,M11,M21,M12,M22,V1,V2,W1,W2)==1)
-{
-document.getElementById("try").innerText=""
-page+=1
-document.getElementById("question").innerText=quests[page]
-}
-
-
-
-
-}
-initialized=1
-}
-
-
-
-
-
 
 function grade(p,m11,m21,m12,m22,v1,v2,w1,w2){
-correct=0
+  correct=0
 
-if (p==0){
-if (m11*m12>=0 && m21*m22>=0 && v1>=0 && v2<=0){
-correct=1}}
+  if (p==0){
+    if (m11*m12>=0 && m21*m22>=0 && v1>=0 && v2<=0){
+      correct=1
+    }
+  }
 
-if (p==1){
-if (m21*w1>=0 && m22*w2>=0 && v1<=0 && v2<=0){
-correct=1}}
-
-return(correct)
+  if (p==1){
+    if (m21*w1>=0 && m22*w2>=0 && v1<=0 && v2<=0){
+      correct=1
+    }
+  }
+  return(correct)
 }
-
-
 </script>
-
-
-
-
 </body>
 </html>
-
-
