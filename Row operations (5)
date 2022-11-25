@@ -448,9 +448,9 @@ Enter module instructions here
 
 document.getElementById("blue1").innerHTML="1"
 document.getElementById("blue2").innerHTML="1"
-document.getElementById("blue3").innerHTML="3"
-document.getElementById("blue4").innerHTML="4"
-document.getElementById("blue5").innerHTML="5"
+document.getElementById("blue3").innerHTML="1"
+document.getElementById("blue4").innerHTML="1"
+document.getElementById("blue5").innerHTML="1"
 document.getElementById("green1").innerHTML="5"
 document.getElementById("green2").innerHTML="4"
 document.getElementById("green3").innerHTML="3"
@@ -468,8 +468,7 @@ document.getElementById("yellow4").innerHTML="8"
 document.getElementById("yellow5").innerHTML="7"
 
 
-function test(){
-    document.getElementById("yellow5").innerHTML="999"}
+
 
 function swi(i){
     b1=document.getElementById("blue1")
@@ -551,19 +550,89 @@ function swi(i){
     G=[g1,g2,g3,g4,g5]
     R=[r1,r2,r3,r4,r5]
     Y=[y1,y2,y3,y4,y5]
-    Colors=[B,G,R,Y]
-    
+    Colors=[B,G,R,Y] 
     Row=Colors[i-1]
-    Second=Colors[i]
-    var rowHTML=[]
+    Con=constants[i-1].value
+
+
+    Ctop=Con
+    Cbot=1
+
+
+    var andex=0
+      for (var k=0; k<Con.length; k++){
+        num=0
+        if (Con[k]>-9999999){
+          num=1}
+          if (num==0){
+            andex=k}
+          }
+
+      if (andex>0){
+      Ctop=Con.substring(0,andex)
+      Cbot=Con.substring(andex+1,Con.length)}
+
+
+
+
+
+
+
+  var rowHTML=[]
     for (var j=0; j<5; j++){
     rowHTML.push(Row[j].innerHTML)
     }
 
+   
+
+ var rowNums=[]
+ 
     for (var j=0; j<5; j++){
-    Row[j].innerHTML=rowHTML[j]*constants[i-1].value
+    var J=rowHTML[j]
+    var Jtop=J
+    var Jbot=1
+
+    var andex=0
+      for (var k=0; k<J.length; k++){
+        num=0
+        if (J[k]>-9999999){
+          num=1}
+          if (num==0){
+            andex=k}
+          }
+
+      if (andex>0){
+      Jtop=J.substring(0,andex)
+      Jbot=J.substring(andex+1,J.length)}
+    
+    rowNums.push([Jtop,Jbot])}
+
+
+       for (var j=0; j<5; j++){
+        rowNums[j][0]*=Ctop
+        rowNums[j][1]*=Cbot}
+
+
+  
+
+ 
+
+    for (var j=0; j<5; j++){
+      if (rowNums[j][1]==1){
+        Row[j].innerHTML=rowNums[j][0]
+      }
+      if (rowNums[j][1]!=1){
+    Row[j].innerHTML=rowNums[j][0]+"&frasl;"+rowNums[j][1]
     }
+    }
+  
+
+
+
+
+  
     constants[i-1].value=''
+    reduce()
     }
 
 
@@ -617,25 +686,191 @@ function swi(i){
     
     AddHTML=[]
     TakeHTML=[]
+
+
+
+Con=constants[start].value
+
+
+
+    Ctop=Con
+    Cbot=1
+
+
+    var andex=0
+      for (var k=0; k<Con.length; k++){
+        num=0
+        if (Con[k]>-9999999){
+          num=1}
+          if (num==0){
+            andex=k}
+          }
+
+      if (andex>0){
+      Ctop=Con.substring(0,andex)
+      Cbot=Con.substring(andex+1,Con.length)}
+
+
+
+
+
+
+   
+
     for (j=0; j<5; j++){
         AddHTML.push(Colors[start][j].innerHTML)
         TakeHTML.push(Colors[end][j].innerHTML)
     }
 
+ AddNums=[]
+ TakeNums=[]
 
-    for (j=0; j<5; j++){
-        Colors[end][j].innerHTML=constants[start].value*AddHTML[j]+1*TakeHTML[j]
-    }
+    for (var j=0; j<5; j++){
+    var Add=AddHTML[j]
+    var Take=TakeHTML[j]
+
+
+
+    var slash1=0
+      for (var k=0; k<Add.length; k++){
+        num=0
+        if (Add[k]>-9999999){
+          num=1}
+          if (num==0){
+            slash1=k}
+          }
+
+    var slash2=0
+      for (var k=0; k<Take.length; k++){
+        num=0
+        if (Take[k]>-9999999){
+          num=1}
+          if (num==0){
+            slash2=k}
+          }
+
+
+
+
+
+
+      if (slash1>0){
+      AddNums.push([Add.substring(0,slash1),Add.substring(slash1+1,Add.length)])}
+      if (slash1==0){
+        AddNums.push([Add,1])}
+
+
+      if (slash2>0){
+      TakeNums.push([Take.substring(0,slash2),Take.substring(slash2+1,Take.length)])}
+      if (slash2==0){
+        TakeNums.push([Take,1])}
+
+      }
+
+
+       for (var j=0; j<5; j++){
+        c0=Ctop
+        c1=Cbot
+        a0=AddNums[j][0]
+        a1=AddNums[j][1]
+        t0=TakeNums[j][0]
+        t1=TakeNums[j][1]
+        n0=c0*a0*t1+t0*c1*a1
+        n1=c1*a1*t1
+        if (n1==1){Colors[end][j].innerHTML=n0}
+        if (n1!=1){Colors[end][j].innerHTML=n0+"&frasl;"+n1}}
+
+
+
+
     constants[start].value=''
+    reduce()
     }
 
 
 
 
+    function reduce(){
+    
+
+
+    b1=document.getElementById("blue1")
+    b2=document.getElementById("blue2")
+    b3=document.getElementById("blue3")
+    b4=document.getElementById("blue4")
+    b5=document.getElementById("blue5")
+    g1=document.getElementById("green1")
+    g2=document.getElementById("green2")
+    g3=document.getElementById("green3")
+    g4=document.getElementById("green4")
+    g5=document.getElementById("green5")
+    r1=document.getElementById("red1")
+    r2=document.getElementById("red2")
+    r3=document.getElementById("red3")
+    r4=document.getElementById("red4")
+    r5=document.getElementById("red5")
+    y1=document.getElementById("yellow1")
+    y2=document.getElementById("yellow2")
+    y3=document.getElementById("yellow3")
+    y4=document.getElementById("yellow4")
+    y5=document.getElementById("yellow5")  
+
+  
+    
+    var B=[b1,b2,b3,b4,b5]
+    var G=[g1,g2,g3,g4,g5]
+    var R=[r1,r2,r3,r4,r5]
+    var Y=[y1,y2,y3,y4,y5]
+    Colors=[B,G,R,Y]
+
+   for (i=0; i<Colors.length; i++){
+    for (j=0; j<Colors[i].length; j++){
+     var n=Colors[i][j].innerHTML
+  
+    
+
+
+   
+    var slash=0
+      for (var k=0; k<n.length; k++){
+        num=0
+        if (n[k]>-9999999){
+          num=1}
+          if (num==0){
+            slash=k}
+          }
 
 
 
 
+if (slash>0){
+
+var n0=n.substring(0,slash)
+var n1=n.substring(slash+1,n.length)
+lcm=1
+for (m=0; m<n1+1; m++){
+  if (Number.isInteger(n1/m)==true && Number.isInteger(n0/m)==true){
+    lcm=m
+  }
+}
+n0/=lcm
+n1/=lcm
+
+
+
+
+if (n1==1){
+  Colors[i][j].innerHTML=n0}
+  if (n1!=1){
+  Colors[i][j].innerHTML=n0+"&frasl;"+n1}
+
+
+      
+    }
+  }
+}
+
+    }
 
 
 
