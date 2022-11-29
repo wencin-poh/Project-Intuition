@@ -176,7 +176,19 @@
 <body>
 <div>
 <p>
-Enter module directions here.
+This module explores matrix-vector multiplication.  In particular, it emphasizes how a matrix vector product can be viewed as a linear combination of the columns of the matrix.
+</p>
+<p>
+To complete this module, you'll need to choose matrices and vectors so that their product has some desired characteristics.  The matrix is shown on the left of the multiplication sign, and the vectors represented by its columns are shown on the graph.  They are color coordinated with the columns. 
+</p>
+<p>
+You can adjust the matrix in 3 different ways:  by dragging the gray boxes at the ends of the vectors; by typing in numerical values in the matrix; and by using the up and down arrow buttons next to the numbers.  Give it a try!
+</p>
+<p>
+You'll also need to adjust the vector on the right side of the multiplication sign.  You can do this by typing in numerical values or using the arrow buttons.  Notice that each vector entry is color coordinated with the matrix column that it multiplies.
+</p>
+<p>
+The product of your matrix and vector is on the right side of the equation, and also shown on the graph.  Both are in purple.  You'll want to carefully observe how this product is a combination of the blue and red vectors encoded in the matrix.
 </p>
 <div id="question">
 Ready to begin?  Click "Start" to view your first question.
@@ -509,8 +521,8 @@ function drag(e) {
   }
 
 function close() {
-	document.onmouseup = null;
-	document.onmousemove = null;
+  document.onmouseup = null;
+  document.onmousemove = null;
     tip.style.left = 10*Math.round(tip.offsetLeft/10) + "px";
     tip.style.top = 10*Math.round(tip.offsetTop/10) + "px";
     draw(tip.offsetLeft + dx + 10, tip.offsetTop + dy +10);
@@ -629,8 +641,17 @@ document.getElementById("w2").value=Y
 var initialized=0
 var page=0
 var quests=[
-"0. Find a two vectors in the second quadrant, and a linear combination of them which lies in the first quadrant.",
-"1. Good job, now find a vector in the first quadrant and a vector in the third quadrant along with a linear combination of them in the fourth quadrant.",
+"1. Make a linear combination that includes 2 copies of the first column of the matrix, and 3 copies of the second.",
+"2. Make a linear combination that adds 4 of the first column and subtracts 2 of the second.",
+"3. Find a linear combination where the result does not depend at all on the second column of the matrix.  You can check your answer by changing the red vector and making sure the result does not change.",
+"4. Find a linear combination where the result does not depend at all on the second column of the matrix, and the result is the vector (-1, 0).",
+"5. Find a two vectors in the second quadrant, and a linear combination of them which lies in the first quadrant.",
+"6. Good job, now find a vector in the first quadrant and a vector in the third quadrant along with a linear combination of them in the fourth quadrant.",
+"7. Let's think about making the three vector end-points colinear (i.e. the gray squares and black dot all lying on one line).  First, make the vector in the matrix-vector product equal to (1,1).  Then, find a matrix where the columns are approximately colinear with the product.",
+"8. Next, find a vector so that any matrix will result in all our vectors being colinear.  Hint: you'll need the product (the black dot) to always land right in between the gray squares.",
+"9. Find a vector so that the matrix-vector product is always the same, no matter what matrix you use.",
+"10. Find a matrix so that we can multiply it with any vector and get the same vector as the product (i.e. vectors are unchanged by multiplication with this matrix)",
+
 "Good job!!!"]
 
 
@@ -683,14 +704,47 @@ function grade(p,m11,m21,m12,m22,v1,v2,w1,w2){
 correct=0
 
 if (p==0){
-if (m11<=0 && m21>=0 && m12<=0 && m22>=0 && w1>=0 && w2>=0){
-correct=1}}
+  if(v1==2 && v2==3){
+    correct = 1}}
 
 if (p==1){
-if (m11>=0 && m21>=0 && m12<=0 && m22<=0 && w1>=0 && w2<=0){
-correct=1}
-if (m12>=0 && m22>=0 && m11<=0 && m21<=0 && w1>=0 && w2<=0){
-correct=1}}
+  if(v1==4 && v2== -2){
+    correct = 1}}
+
+if (p==2){
+  if(v2==0){
+    correct = 1}}
+
+if (p==3){
+  if(v2==0 && w1==-1 && w2==0){
+    correct = 1}}
+
+if (p==4){
+  if (m11<=0 && m21>=0 && m12<=0 && m22>=0 && w1>=0 && w2>=0){
+    correct=1}}
+
+if (p==5){
+  if (m11>=0 && m21>=0 && m12<=0 && m22<=0 && w1>=0 && w2<=0){
+    correct=1}
+  if (m12>=0 && m22>=0 && m11<=0 && m21<=0 && w1>=0 && w2<=0){
+    correct=1}}
+
+if (p==6){
+  if (v1==1 && v2==1 && -0.1 < ((m11/m12)/(m21/m22)-1) && ((m11/m12)/(m21/m22)-1) < 0.1){
+    correct = 1}}
+
+if (p==7){
+  if (v1==0.5 && v2==0.5){
+    correct=1}}
+
+if (p==8){
+  if (v1==0 && v2==0){
+    correct=1}}
+
+if (p==9){
+  if (m11==1 && m12==0 && m21==0 && m22==1){
+    correct=1}}
+  
 
 return(correct)
 }
