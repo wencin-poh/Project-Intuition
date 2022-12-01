@@ -19,6 +19,17 @@
   background-color: white;
   text-align: center}
 
+
+
+  #equations {
+  position: absolute;
+  height: 300px;
+  width: 475px;
+  left: 500px;
+  top: 90px;
+  background-color: grey;
+  text-align: center}
+
  
  
  #bluetip {
@@ -377,11 +388,16 @@ Enter module instructions here
 
 
 <div id="sub">
-<button  onclick="submit()">Submit</button>
+<button  onclick="revert()">Back</button>
 </div>
 <div id="try">
 
 </div>
+
+<div id="equations">
+h
+</div>
+
 
 <div id="outer">
     <input id = "in1"  type='text' style='font-size: 22px'></input>
@@ -442,35 +458,268 @@ Enter module instructions here
 
 
 
+<script>
 
+
+
+
+
+
+</script>
 
 <script>
 
-document.getElementById("blue1").innerHTML="1"
-document.getElementById("blue2").innerHTML="1"
-document.getElementById("blue3").innerHTML="1"
-document.getElementById("blue4").innerHTML="1"
-document.getElementById("blue5").innerHTML="1"
-document.getElementById("green1").innerHTML="5"
-document.getElementById("green2").innerHTML="4"
-document.getElementById("green3").innerHTML="3"
-document.getElementById("green4").innerHTML="2"
-document.getElementById("green5").innerHTML="1"
-document.getElementById("red1").innerHTML="6"
-document.getElementById("red2").innerHTML="5"
-document.getElementById("red3").innerHTML="6"
-document.getElementById("red4").innerHTML="5"
-document.getElementById("red5").innerHTML="6"
-document.getElementById("yellow1").innerHTML="7"
-document.getElementById("yellow2").innerHTML="8"
-document.getElementById("yellow3").innerHTML="8"
-document.getElementById("yellow4").innerHTML="8"
-document.getElementById("yellow5").innerHTML="7"
+
+
+
+
+
+
+
+BLUE=document.getElementById("bluetip")
+  GREEN=document.getElementById("greentip")
+  RED=document.getElementById("redtip")
+  YELLOW=document.getElementById("yellowtip")
+
+  BLUE.style.backgroundColor="blue"
+  GREEN.style.backgroundColor="green"
+  RED.style.backgroundColor="red"
+  YELLOW.style.backgroundColor="yellow"
+
+function set(complexity){
+B0=Math.round(10*(Math.random()+Math.random()))-10
+B1=Math.round(10*(Math.random()+Math.random()))-10
+B2=Math.round(10*(Math.random()+Math.random()))-10
+B3=Math.round(10*(Math.random()+Math.random()))-10
+b=[[1,1],[0,1],[0,1],[0,1],[B0,1]]
+g=[[0,1],[1,1],[0,1],[0,1],[B1,1]]
+r=[[0,1],[0,1],[1,1],[0,1],[B2,1]]
+y=[[0,1],[0,1],[0,1],[1,1],[B3,1]]
+var Colors=[b,g,r,y]
+for (j=0; j<complexity; j++){
+    if (Math.random()<0.5){
+        m=Math.floor(4*Math.random())
+        n=Math.floor(4*Math.random())
+        var Cm=Colors[m]
+        var Cn=Colors[n]
+        Colors[m]=Cn
+        Colors[n]=Cm}
+
+
+    if (Math.random()<0.5){
+        m=Math.floor(4*Math.random())
+        c=Math.round(10*Math.random())-5
+            for (k=0; k<5; k++){
+                Colors[m][k][0]*=c}}
+
+      if (Math.random()<0.3){
+        m=Math.floor(4*Math.random())
+        c=Math.ceil(4*Math.random())
+            for (k=0; k<5; k++){
+                Colors[m][k][1]*=c}}
+
+
+    if (Math.random()<0.9){
+        m=Math.floor(4*Math.random())
+        n=Math.floor(4*Math.random())
+        for (k=0; k<5; k++){
+                var t0=Colors[m][k][0]*Colors[n][k][1]
+                    +Colors[m][k][1]*Colors[n][k][0]
+                var t1=Colors[m][k][1]*Colors[n][k][1]
+                Colors[n][k][0]=t0
+                Colors[n][k][1]=t1
+            }}
+       
+
+}
+b1=document.getElementById("blue1")
+    b2=document.getElementById("blue2")
+    b3=document.getElementById("blue3")
+    b4=document.getElementById("blue4")
+    b5=document.getElementById("blue5")
+    g1=document.getElementById("green1")
+    g2=document.getElementById("green2")
+    g3=document.getElementById("green3")
+    g4=document.getElementById("green4")
+    g5=document.getElementById("green5")
+    r1=document.getElementById("red1")
+    r2=document.getElementById("red2")
+    r3=document.getElementById("red3")
+    r4=document.getElementById("red4")
+    r5=document.getElementById("red5")
+    y1=document.getElementById("yellow1")
+    y2=document.getElementById("yellow2")
+    y3=document.getElementById("yellow3")
+    y4=document.getElementById("yellow4")
+    y5=document.getElementById("yellow5")  
+    
+     B=[b1,b2,b3,b4,b5]
+     G=[g1,g2,g3,g4,g5]
+     R=[r1,r2,r3,r4,r5]
+    Y=[y1,y2,y3,y4,y5]
+
+    var COLORS=[B,G,R,Y]
+    for (p=0; p<4; p++){
+      for (q=0; q<5; q++){
+   
+
+
+
+        if (Colors[p][q][1]==1 || Colors[p][q][0]==0){
+          COLORS[p][q].innerHTML=Colors[p][q][0]
+        }
+        
+        if (Colors[p][q][1]!=1 && Colors[p][q][0]!=0){
+          COLORS[p][q].innerHTML=Colors[p][q][0]+'&frasl;'+Colors[p][q][1]
+        }
+
+
+  
+    }
+  }
+
+}
+
+
+
+
+function write_equations(){
+  b1=document.getElementById("blue1").innerHTML
+    b2=document.getElementById("blue2").innerHTML
+    b3=document.getElementById("blue3").innerHTML
+    b4=document.getElementById("blue4").innerHTML
+    b5=document.getElementById("blue5").innerHTML
+    g1=document.getElementById("green1").innerHTML
+    g2=document.getElementById("green2").innerHTML
+    g3=document.getElementById("green3").innerHTML
+    g4=document.getElementById("green4").innerHTML
+    g5=document.getElementById("green5").innerHTML
+    r1=document.getElementById("red1").innerHTML
+    r2=document.getElementById("red2").innerHTML
+    r3=document.getElementById("red3").innerHTML
+    r4=document.getElementById("red4").innerHTML
+    r5=document.getElementById("red5").innerHTML
+    y1=document.getElementById("yellow1").innerHTML
+    y2=document.getElementById("yellow2").innerHTML
+    y3=document.getElementById("yellow3").innerHTML
+    y4=document.getElementById("yellow4").innerHTML
+    y5=document.getElementById("yellow5").innerHTML
+    B=document.getElementById("bluetip").style.backgroundColor
+    G=document.getElementById("greentip").style.backgroundColor
+    R=document.getElementById("redtip").style.backgroundColor
+    Y=document.getElementById("yellowtip").style.backgroundColor
+
+    Eq=document.getElementById("equations")
+    Eq.innerHTML=b1+"x+"+b2+"y+"+b3+"z+"+b4+"w="+b5 
+ 
+
+
+}
+
+
+set(6)
+reduce()
+write_equations()
+States=[]
+
+ 
+
+
+
+function record_state(){
+  b1=document.getElementById("blue1").innerHTML
+    b2=document.getElementById("blue2").innerHTML
+    b3=document.getElementById("blue3").innerHTML
+    b4=document.getElementById("blue4").innerHTML
+    b5=document.getElementById("blue5").innerHTML
+    g1=document.getElementById("green1").innerHTML
+    g2=document.getElementById("green2").innerHTML
+    g3=document.getElementById("green3").innerHTML
+    g4=document.getElementById("green4").innerHTML
+    g5=document.getElementById("green5").innerHTML
+    r1=document.getElementById("red1").innerHTML
+    r2=document.getElementById("red2").innerHTML
+    r3=document.getElementById("red3").innerHTML
+    r4=document.getElementById("red4").innerHTML
+    r5=document.getElementById("red5").innerHTML
+    y1=document.getElementById("yellow1").innerHTML
+    y2=document.getElementById("yellow2").innerHTML
+    y3=document.getElementById("yellow3").innerHTML
+    y4=document.getElementById("yellow4").innerHTML
+    y5=document.getElementById("yellow5").innerHTML
+    B=document.getElementById("bluetip").style.backgroundColor
+    G=document.getElementById("greentip").style.backgroundColor
+    R=document.getElementById("redtip").style.backgroundColor
+    Y=document.getElementById("yellowtip").style.backgroundColor
+
+
+    States.push([[b1,b2,b3,b4,b5],[g1,g2,g3,g4,g5],[r1,r2,r3,r4,r5],[y1,y2,y3,y4,y5],[B,G,R,Y]])
+}
+
+function revert(){
+  S=States[States.length-1]
+  document.getElementById("blue1").innerHTML=S[0][0]
+    document.getElementById("blue2").innerHTML=S[0][1]
+   document.getElementById("blue3").innerHTML=S[0][2]
+    document.getElementById("blue4").innerHTML=S[0][3]
+    document.getElementById("blue5").innerHTML=S[0][4]
+    document.getElementById("green1").innerHTML=S[1][0]
+    document.getElementById("green2").innerHTML=S[1][1]
+    document.getElementById("green3").innerHTML=S[1][2]
+    document.getElementById("green4").innerHTML=S[1][3]
+    document.getElementById("green5").innerHTML=S[1][4]
+    document.getElementById("red1").innerHTML=S[2][0]
+    document.getElementById("red2").innerHTML=S[2][1]
+    document.getElementById("red3").innerHTML=S[2][2]
+    document.getElementById("red4").innerHTML=S[2][3]
+    document.getElementById("red5").innerHTML=S[2][4]
+    document.getElementById("yellow1").innerHTML=S[3][0]
+    document.getElementById("yellow2").innerHTML=S[3][1]
+    document.getElementById("yellow3").innerHTML=S[3][2]
+    document.getElementById("yellow4").innerHTML=S[3][3]
+    document.getElementById("yellow5").innerHTML=S[3][4]
+    document.getElementById("bluetip").style.backgroundColor=S[4][0]
+    document.getElementById("blue1").style.backgroundColor=S[4][0]
+    document.getElementById("blue2").style.backgroundColor=S[4][0]
+    document.getElementById("blue3").style.backgroundColor=S[4][0]
+    document.getElementById("blue4").style.backgroundColor=S[4][0]
+    document.getElementById("blue5").style.backgroundColor=S[4][0]
+
+    document.getElementById("green1").style.backgroundColor=S[4][1]
+    document.getElementById("green2").style.backgroundColor=S[4][1]
+    document.getElementById("green3").style.backgroundColor=S[4][1]
+    document.getElementById("green4").style.backgroundColor=S[4][1]
+    document.getElementById("green5").style.backgroundColor=S[4][1]
+    document.getElementById("greentip").style.backgroundColor=S[4][1]
+
+
+    document.getElementById("redtip").style.backgroundColor=S[4][2]
+    document.getElementById("red1").style.backgroundColor=S[4][2]
+    document.getElementById("red2").style.backgroundColor=S[4][2]
+    document.getElementById("red3").style.backgroundColor=S[4][2]
+    document.getElementById("red4").style.backgroundColor=S[4][2]
+    document.getElementById("red5").style.backgroundColor=S[4][2]
+
+    document.getElementById("yellowtip").style.backgroundColor=S[4][3]
+    document.getElementById("yellow1").style.backgroundColor=S[4][3]
+    document.getElementById("yellow2").style.backgroundColor=S[4][3]
+    document.getElementById("yellow3").style.backgroundColor=S[4][3]
+    document.getElementById("yellow4").style.backgroundColor=S[4][3]
+    document.getElementById("yellow5").style.backgroundColor=S[4][3]
+
+  States.splice(States.length-1,1)
+}
+
 
 
 
 
 function swi(i){
+  record_state()
+  BLUE=document.getElementById("bluetip")
+  GREEN=document.getElementById("greentip")
+  RED=document.getElementById("redtip")
+  YELLOW=document.getElementById("yellowtip")
     b1=document.getElementById("blue1")
     b2=document.getElementById("blue2")
     b3=document.getElementById("blue3")
@@ -497,9 +746,11 @@ function swi(i){
     R=[r1,r2,r3,r4,r5]
     Y=[y1,y2,y3,y4,y5]
     Colors=[B,G,R,Y]
-    
+    COL=[BLUE,GREEN,RED,YELLOW]
     First=Colors[i-1]
     Second=Colors[i]
+    FirstColor=COL[i-1].style.backgroundColor
+    SecondColor=COL[i].style.backgroundColor
     var FirstHTML=[]
     var SecondHTML=[]
     for (var j=0; j<5; j++){
@@ -509,8 +760,16 @@ function swi(i){
 
     for (var j=0; j<5; j++){
     First[j].innerHTML=SecondHTML[j]
+    First[j].style.backgroundColor=SecondColor
     Second[j].innerHTML=FirstHTML[j]
+    Second[j].style.backgroundColor=FirstColor
     }
+
+    COL[i-1].style.backgroundColor=SecondColor
+    COL[i].style.backgroundColor=FirstColor
+
+
+
     }
 
 
@@ -518,6 +777,7 @@ function swi(i){
 
 
     function mult(i){
+      record_state()
     b1=document.getElementById("blue1")
     b2=document.getElementById("blue2")
     b3=document.getElementById("blue3")
@@ -638,20 +898,22 @@ function swi(i){
 
 
     function add(Z0,Z1){
-    
+      record_state()
+start=99
+end=99
+    if (175<Z0 && Z0<225){start=0}
+    if (250<Z0 && Z0<300){start=1}
+    if (325<Z0 && Z0<375){start=2}
+    if (400<Z0 && Z0<450){start=3}
 
-    if (155<Z0 && Z0<205){start=0}
-    if (235<Z0 && Z0<280){start=1}
-    if (305<Z0 && Z0<355){start=2}
-    if (380<Z0 && Z0<430){start=3}
-
-    if (155<Z1 && Z1<205){end=0}
-    if (235<Z1 && Z1<280){end=1}
-    if (305<Z1 && Z1<355){end=2}
-    if (380<Z1 && Z1<430){end=3}
+    if (175<Z1 && Z1<225){end=0}
+    if (250<Z1 && Z1<300){end=1}
+    if (325<Z1 && Z1<375){end=2}
+    if (400<Z1 && Z1<450){end=3}
 
     b1=document.getElementById("blue1")
     b2=document.getElementById("blue2")
+
     b3=document.getElementById("blue3")
     b4=document.getElementById("blue4")
     b5=document.getElementById("blue5")
