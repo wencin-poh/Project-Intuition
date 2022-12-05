@@ -392,7 +392,7 @@ function submit(){
       document.getElementById("try").innerText="Not Quite"
     }
 
-    if (grade(page,M11,M21,M12,M22,V1,V2,W1,W2)=="true"){
+    if (grade(page,M11,M21,M12,M22,W1,W2)=="true"){
       document.getElementById("try").innerText=""
       page+=1
       document.getElementById("question").innerText=quests[page]
@@ -405,6 +405,8 @@ function grade(page,m11,m21,m12,m22,w1,w2){
   correct="false"
   var rowSign1=m11*m12
   var rowSign2=m21*m22
+  // With v1 and v2 truncated to 2 decimal places, it seems that arithmetic operations
+  // do not work so well. We shall create x and y and use these values instead
   var x=(m22*w1-m12*w2)/(m11*m22-m12*m21)
   var y=(m11*w2-m21*w1)/(m11*m22-m12*m21)
 
@@ -478,7 +480,7 @@ function grade(page,m11,m21,m12,m22,w1,w2){
     case 9:
       var cond1=(-m11/m12==1 && -m21/m22==2)
       var cond2=(-m11/m12==2 && -m21/m22==1)
-      if ((cond1 || cond2) && (x+2)**2<=0.5 && (y+1)**2<=0.5){
+      if ((cond1 || cond2) && (x+2)**2<=0.5 && (y+1)**2<=1){
         correct="true"
       }
       break
