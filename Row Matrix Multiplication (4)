@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <!-- The following adds MathJax to render LaTeX notation -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"></script>
+</head>
+
 <style>
 #blank {
-  position: relative;
-}
+  position: relative;}
 
 #outer {
   position: absolute;
@@ -14,7 +19,6 @@
   background-color: white;
   text-align: center;
   border: 9px solid #d3d3d3;}
-
  
 #bluetip {
   position: absolute;
@@ -170,29 +174,41 @@
   top: 10px;
   background-color: white;
   text-align: center;}
+
+.sidebox {
+  position: relative;
+  top: 525px;
+  left: 5px;
+  color: blue;}
+
+.greytext {
+  position: relative;
+  top: 520px;
+  left: 5px;
+  color: grey;}
  </style>
  
 <body>
 <div>
 <p>
   Let us explore another perspective of matrix multiplication in the context of the rows of matrix.
-  Here, we view the matrix equation Ax=b in the following framework:
-  <ol>
-    <li>The column vector x has m unknowns x_1, x_2, ..., x_m;</li>
-    <li>Each of the n rows of the matrix A provide coefficients of the respective unknowns.
+  Here, we view the matrix equation \(Ax = b\) in the following framework:
+  <ol type='a'>
+    <li>The column vector \(x\) has \(m\) unknowns \(x_1, x_2, \ldots, x_m\);</li>
+    <li>Each of the \(n\) rows of the matrix \(A\) provide coefficients of the respective unknowns.
     They represent an expression in terms of these unknowns;</li>
-    <li>Each entry of the column vector b provides a value for the respective expressions mentioned in (2).</li>
+    <li>Each entry of the column vector \(b\) provides a value for the respective expressions mentioned in part (b).</li>
   </ol>
-  In other words, we can see the equation Ax=b as a system of linear equations that an unknown vector x is supposed to satisfy.
+  In other words, we can see the equation \(Ax = b\) as a system of linear equations that an unknown vector \(x\) is supposed to satisfy.
   We shall explore this using a system of two linear equations in two unknowns, which are straight lines on a plane, in general.
 </p>
 
 <p>
-  In the following questions, only the entries of matrix A and vector b can be changed.
-  The entries in vector x changes in response to these entries. 
-  In the case where no such x exists, there are no values displayed in x.
+  In the following questions, only the entries of matrix \(A\) and vector \(b\) can be changed.
+  The entries in vector \(x\) changes in response to these entries. 
+  In the case where no such \(x\) exists, there are no values displayed in \(x\).
 
-  As you change the values in A and b, ponder what these changes mean geometrically for the respective straight lines.
+  As you change the values in \(A\) and \(b\), ponder what these changes mean geometrically for the respective straight lines.
 </p>
 
   <div id="question">
@@ -342,15 +358,19 @@ function draw(){
 var initialized=0
 var page=0
 var quests=[
-"1. Find two lines, both with negative slope, that intersect somewhere on the x-axis.",
-"2. Excellent! Now find two lines, both with positive slope, that intersect somewhere on the y-axis.",
-"3. Wonderful! Next, find two lines, one with positive slope and the other with negative slope, that intersect somewhere strictly in the first quadrant.",
-"4. Terrific! Find two lines, one with positive slope and the other with negative slope, that intersect at (-1, 1).",
-"5. Great!! Let's now find two lines, with slopes 1 and 2 respectively that intersect at the point (-2, -1).",
-"6. Superb!! Determine two lines, with slopes -0.5 and -1 respectively that intersect somewhere within the fourth quadrant.",
-"7. Awesome, let's try a different type of question. Set the first row of A to have only entries with negative signs, and the second row to have only entries with positive signs. Find a pair of values for b so that the two lines intersect at exactly one point.",
-"8. Nice! Set the first row of A to have only entries with negative signs, and the second row to have only entries with positive signs. Find a pair of values for b so that the two lines intersect at more than one point.",
-"9. Way to go! Set the first row of A to have only entries with negative signs, and the second row to have only entries with positive signs. Find a pair of values for b so that the two lines never intersect.",
+"Warmup 1. Determine two lines, one with zero slope and the other with positive slope, on the diagram below.",
+"Warmup 2. Determine two lines, both with negative slopes, on the diagram below.",
+"Warmup 3. Determine two lines, one with slope 1 and the other with slope -1, such that both have positive y-intercepts.",
+"Warmup 4. Determine two lines, one with slope 1 and the other with slope -1, such that both have negative x-intercepts.",
+"1. Find two lines, one with positive slope and the other with negative slope, that intersect somewhere strictly in the first quadrant.",
+"2. Superb!! Determine two lines, with slopes -0.5 and -1 respectively that intersect somewhere within the fourth quadrant.",
+"3. Wonderful! Next, find two lines, both with negative slope, that intersect somewhere on the x-axis.",
+"4. Excellent! Now find two lines, both with positive slope, that intersect somewhere on the y-axis.",
+"5. Terrific! Find two lines, one with positive slope and the other with negative slope, that intersect somewhere near (-1, 1).",
+"6. Great!! Let's now find two lines, with slopes 1 and 2 respectively that intersect somewhere near the point (-2, -1).",
+"7. Awesome, let's try a different type of question. Set the first row of the matrix A to have only entries with negative signs, and the second row to have only entries with positive signs. Find a value of vector b so that the two lines intersect at exactly one point.",
+"8. Nice! Set the first row of the matrix A to have only entries with negative signs, and the second row to have only entries with positive signs. Find a value of vector b so that the two lines intersect at more than one point.",
+"9. Way to go! Set the first row of the matrix A to have only entries with negative signs, and the second row to have only entries with positive signs. Find value of vector b so that the two lines never intersect.",
 "Good job!!!"]
 
 function submit(){
@@ -382,8 +402,26 @@ function submit(){
       document.getElementById("try").innerText="Not Quite"
     }
 
-    if (grade(page,M11,M21,M12,M22,V1,V2,W1,W2)==1){
+    if (grade(page,M11,M21,M12,M22,W1,W2)=="true"){
       document.getElementById("try").innerText=""
+      // This creates a new element to display previous questions
+      if (page==0){
+        var newHeading = document.createElement('h2')
+        var textHeading = document.createTextNode('Previous Questions:')
+        newHeading.appendChild(textHeading)
+        newHeading.setAttribute('id', 'previous-questions')
+        newHeading.setAttribute('class', 'sidebox')
+        var headingPosition = document.getElementById('blank')
+        headingPosition.appendChild(newHeading)
+      }
+      
+      var newElement = document.createElement('p')
+      var newText = document.createTextNode(quests[page])
+      newElement.appendChild(newText)
+      newElement.setAttribute('class', 'greytext')
+      var position = document.getElementById('previous-questions').parentNode
+      position.appendChild(newElement)
+      
       page+=1
       document.getElementById("question").innerText=quests[page]
     }
@@ -391,71 +429,105 @@ function submit(){
   initialized=1
 }
 
-function grade(page,m11,m21,m12,m22,v1,v2,w1,w2){
-  correct=false
+function grade(page,m11,m21,m12,m22,w1,w2){
+  correct="false"
   var rowSign1=m11*m12
   var rowSign2=m21*m22
+  // With v1 and v2 truncated to 2 decimal places, it seems that arithmetic operations
+  // do not work so well. We shall create x and y and use these values instead
+  var x=(m22*w1-m12*w2)/(m11*m22-m12*m21)
+  var y=(m11*w2-m21*w1)/(m11*m22-m12*m21)
 
   switch(page){
     case 0:
-      if (rowSign1>0 && rowSign2>0 && v2==0){
-        correct=true
+      var cond1 = -m11/m12==0 && rowSign2<0
+      var cond2 = rowSign1<0 && -m21/m22==0
+      if (cond1 || cond2){
+        correct="true"
       }
       break
-
+    
     case 1:
-      if (rowSign1<0 && rowSign2<0 && v1==0){
-        correct=true
+      if (rowSign1>0 && rowSign2>0){
+        correct="true"
       }
       break
-
+    
     case 2:
-      var cond1=(rowSign1<0 && rowSign2>0)
-      var cond2=(rowSign1>0 && rowSign2<0)
-      if ((cond1 || cond2) && v1>0 && v2>0){
-        correct=true
+      var cond1=(-m11/m12==1 && -m21/m22==-1)
+      var cond2=(-m11/m12==-1 && -m21/m22==1)
+      if ((cond1 || cond2) && w1/m12>0 && w2/m22>0){
+        correct="true"
       }
       break
 
     case 3:
-      var cond1=(rowSign1<0 && rowSign2>0)
-      var cond2=(rowSign1>0 && rowSign2<0)
-      if ((cond1 || cond2) && v1==-1 && v2==1){
-        correct=true
+      var cond1=(-m11/m12==1 && -m21/m22==-1)
+      var cond2=(-m11/m12==-1 && -m21/m22==1)
+      if ((cond1 || cond2) && w1/m11<0 && w2/m21<0){
+        correct="true"
       }
       break
 
     case 4:
-      var cond1=(-m11/m12==1 && -m21/m22==2)
-      var cond2=(-m11/m12==2 && -m21/m22==1)
-      if ((cond1 || cond2) && v1==-2 && v2==-1){
-        correct=true
+      var cond1=(rowSign1<0 && rowSign2>0)
+      var cond2=(rowSign1>0 && rowSign2<0)
+      if ((cond1 || cond2) && x>0 && y>0){
+        correct="true"
       }
       break
 
     case 5:
       var cond1=(-m11/m12==-0.5 && -m21/m22==-1)
       var cond2=(-m11/m12==-1 && -m21/m22==-0.5)
-      if ((cond1 || cond2) && v1>=0 && v2<=0){
-        correct=true
+      if ((cond1 || cond2) && x>=0 && y<=0){
+        correct="true"
       }
       break
 
     case 6:
-      if (m11<0 && m12<0 && m21>0 && m22>0 && m11*m22!=m12*m21){
-        correct=true
+      if (rowSign1>0 && rowSign2>0 && y==0){
+        correct="true"
       }
       break
 
     case 7:
-      if (m11<0 && m12<0 && m21>0 && m22>0 && m11*m22==m12*m21 && m11*w2==w1*m21){
-        correct=true
+      if (rowSign1<0 && rowSign2<0 && x==0){
+        correct="true"
       }
       break
 
     case 8:
+      var cond1=(rowSign1<0 && rowSign2>0)
+      var cond2=(rowSign1>0 && rowSign2<0)
+      if ((cond1 || cond2) && (x+1)**2+(y-1)**2<=1){
+        correct="true"
+      }
+      break
+
+    case 9:
+      var cond1=(-m11/m12==1 && -m21/m22==2)
+      var cond2=(-m11/m12==2 && -m21/m22==1)
+      if ((cond1 || cond2) && (x+2)**2<=0.5 && (y+1)**2<=1){
+        correct="true"
+      }
+      break
+
+    case 10:
+      if (m11<0 && m12<0 && m21>0 && m22>0 && m11*m22!=m12*m21){
+        correct="true"
+      }
+      break
+
+    case 11:
+      if (m11<0 && m12<0 && m21>0 && m22>0 && m11*m22==m12*m21 && m11*w2==w1*m21){
+        correct="true"
+      }
+      break
+
+    case 12:
       if (m11<0 && m12<0 && m21>0 && m22>0 && m11*m22==m12*m21 && m11*w2!=w1*m21){
-        correct=true
+        correct="true"
       }
       break
   }
