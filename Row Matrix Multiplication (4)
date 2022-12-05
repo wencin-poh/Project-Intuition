@@ -8,8 +8,7 @@
 
 <style>
 #blank {
-  position: relative;
-}
+  position: relative;}
 
 #outer {
   position: absolute;
@@ -20,7 +19,6 @@
   background-color: white;
   text-align: center;
   border: 9px solid #d3d3d3;}
-
  
 #bluetip {
   position: absolute;
@@ -176,6 +174,18 @@
   top: 10px;
   background-color: white;
   text-align: center;}
+
+.sidebox {
+  position: relative;
+  top: 525px;
+  left: 5px;
+  color: blue;}
+
+.greytext {
+  position: relative;
+  top: 520px;
+  left: 5px;
+  color: grey;}
  </style>
  
 <body>
@@ -358,9 +368,9 @@ var quests=[
 "4. Excellent! Now find two lines, both with positive slope, that intersect somewhere on the y-axis.",
 "5. Terrific! Find two lines, one with positive slope and the other with negative slope, that intersect somewhere near (-1, 1).",
 "6. Great!! Let's now find two lines, with slopes 1 and 2 respectively that intersect somewhere near the point (-2, -1).",
-"7. Awesome, let's try a different type of question. Set the first row of A to have only entries with negative signs, and the second row to have only entries with positive signs. Find a pair of values for b so that the two lines intersect at exactly one point.",
-"8. Nice! Set the first row of A to have only entries with negative signs, and the second row to have only entries with positive signs. Find a pair of values for b so that the two lines intersect at more than one point.",
-"9. Way to go! Set the first row of A to have only entries with negative signs, and the second row to have only entries with positive signs. Find a pair of values for b so that the two lines never intersect.",
+"7. Awesome, let's try a different type of question. Set the first row of the matrix A to have only entries with negative signs, and the second row to have only entries with positive signs. Find a value of vector b so that the two lines intersect at exactly one point.",
+"8. Nice! Set the first row of the matrix A to have only entries with negative signs, and the second row to have only entries with positive signs. Find a value of vector b so that the two lines intersect at more than one point.",
+"9. Way to go! Set the first row of the matrix A to have only entries with negative signs, and the second row to have only entries with positive signs. Find value of vector b so that the two lines never intersect.",
 "Good job!!!"]
 
 function submit(){
@@ -394,6 +404,24 @@ function submit(){
 
     if (grade(page,M11,M21,M12,M22,W1,W2)=="true"){
       document.getElementById("try").innerText=""
+      // This creates a new element to display previous questions
+      if (page==0){
+        var newHeading = document.createElement('h2')
+        var textHeading = document.createTextNode('Previous Questions:')
+        newHeading.appendChild(textHeading)
+        newHeading.setAttribute('id', 'previous-questions')
+        newHeading.setAttribute('class', 'sidebox')
+        var headingPosition = document.getElementById('blank')
+        headingPosition.appendChild(newHeading)
+      }
+      
+      var newElement = document.createElement('p')
+      var newText = document.createTextNode(quests[page])
+      newElement.appendChild(newText)
+      newElement.setAttribute('class', 'greytext')
+      var position = document.getElementById('previous-questions').parentNode
+      position.appendChild(newElement)
+      
       page+=1
       document.getElementById("question").innerText=quests[page]
     }
