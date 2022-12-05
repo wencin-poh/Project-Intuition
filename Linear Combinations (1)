@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html>
 
@@ -118,6 +120,40 @@
   background-color: white;
   text-align: center;}
   
+
+
+  #forward {
+  position: absolute;
+  height: 20px;
+  width: 50px;
+  left: 270px;
+  top: 110px;
+  background-color: white;
+  text-align: center;}
+
+
+  #back {
+  position: absolute;
+  height: 20px;
+  width: 50px;
+  left: 270px;
+  top: 140px;
+  background-color: white;
+  text-align: center;}
+
+
+  #score {
+  position: absolute;
+  height: 220px;
+  width: 50px;
+  left: 530px;
+  top: 40px;
+  background-color: white;
+  text-align: center;}
+
+
+
+
   
      #try {
   position: absolute;
@@ -479,11 +515,17 @@ Click the "Start" button when you are ready to begin.
 <div id="sub">
 <button  onclick="submit()">Start</button>
 </div>
+<div id="forward">
+  <button  onclick="forward()">Skip</button>
+  </div>
+  <div id="back">
+    <button  onclick="back()">Last</button>
+    </div>
 <div id="try">
-
 </div>
 
-
+<div id="score">
+</div>
 
 
 
@@ -604,6 +646,10 @@ Faces
 
 
 <script>
+
+
+
+
 function zero(){
 
 document.getElementById("tnum").innerText="0"
@@ -724,24 +770,43 @@ document.getElementById("onum").innerText=t}
 var initialized=0
 var page=0
 var quests=[
-"0. Find a basket with V=12, E=18, and F=10",
-"1. Good job, now find a basket with V=10, E=18, and F=12",
-"2. Good job, now find a basket with V=14, E=24, and F=16",
-"3. Good job, now find a basket with at least 5 of each type of solid and with V=F",
-"4. Excellent, now find a basket with V=32, E=48, and F=32",
-"5. Excellent, now find a basket with V=28, E=48, and F=28",
-"6. Good job, now find a basket with V=30, E=48, and F=30",
-"7. Excellent, now find a basket with more cubes than octahedrons and with V=F",
-"8. Good job, now find a basket with at least one of each shape and V>F",
-"9. Excellent, now find a basket with at least one of each shape and V>E",
-"10. Good job, now find a basket with the same number of tetrahedron faces, cube faces, and octahedron faces",
-"11. Good job, now find a basket with the same number of tetrahedron edges, cube edges, and octahedron edges",
-"12. Good job, now find a basket with the same number of tetrahedron vertices, cube vertices, and octahedron vertices",
-"13. Good job, now find a basket with the same number of tetrahedron vertices, tetrahedron edges and tetrahedron faces",
+"1. Find a basket with V=12, E=18, and F=10",
+"2. Good job, now find a basket with V=10, E=18, and F=12",
+"3. Good job, now find a basket with V=14, E=24, and F=16",
+"4. Good job, now find a basket with at least 5 of each type of solid and with V=F",
+"5. Excellent, now find a basket with V=32, E=48, and F=32",
+"6. Excellent, now find a basket with V=28, E=48, and F=28",
+"7. Good job, now find a basket with V=30, E=48, and F=30",
+"8. Excellent, now find a basket with more cubes than octahedrons and with V=F",
+"9. Good job, now find a basket with at least one of each shape and V>F",
+"10. Excellent, now find a basket with at least one of each shape and V>E",
+"11. Good job, now find a basket with the same number of tetrahedron faces, cube faces, and octahedron faces",
+"12. Good job, now find a basket with the same number of tetrahedron edges, cube edges, and octahedron edges",
+"13. Good job, now find a basket with the same number of tetrahedron vertices, cube vertices, and octahedron vertices",
+"14. Good job, now find a basket with the same number of tetrahedron vertices, tetrahedron edges and tetrahedron faces",
 "Good job!!!"]
 
+Answered=[0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+function score(){
+  S=document.getElementById("score")
+  while(S.firstChild){
+  S.removeChild(S.firstChild)}
 
+  for (i=0; i<Answered.length; i++){
+  qid='q'+i
+  var q = document.createElement('div');
+    q.id = qid;
+    q.innerHTML = i+1;
+    if (Answered[i]==0){
+      q.style.color='red'
+    }
+    if (Answered[i]>0){
+      q.style.color='green'
+    }
+    S.appendChild(q);
+}}
 
+score()
 
 
 function grade(p,v1,v2,v3,t,c,o){
@@ -762,12 +827,24 @@ if (p==11){ if (6*t==12*c && 12*c==12*o){correct=1}}
 if (p==12){ if (4*t==8*c && 8*c==6*o){correct=1}}
 if (p==13){ if (v1==0){correct=1}}
 
-
+Answered[p]+=correct
+score()
 return(correct)
 }
 
 
-
+function forward(){
+  if (page<Answered.length){
+  page+=1
+  document.getElementById("question").innerText=quests[page]
+  document.getElementById("try").innerText=""}
+}
+function back(){
+  if (page>0){
+  page-=1
+  document.getElementById("question").innerText=quests[page]
+  document.getElementById("try").innerText=""}
+}
 
 
 
