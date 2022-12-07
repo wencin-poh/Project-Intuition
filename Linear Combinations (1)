@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html>
 
@@ -7,10 +5,26 @@
 <style>
 
 
-#blank {
+
+
+
+
+#intro {
   position: relative;
+  width: 550px;
 }
 
+#blank {
+  position: relative;
+  width: 550px;
+  height: 350px;
+
+}
+#question {
+  position: relative;
+  width: 550px;
+  height: 20px;
+}
 
  #buttons {
   position: absolute;
@@ -104,7 +118,7 @@
  #topmatrix {
   position: absolute;
   height: 110px;
-  width: 230px;
+  width: 270px;
   left: 10px;
   top: 20px;
   background-color: grey;
@@ -115,39 +129,19 @@
   position: absolute;
   height: 20px;
   width: 50px;
-  left: 270px;
-  top: 80px;
+  left: 320px;
+  top: 50px;
   background-color: white;
   text-align: center;}
   
 
 
-  #forward {
-  position: absolute;
-  height: 20px;
-  width: 50px;
-  left: 270px;
-  top: 110px;
-  background-color: white;
-  text-align: center;}
-
-
-  #back {
-  position: absolute;
-  height: 20px;
-  width: 50px;
-  left: 270px;
-  top: 140px;
-  background-color: white;
-  text-align: center;}
-
-
   #score {
   position: absolute;
   height: 220px;
-  width: 50px;
-  left: 530px;
-  top: 40px;
+  width: 90px;
+  left: 930px;
+  top: 90px;
   background-color: white;
   text-align: center;}
 
@@ -159,8 +153,8 @@
   position: absolute;
   height: 20px;
   width: 50px;
-  left: 270px;
-  top: 40px;
+  left: 400px;
+  top: 105px;
   background-color: white;
   text-align: center;}
   
@@ -252,6 +246,30 @@
   text-align: center;} 
 
 
+  #M14 {
+  position: absolute;
+  height: 20px;
+  width: 40px;
+  left: 225px;
+  top: 20px;
+  background-color: grey;
+  text-align: left;} 
+  #M24 {
+  position: absolute;
+  height: 20px;
+  width: 40px;
+  left: 225px;
+  top: 50px;
+  background-color: grey;
+  text-align: left;} 
+  #M34 {
+  position: absolute;
+  height: 20px;
+  width: 40px;
+  left: 225px;
+  top: 80px;
+  background-color: grey;
+  text-align: left;} 
 
 
 
@@ -424,6 +442,17 @@
   text-align: center;}
 
   
+  #MatEq {
+  position: absolute;
+  height: 300px;
+  width: 300px;
+  left: 500px;
+  top: 300px;
+  background-color: lightgrey;
+  text-align: center;}
+
+
+
  </style>
  
  
@@ -436,32 +465,32 @@
 <body>
 
 
+  <h2> <center>Linear Algebra: Module 1 </center></h2>
 
 
-
-<div>
+<div id="intro">
 
 
 <p>
 You are at the platonic solid market.  You are allowed to purchase any (non-negative) number of each type of solid.  You wish to create a:  
 </p>
 
-<p style='color:green'>
+<span style='color:green'>
 Shopping basket which contains V vertices, E edges, and F faces.
-</p>
-
-<p style='color:blue'>
+</span>
+<br>
+<span style='color:blue'>
 A tetrahedron has 4 vertices, 6 edges, and 4 faces.
-</p>
-
-<p style='color:gold'>
+</span>
+<br>
+<span style='color:gold'>
 A cube has 8 vertices, 12 edges, and 6 faces.
-</p>
+</span>
 
-
-<p style='color:red'>
+<br>
+<span style='color:red'>
 An octahedron has 6 vertices, 12 edges, and 8 faces.
-</p>
+</span>
 
 <p>
 Use the up and down arrows to add or subtract each type of solid from your shopping basket to answer the following questions. If there is no solution (or the only solution is an empty basket) submit an empty basket:
@@ -469,19 +498,17 @@ Use the up and down arrows to add or subtract each type of solid from your shopp
 
 </div>
 
-<div id="question">
+<p id="question">
 
 
-Click the "Start" button when you are ready to begin.
+<span>Click the "Start" button when you are ready to begin.</span>
 
 
-
-</div>
+</p>
 
 
 
 <div id="blank">
-
 
 
 <div id="topmatrix">
@@ -508,24 +535,38 @@ Click the "Start" button when you are ready to begin.
 <div id="M33">
 </div>
 
+<div id="M14">
+  <small>Vertices</small>
+</div>
+<div id="M24">
+  <small>Edges</small>
+</div>
+<div id="M34">
+  <small>Faces</small>
+</div>
+
+
+
 </div>
 
 
 
 <div id="sub">
+  <p>
 <button  onclick="submit()">Start</button>
-</div>
-<div id="forward">
+  </p>
+<p>
   <button  onclick="forward()">Skip</button>
+</p>
+<p>
+    <button  onclick="back()">Previous</button>
+</p>
   </div>
-  <div id="back">
-    <button  onclick="back()">Last</button>
-    </div>
+
 <div id="try">
 </div>
 
-<div id="score">
-</div>
+
 
 
 
@@ -617,6 +658,7 @@ Click the "Start" button when you are ready to begin.
 
 
 <div id="vector">
+  <small>TOTALS</small>
 <div id="V1">
 </div>
 <div id="Ver">
@@ -638,10 +680,21 @@ Faces
 </div>
 
 
+<div id="previous">
+
+<h2>Completed Questions:</h2>
+
+</div>
 
 
 
+<div id="score">
 
+</div>
+
+<div id="MatEq">
+<h2>Matrix Equations (Jeff)</h2>
+</div>
 
 
 
@@ -767,6 +820,8 @@ document.getElementById("onum").innerText=t}
 
 
 
+
+
 var initialized=0
 var page=0
 var quests=[
@@ -792,16 +847,31 @@ function score(){
   while(S.firstChild){
   S.removeChild(S.firstChild)}
 
+
+  var q = document.createElement('h1');
+  q.style.fontSize="x-large"
+  q.style.textAlign="left"
+   q.innerHTML="Score Card"
+    S.appendChild(q);
+
   for (i=0; i<Answered.length; i++){
   qid='q'+i
   var q = document.createElement('div');
+  q.style.fontSize="x-large"
+  q.style.textAlign="left"
     q.id = qid;
     q.innerHTML = i+1;
     if (Answered[i]==0){
       q.style.color='red'
+      Check=q.innerHTML
+      Check+=" &#x2610"
+      q.innerHTML=Check
     }
     if (Answered[i]>0){
       q.style.color='green'
+      Check=q.innerHTML
+      Check+=" &#9745"
+      q.innerHTML=Check
     }
     S.appendChild(q);
 }}
@@ -877,6 +947,23 @@ document.getElementById("try").innerText="Not Quite"}
 if (grade(page,v1,v2,v3,tet,cub,oct)==1)
 {
 document.getElementById("try").innerText=""
+
+
+      // This creates a new element to display previous questions
+
+      
+      var answered_question = document.createElement('div')
+      answered_question.innerHTML=quests[page]
+      var previous=document.getElementById("previous")
+      previous.appendChild(answered_question)
+      answered_question.style.color='grey'
+
+
+
+
+
+
+
 page+=1
 document.getElementById("question").innerText=quests[page]
 zero()
@@ -915,7 +1002,3 @@ initialized=1
 
 </body>
 </html>
-
-
-
-
