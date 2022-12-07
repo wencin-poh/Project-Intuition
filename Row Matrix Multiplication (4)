@@ -179,7 +179,7 @@
   position: relative;
   top: 525px;
   left: 5px;
-  color: blue;}
+  color: grey;}
 
 .greytext {
   position: relative;
