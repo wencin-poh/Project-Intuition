@@ -19,23 +19,6 @@
   background-color: white;
   text-align: center;
   border: 9px solid #d3d3d3;}
- 
-#bluetip {
-  position: absolute;
-  height: 20px;
-  width: 20px;
-  left: 90px;
-  top: 90px;
-  background-color: grey;}
-  
-#greentip {
-  position: absolute;
-  height: 20px;
-  width: 20px;
-  left: 290px;
-  top: 90px;
-  background-color: grey;}
-
   
 #matrix {
   position: absolute;
@@ -161,30 +144,33 @@
   position: absolute;
   height: 30px;
   width: 80px;
-  left: 380px;
-  top: 50px;
-  background-color: white;
+  left: 450px;
+  top: 15px;
   text-align: center;}
 
 #try {
   position: absolute;
   height: 30px;
   width: 80px;
-  left: 380px;
+  left: 450px;
   top: 10px;
+  text-align: center;}
+
+#score {
+  position: absolute;
+  height: 220px;
+  width: 90px;
+  left: 700px;
+  top: 250px;
   background-color: white;
   text-align: center;}
 
-.sidebox {
-  position: relative;
-  top: 525px;
-  left: 5px;
-  color: grey;}
+#completed {
+  position: absolute;
+  left: 10px;
+  top: 745px;}
 
 .greytext {
-  position: relative;
-  top: 520px;
-  left: 5px;
   color: grey;}
  </style>
  
@@ -269,7 +255,15 @@
   </div>
 
   <div id="sub">
-  <button  onclick="submit()">Start</button>
+    <p>
+      <button  onclick="submit()">Start</button>
+    </p>
+    <p>
+      <button  onclick="forward()">Skip</button>
+    </p>
+    <p>
+      <button  onclick="back()">Previous</button>
+    </p>
   </div>
 
   <div id="try">
@@ -280,6 +274,13 @@
   style="border:1px solid #c3c3c3;">
   </canvas>
   </div>
+</div>
+
+<div id="completed">
+  <h2>Completed Questions:</h2>
+</div>
+
+<div id="score">
 </div>
 
 
@@ -358,20 +359,72 @@ function draw(){
 var initialized=0
 var page=0
 var quests=[
-"Warmup 1. Determine two lines, one with zero slope and the other with positive slope, on the diagram below.",
-"Warmup 2. Determine two lines, both with negative slopes, on the diagram below.",
-"Warmup 3. Determine two lines, one with slope 1 and the other with slope -1, such that both have positive y-intercepts.",
-"Warmup 4. Determine two lines, one with slope 1 and the other with slope -1, such that both have negative x-intercepts.",
-"1. Find two lines, one with positive slope and the other with negative slope, that intersect somewhere strictly in the first quadrant.",
-"2. Superb!! Determine two lines, with slopes -0.5 and -1 respectively that intersect somewhere within the fourth quadrant.",
-"3. Wonderful! Next, find two lines, both with negative slope, that intersect somewhere on the x-axis.",
-"4. Excellent! Now find two lines, both with positive slope, that intersect somewhere on the y-axis.",
-"5. Terrific! Find two lines, one with positive slope and the other with negative slope, that intersect somewhere near (-1, 1).",
-"6. Great!! Let's now find two lines, with slopes 1 and 2 respectively that intersect somewhere near the point (-2, -1).",
-"7. Awesome, let's try a different type of question. Set the first row of the matrix A to have only entries with negative signs, and the second row to have only entries with positive signs. Find a value of vector b so that the two lines intersect at exactly one point.",
-"8. Nice! Set the first row of the matrix A to have only entries with negative signs, and the second row to have only entries with positive signs. Find a value of vector b so that the two lines intersect at more than one point.",
-"9. Way to go! Set the first row of the matrix A to have only entries with negative signs, and the second row to have only entries with positive signs. Find value of vector b so that the two lines never intersect.",
+"1. Determine two lines, one with zero slope and the other with positive slope, on the diagram below.",
+"2. Determine two lines, both with negative slopes, on the diagram below.",
+"3. Determine two lines, one with slope 1 and the other with slope -1, such that both have positive y-intercepts.",
+"4. Determine two lines, one with slope 1 and the other with slope -1, such that both have negative x-intercepts.",
+"5. Find two lines, one with positive slope and the other with negative slope, that intersect somewhere strictly in the first quadrant.",
+"6. Superb!! Determine two lines, with slopes -0.5 and -1 respectively that intersect somewhere within the fourth quadrant.",
+"7. Wonderful! Next, find two lines, both with negative slope, that intersect somewhere on the x-axis.",
+"8. Excellent! Now find two lines, both with positive slope, that intersect somewhere on the y-axis.",
+"9. Terrific! Find two lines, one with positive slope and the other with negative slope, that intersect somewhere near (-1, 1).",
+"10. Great!! Let's now find two lines, with slopes 1 and 2 respectively that intersect somewhere near the point (-2, -1).",
+"11. Awesome, let's try a different type of question. Set the first row of the matrix A to have only entries with negative signs, and the second row to have only entries with positive signs. Find a value of vector b so that the two lines intersect at exactly one point.",
+"12. Nice! Set the first row of the matrix A to have only entries with negative signs, and the second row to have only entries with positive signs. Find a value of vector b so that the two lines intersect at more than one point.",
+"13. Way to go! Set the first row of the matrix A to have only entries with negative signs, and the second row to have only entries with positive signs. Find value of vector b so that the two lines never intersect.",
 "Good job!!!"]
+
+Answered = [0,0,0,0,0,0,0,0,0,0,0,0,0]
+function score(){
+  scoreBoard = document.getElementById("score")
+  while(scoreBoard.firstChild){
+    scoreBoard.removeChild(scoreBoard.firstChild)
+  }
+
+  var scoreCard = document.createElement('h1');
+  scoreCard.style.fontSize="x-large"
+  scoreCard.style.textAlign="left"
+  scoreCard.innerHTML="Score Card"
+  scoreBoard.appendChild(scoreCard);
+
+  for (i=0; i<Answered.length; i++){
+    question_id = 'q' + i
+    var question = document.createElement('div');
+    question.style.fontSize = "x-large"
+    question.style.textAlign = "left"
+    question.id = question_id;
+    question.innerHTML =  i + 1;
+    if (Answered[i]==0){
+      question.style.color = 'red'
+      Check = question.innerHTML
+      Check += " &#x2610"
+      question.innerHTML = Check
+    }
+    if (Answered[i]==1){
+      question.style.color = 'green'
+      Check = question.innerHTML
+      Check += " &#9745"
+      question.innerHTML = Check
+    }
+    scoreBoard.appendChild(question);
+  }
+}
+score()
+
+function forward(){
+  if (page<Answered.length){
+    page+=1
+    document.getElementById("question").innerText=quests[page]
+    document.getElementById("try").innerText=""}
+}
+
+function back(){
+  if (page>0){
+    page-=1
+    document.getElementById("question").innerText=quests[page]
+    document.getElementById("try").innerText=""}
+}
+
 
 function submit(){
   if (initialized==0){
@@ -404,24 +457,14 @@ function submit(){
 
     if (grade(page,M11,M21,M12,M22,W1,W2)=="true"){
       document.getElementById("try").innerText=""
-      // This creates a new element to display previous questions
-      if (page==0){
-        var newHeading = document.createElement('h2')
-        var textHeading = document.createTextNode('Previous Questions:')
-        newHeading.appendChild(textHeading)
-        newHeading.setAttribute('id', 'previous-questions')
-        newHeading.setAttribute('class', 'sidebox')
-        var headingPosition = document.getElementById('blank')
-        headingPosition.appendChild(newHeading)
-      }
-      
-      var newElement = document.createElement('p')
-      var newText = document.createTextNode(quests[page])
-      newElement.appendChild(newText)
-      newElement.setAttribute('class', 'greytext')
-      var position = document.getElementById('previous-questions').parentNode
-      position.appendChild(newElement)
-      
+
+      // This creates a new element to display completed questions
+      var answeredQuestion = document.createElement('div')
+      answeredQuestion.innerHTML = quests[page]
+      answeredQuestion.setAttribute('class', 'greytext')
+      var completedQuestions = document.getElementById("completed")
+      completedQuestions.appendChild(answeredQuestion)
+
       page+=1
       document.getElementById("question").innerText=quests[page]
     }
@@ -431,6 +474,7 @@ function submit(){
 
 function grade(page,m11,m21,m12,m22,w1,w2){
   correct="false"
+
   var rowSign1=m11*m12
   var rowSign2=m21*m22
   // With v1 and v2 truncated to 2 decimal places, it seems that arithmetic operations
@@ -508,7 +552,7 @@ function grade(page,m11,m21,m12,m22,w1,w2){
     case 9:
       var cond1=(-m11/m12==1 && -m21/m22==2)
       var cond2=(-m11/m12==2 && -m21/m22==1)
-      if ((cond1 || cond2) && (x+2)**2<=0.5 && (y+1)**2<=1){
+      if ((cond1 || cond2) && (x+2)**2+(y+1)**2<=1){
         correct="true"
       }
       break
@@ -531,6 +575,10 @@ function grade(page,m11,m21,m12,m22,w1,w2){
       }
       break
   }
+  if (correct == "true"){
+    Answered[page] = 1
+  }
+  score()
   return(correct)
 }
 </script>
