@@ -176,6 +176,12 @@
  
 <body>
 <div>
+  <h1>
+    Linear Algebra: Module 4
+  </h1>
+</div>
+
+<div>
 <p>
   Let us explore another perspective of matrix multiplication in the context of the rows of matrix.
   Here, we view the matrix equation \(Ax = b\) in the following framework:
