@@ -7,6 +7,11 @@
 </head>
 
 <style>
+#intro {
+  position: relative;
+  width: 600px;
+}
+
 #blank {
   position: relative;}
 
@@ -161,27 +166,24 @@
   height: 220px;
   width: 90px;
   left: 700px;
-  top: 250px;
+  top: 400px;
   background-color: white;
   text-align: center;}
 
 #completed {
   position: absolute;
   left: 10px;
-  top: 745px;}
+  top: 500px}
 
 .greytext {
   color: grey;}
  </style>
  
 <body>
-<div>
-  <h1>
-    Linear Algebra: Module 4
-  </h1>
-</div>
 
-<div>
+<h2> <center>Linear Algebra: Module 4 </center></h2>
+
+<div id="intro">
 <p>
   Let us explore another perspective of matrix multiplication in the context of the rows of matrix.
   Here, we view the matrix equation \(Ax = b\) in the following framework:
@@ -280,10 +282,10 @@
   style="border:1px solid #c3c3c3;">
   </canvas>
   </div>
-</div>
 
-<div id="completed">
-  <h2>Completed Questions:</h2>
+  <div id="completed">
+    <h2>Completed Questions:</h2>
+  </div>
 </div>
 
 <div id="score">
