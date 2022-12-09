@@ -166,7 +166,7 @@
   height: 220px;
   width: 90px;
   left: 700px;
-  top: 400px;
+  top: 500px;
   background-color: white;
   text-align: center;}
 
