@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Linear Algebra: Elementary Matrices</title>
+
+  <!-- The following adds MathJax to render LaTeX notation -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"></script>
+    <!-- This adds some Google Font(s) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Source+Serif+Pro">
+    
+    <style>
+      body 
+      {
+          font-family: 'Source Serif Pro', serif;
+          font-size: 11pt;
+          color: #004D40;
+          background-color: #EFFFA2;
+        }
+
+        #matrices
+        {
+          display: flex;
+          justify-content: space-around;
+        }
+
+        .entry
+        {
+          width: 40px;
+          height: 15px;
+          border-radius: 5px;
+        }
+
+        .output
+        {
+          width: 40px;
+          height: 15px;
+          border-radius: 5px;
+          background-color: ghostwhite;
+        }
+
+        .dropdown
+        {
+          height: 20px;
+          border-radius: 5px;
+        }
+
+        .operationButton
+        {
+          height: 20px;
+          border-radius: 5px;
+          background: radial-gradient(#FFFFFF, #DDDDDD);
+          cursor: pointer;
+
+        }
+
+        .operationButton:hover
+        {
+          background: radial-gradient(#FFFFFF, #FFB000);
+        }
+
+        .operationButton:active
+        {
+          background: #FFB000;
+        }
+
+        .column
+        {
+          position: relative;
+          left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2><center>Module 6: Elementary Matrices</center></h2>
+    <div id="intro">
+      <p>Every elementary row operation on a matrix can be traced back to the action of multiplying an elementary matrix by that matrix. 
+      We shall explore and understand this maxim through the following module.</p>
+    <p>Each elementary matrix is a square matrix resembling an identity matrix, but with a twist depending on their type.
+      In general, we have the following types of elementary matrices:</p>
+  <ul>
+    <li>
+      [Swap Rows] Swap Row \(i\) with Row \(j\) - This is represented by multiplying by the matrix of the form 
+      \[\begin{bmatrix}
+      1 &        &   &   & &   &   &        &   \\
+        & \ddots &   &   & &   &   &        &   \\
+        &        & 1 &   & &   &   &        &   \\
+        &        &   & 0 & & 1 &   &        &   \\
+        &        &   &   & &   &   &        &   \\
+        &        &   & 1 & & 0 &   &        &   \\
+        &        &   &   & &   & 1 &        &   \\
+        &        &   &   & &   &   & \ddots &   \\
+        &        &   &   & &   &   &        & 1 
+      \end{bmatrix},\]
+        where the only entries with \(1\) off the main diagonal are at positions \((i, j)\) and \((j, i)\), whereas the only entries with \(0\) on the main diagonal are at positions \((i, i)\) and \((j, j)\).
+      </li>
+    <li>
+      [Scale Row] Scale Row \(i\) by \(c\) - This is represented by multiplying by the matrix of the form 
+      \[\begin{bmatrix}
+      1 &        &   &   &   &        &   \\
+        & \ddots &   &   &   &        &   \\
+        &        & 1 &   &   &        &   \\
+        &        &   & c &   &        &   \\
+        &        &   &   & 1 &        &   \\
+        &        &   &   &   & \ddots &   \\
+        &        &   &   &   &        & 1 
+      \end{bmatrix},\]
+      where the \((i,i)\)-entry is \(c\).
+    </li>
+    <li>
+      [Add Row] Add \(c\) times of Row \(i\) to Row \(j\) - This is represented by multiplying by the matrix of the form 
+      \[\begin{bmatrix}
+      1 &        &   &   &         &   &   &        &   \\
+        & \ddots &   &   &         &   &   &        &   \\
+        &        & 1 &   &         &   &   &        &   \\
+        &        &   & 1 &         & 0 &   &        &   \\
+        &        &   &   &  \ddots &   &   &        &   \\
+        &        &   & c &         & 1 &   &        &   \\
+        &        &   &   &         &   & 1 &        &   \\
+        &        &   &   &         &   &   & \ddots &   \\
+        &        &   &   &         &   &   &        & 1 
+      \end{bmatrix},\]
+      where the \((j, i)\)-entry of the matrix is \(c\).
+    </li>
+  </ul>
+    </div>
+
+    <div id="instructions">
+      <p>
+    In the following module, you may specify the type of row operations, followed by the associated parameters, namely, some combination of row indices \(i\) and \(j\) and scalar \(c\).
+    </p>
+    </div>
+
+    <div id="question">
+      <h2>Current question:</h2>
+    </div>
+
+  <div id="matrixOptions">
+      <h3>Elementary row operation</h3>
+      Operation type:
+      <select onchange="disableParameters()" id="operationType" name="operationType" class="dropdown">
+        <option value="null"> </option>
+          <option value="swap">Swap Rows</option>
+          <option value="scale">Scale Row</option>
+          <option value="add">Add Row</option>
+        </select><br>
+      Row \(i=\)
+      <select id="row_i" name="row_i" class="dropdown">
+        <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select><br>
+        Row \(j=\)
+      <select id="row_j" name="row_j" class="dropdown">
+        <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select><br>
+      Scalar \(c=\)
+      <input type="number" class="entry" id="scalar" name="scalar" value=1 step=0.1><br><br>
+
+      <button onclick="createMatrix()" class="operationButton" id="createMatrix"> Create Matrix </button>
+      <button onclick="executeOperation()" class="operationButton" id="executeOperation"> Execute Operation </button>
+      <button onclick="advanceMatrix()" class="operationButton" id="advanceMatrix"> Advance Matrix </button>
+      <button onclick="resetProgress()" class="operationButton" id="resetOperation"> Reset Progress </button>
+  </div>
+
+    <div id="matrices">
+      <div id="elementaryMatrix" class="matrixOperation">
+        <h3>Matrix \(E\)</h3>
+        <!--Row 1-->
+        <input type="text" id="e11" name="e11" class="entry" value=1>
+        <input type="text" id="e12" name="e12" class="entry" value=0>
+        <input type="text" id="e13" name="e13" class="entry" value=0>
+        <input type="text" id="e14" name="e14" class="entry" value=0><br><br>
+        <!--Row 2-->
+        <input type="text" id="e21" name="e21" class="entry" value=0>
+        <input type="text" id="e22" name="e22" class="entry" value=1>
+        <input type="text" id="e23" name="e23" class="entry" value=0>
+        <input type="text" id="e24" name="e24" class="entry" value=0><br><br>
+        <!--Row 3-->
+        <input type="text" id="e31" name="e31" class="entry" value=0>
+        <input type="text" id="e32" name="e32" class="entry" value=0>
+        <input type="text" id="e33" name="e33" class="entry" value=1>
+        <input type="text" id="e34" name="e34" class="entry" value=0><br><br>
+        <!--Row 4-->
+        <input type="text" id="e41" name="e41" class="entry" value=0>
+        <input type="text" id="e42" name="e42" class="entry" value=0>
+        <input type="text" id="e43" name="e43" class="entry" value=0>
+        <input type="text" id="e44" name="e44" class="entry" value=1>
+      </div>
+      
+      <div id="augmentedMatrixOne" class="matrixOperation">
+        <h3>Matrix \(A\)</h3>
+        <!--Row 1-->
+        <input type="text" id="a11" name="a11" class="entry" value=1>
+        <input type="text" id="a12" name="a12" class="entry" value=1>
+        <input type="text" id="a13" name="a13" class="entry" value=1>
+        <input type="text" id="a14" name="a14" class="entry" value=1>
+        <input type="text" id="a15" name="a15" class="entry" value=1>
+        <input type="text" id="a16" name="a16" class="entry column" value=5><br><br>
+        <!--Row 2-->
+        <input type="text" id="a21" name="a21" class="entry" value=2>
+        <input type="text" id="a22" name="a22" class="entry" value=1>
+        <input type="text" id="a23" name="a23" class="entry" value=0>
+        <input type="text" id="a24" name="a24" class="entry" value=1>
+        <input type="text" id="a25" name="a25" class="entry" value=2>
+        <input type="text" id="a26" name="a26" class="entry column" value=11><br><br>
+        <!--Row 3-->
+        <input type="text" id="a31" name="a31" class="entry" value=1>
+        <input type="text" id="a32" name="a32" class="entry" value=-1>
+        <input type="text" id="a33" name="a33" class="entry" value=1>
+        <input type="text" id="a34" name="a34" class="entry" value=-1>
+        <input type="text" id="a35" name="a35" class="entry" value=1>
+        <input type="text" id="a36" name="a36" class="entry column" value=15><br><br>
+        <!--Row 4-->
+        <input type="text" id="a41" name="a41" class="entry" value=1>
+        <input type="text" id="a42" name="a42" class="entry" value=0>
+        <input type="text" id="a43" name="a43" class="entry" value=2>
+        <input type="text" id="a44" name="a44" class="entry" value=-1>
+        <input type="text" id="a45" name="a45" class="entry" value=0>
+        <input type="text" id="a46" name="a46" class="entry column" value=8><br><br>
+      </div>
+      
+      <div id="augmentedMatrixTwo" class="matrixOperation">
+        <h3>Matrix \(B\)</h3>
+        <!--Row 1-->
+        <input type="text" id="b11" name="b11" class="output" disabled>
+        <input type="text" id="b12" name="b12" class="output" disabled>
+        <input type="text" id="b13" name="b13" class="output" disabled>
+        <input type="text" id="b14" name="b14" class="output" disabled>
+        <input type="text" id="b15" name="b15" class="output" disabled>
+        <input type="text" id="b16" name="b16" class="output column" disabled><br><br>
+        <!--Row 2-->
+        <input type="text" id="b21" name="b21" class="output" disabled>
+        <input type="text" id="b22" name="b22" class="output" disabled>
+        <input type="text" id="b23" name="b23" class="output" disabled>
+        <input type="text" id="b24" name="b24" class="output" disabled>
+        <input type="text" id="b25" name="b25" class="output" disabled>
+        <input type="text" id="b26" name="b26" class="output column" disabled><br><br>
+        <!--Row 3-->
+        <input type="text" id="b31" name="b31" class="output" disabled>
+        <input type="text" id="b32" name="b32" class="output" disabled>
+        <input type="text" id="b33" name="b33" class="output" disabled>
+        <input type="text" id="b34" name="b34" class="output" disabled>
+        <input type="text" id="b35" name="b35" class="output" disabled>
+        <input type="text" id="b36" name="b36" class="output column" disabled><br><br>
+        <!--Row 4-->
+        <input type="text" id="b41" name="b41" class="output" disabled>
+        <input type="text" id="b42" name="b42" class="output" disabled>
+        <input type="text" id="b43" name="b43" class="output" disabled>
+        <input type="text" id="b44" name="b44" class="output" disabled>
+        <input type="text" id="b45" name="b45" class="output" disabled>
+        <input type="text" id="b46" name="b46" class="output column" disabled><br><br>
+      </div>
+    </div>
+
+    <div id="completed">
+      <h2>Completed questions:</h2>
+    </div>
+
+    <div id="score">
+    
+    </div>
+
+    <script>
+      reset = true
+
+      // This function disables unnecessary parameters to prevent 
+      // users from changing their values
+      function disableParameters(){
+        type = document.getElementById("operationType").value
+        jthRow = document.getElementById("row_j")
+        scalingFactor = document.getElementById("scalar")
+        switch(type){ 
+          case "swap":
+            jthRow.disabled = false
+            scalingFactor.disabled = true
+            break
+
+          case "scale":
+            jthRow.disabled = true
+            scalingFactor.disabled = false
+            break
+
+          default:
+            jthRow.disabled = false
+            scalingFactor.disabled = false
+            break
+        }
+      }
+
+      // This functions resets the entire progress of row operations
+      function resetProgress(){
+        let i = 1
+        let j = 1
+        let c = 1
+        let E = [[1,0,0,0], [0,1,0,0], [0,0,1,0], [0,0,0,1]]
+        let A = [[1,1,1,1,1,5], [2,1,0,1,2,11], [1,-1,1,-1,1,15], [1,0,2,-1,0,8]]
+        e = ""
+        let B = [[e,e,e,e,e,e], [e,e,e,e,e,e], [e,e,e,e,e,e], [e,e,e,e,e,e]]
+
+        operationType = document.getElementById("operationType")
+        ithRow = document.getElementById("row_i")
+        jthRow = document.getElementById("row_j")
+        scalingFactor = document.getElementById("scalar")
+        operationType.value = "null"
+        ithRow.value = i
+        jthRow.value = j
+        scalingFactor.value = c
+
+        // This resets the matrices' entries
+        writeMatrix(E, "e")
+        writeMatrix(A, "a")
+        writeMatrix(B, "b")
+        reset = true
+      }
+
+      // This function creates an elementary matrix
+      function createMatrix(){
+        let E = [[1,0,0,0], [0,1,0,0], [0,0,1,0], [0,0,0,1]]
+        let selected = true
+
+        type = document.getElementById("operationType").value
+        switch(type){
+          case "swap":
+            i = document.getElementById("row_i").value - 1
+            j = document.getElementById("row_j").value - 1
+            if (i===j){
+              alert("The row indices must be distinct.")
+              break
+            }
+            E[i][i] = 0
+            E[j][j] = 0
+            E[i][j] = 1
+            E[j][i] = 1
+            break
+
+          case "scale":
+            i = document.getElementById("row_i").value - 1
+            c = document.getElementById("scalar").value
+            E[i][i] = c
+            break
+
+          case "add":
+            i = document.getElementById("row_i").value - 1
+            j = document.getElementById("row_j").value - 1
+            if (i===j){
+              alert("The row indices must be distinct.")
+              break
+            }
+            c = document.getElementById("scalar").value
+            E[j][i] = c
+            break
+
+          case "null":
+            selected = false
+            break
+        }
+
+        if (!selected){
+          return 
+        }
+        writeMatrix(E, "e")
+      }
+
+      function executeOperation(){
+        A = readMatrix("a")
+        E = readMatrix("e")
+        B = matrixMultiply(E, A)
+        writeMatrix(B, "b")
+        reset = false
+      }
+
+      function advanceMatrix(){
+        if (reset){
+          return
+        }
+        B = readMatrix("b")
+        writeMatrix(B, "a")
+      }
+
+      function readMatrix(string){
+        M = []
+        var limit = string==="e" ? 4 : 6
+        for (let i=0; i<4; i++){
+          row = []
+          for (let j=0; j<limit; j++){
+          entryAddressM = string+String(i+1)+String(j+1)
+          entryM = document.getElementById(entryAddressM)
+          row.push(Number(entryM.value))
+          }
+          M.push(row)
+        }
+        return M
+      }
+
+      function writeMatrix(matrixM, string){
+        let limit = string==="e" ? 4 : 6
+        for (let i=0; i<4; i++){
+          for (let j=0; j<limit; j++){
+          entryAddressM = string+String(i+1)+String(j+1)
+          entryM = document.getElementById(entryAddressM)
+          entryM.value = String(matrixM[i][j])
+          }
+        }
+      }
+
+      // These functions perform matrix operations
+      function matrixMultiply(matrixA, matrixB){
+        m = matrixA.length
+        p = matrixB.length
+        n = matrixB[0].length
+
+        let product = []
+        for (let i=0; i<m; i++){
+          let row = []
+          for (let j=0; j<n; j++){
+            let sum = 0
+            for (let k=0; k<p; k++){
+              sum += matrixA[i][k]*matrixB[k][j]
+            }
+            row.push(sum)
+          }
+          product.push(row)
+        }
+        return product
+      }
+      /*
+      function swapRows(matrixA, i, j){
+        A = matrixA
+        for (let k=0; k<A[0].length; k++){
+          let x = A[i][k]
+          A[i][k] = A[j][k]
+          A[j][k] = x
+        }
+        return A
+      }
+
+      function scaleRow(matrixA, i, c){
+        A = matrixA
+        for (let k=0; k<A[0].length; k++){
+          A[i][k] = c*A[i][k]
+        }
+        return A
+      }
+
+      function addRow(matrixA, i, j, c){
+        A = matrixA
+        for (let k=0; k<A[0].length; k++){
+          A[j][k] += c*A[i][k]
+        }
+      }
+      */
+    </script>
+</body>
+</html>
