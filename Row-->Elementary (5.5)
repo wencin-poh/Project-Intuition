@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- The following adds MathJax to render LaTeX notation -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"></script>
+  </head>
+
+<style>
+
+
+#blank {
+  position: relative;
+}
+
+
+#outer {
+  position: absolute;
+  height: 300px;
+  width: 475px;
+  left: 0px;
+  top: 90px;
+  background-color: white;
+  text-align: center}
+
+
+
+
+
+ 
+ 
+ 
+
+
+
+ #undo {
+  position: absolute;
+  height: 30px;
+  width: 90px;
+  left: 290px;
+  top: 50px;
+  background-color: white;
+  text-align: center;}
+
+   
+  #input_mat{
+    position: absolute;
+  height: 200px;
+  width: 300px;
+  left: 100px;
+  top: 90px;
+  background-color: white;
+  text-align: center;}
+ 
+  #times{
+    position: absolute;
+  height: 50px;
+  width: 30px;
+  left: 440px;
+  top: 180px;
+  background-color: white;
+}
+
+#augmented{
+    position: absolute;
+  height: 220px;
+  width: 400px;
+  left: 500px;
+  top: 90px;
+  background-color: white;
+  text-align: center;}
+
+
+
+  #equations {
+  position: absolute;
+  height: 280px;
+  width: 355px;
+  left: 90px;
+  top: 350px;
+  background-color: rgb(19, 15, 15);
+  text-align: center}
+
+  #solution_box {
+  position: absolute;
+  height: 225px;
+  width: 195px;
+  left: 600px;
+  top: 350px;
+  background-color: white;
+  border: 9px solid black;
+  text-align: center}
+  #submit {
+  position: absolute;
+  height: 30px;
+  width: 65px;
+  left: 70px;
+  top: 180px;
+  background-color: white;
+  text-align: center}
+
+#solutions1 {
+  position: absolute;
+  height: 80px;
+  width: 95px;
+  left: 0px;
+  top: 30px;
+  background-color: white;
+  text-align: center}
+  #solutions2 {
+  position: absolute;
+  height: 80px;
+  width: 95px;
+  left: 95px;
+  top: 30px;
+  background-color: white;
+  text-align: center}
+  #difficulty  {
+    position: absolute;
+  height: 30px;
+  width: 390px;
+  left: 490px;
+  top: 0px;
+  background-color: white;
+  text-align: center;}
+  #diff_buttons  {
+    position: absolute;
+  height: 30px;
+  width: 390px;
+  left: 490px;
+  top: 30px;
+  background-color: white;
+  text-align: center;}
+
+
+  #score {
+  position: absolute;
+  height: 220px;
+  width: 90px;
+  left: 1200px;
+  top: 0px;
+  background-color: white;
+  text-align: center;}
+
+
+
+
+ </style>
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+<body>
+<p>
+You are required to solve the set of equations appearing in the black box.  
+To help you do this you may use the augmented matrix to the left of the equations. 
+By clicking in between any two rows you can interchange those rows. 
+By entering a constant in the box to the left of a row and clicking the multiply 
+button you will mulitply that row by the entered constant. 
+If you enter a constant into the box to the left of a row and then drag that row 
+onto a new row it will add the entered constant times the first row to the second row. 
+As you alter the augmented matrix the equations in the black box will also be altered
+automatically.
+</p>
+
+<p>
+If the set of equations has a single solution you will see one column 
+of input boxes in the solutions area. If the set of equations has more than one solution 
+you will see two columns of input boxes in the solutions area. In this case you must enter 
+two distinct solutions.  Your task is to solve one set of equations of each difficulty level 
+from 1 to 9.  After you correctly answer a problem the difficulty will automatically 
+increase by 1, but you may also adjust the difficulty with the up/down arrows.
+</p>
+
+
+
+
+<div id="blank">
+  <div id="score">
+
+  </div>
+
+<div id="undo">
+<button  onclick="revert()">Undo</button>
+</div>
+<div id="diff_buttons">
+  <button style="background-color:white" onclick="diff(1)">&#8593</button>
+  <button style="background-color:white" onclick="diff(-1)">&#8595</button>
+  </div>
+  <div id="difficulty">
+    Difficulty Level: 1
+    </div>
+
+
+    <div id="input_mat">
+    </div>
+    <div id="times" >
+      <button onclick="multiply()" > <h1>&times</h1> </button>
+    </div>
+    <div id="augmented">
+    </div>
+
+<div id="equations">
+</div>
+
+
+
+
+
+<div id = "solution_box">
+Solutions
+  <div id="submit">
+    <button onclick="check_both()">Submit</button>
+  </div>
+<div id="solutions1">
+</div>
+<div id="solutions2">
+</div>
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+<script>
+
+
+
+
+
+
+
+</script>
+
+<script>
+
+
+
+function multiply(){
+  record_state()
+  B=[[],[],[],[]]
+
+A=get_entries()
+X=get_inputs()
+
+
+for (i=0; i<4; i++){
+  for (j=0; j<5; j++){
+    sum=[0,1]
+    for (k=0; k<4; k++){
+      x=rationalize(X[i][k].value)
+      a=rationalize(A[k][j].innerHTML)
+      b=[x[0]*a[0],x[1]*a[1]]
+      sum=[b[0]*sum[1]+b[1]*sum[0],b[1]*sum[1]]
+    }
+    B[i].push(fractionalize(sum))
+  }
+}
+
+for (i=0; i<4; i++){
+  for (j=0; j<5; j++){
+    A[i][j].innerHTML=B[i][j]}}
+
+    for (i=0; i<4; i++){
+  for (j=0; j<4; j++){
+    if (i==j){
+      X[i][j].value=1}
+      if (i!=j){
+        X[i][j].value=0}
+      }
+    }
+
+
+reduce()
+write_equations()
+
+}
+
+
+
+
+
+
+
+
+
+Colors=["blue","green", "red", "yellow"]
+
+
+
+
+Answered=[0,0,0,0,0,0,0,0,0]
+function score(){
+  S=document.getElementById("score")
+  while(S.firstChild){
+  S.removeChild(S.firstChild)}
+
+
+  var q = document.createElement('h1');
+  q.style.fontSize="x-large"
+  q.style.textAlign="left"
+   q.innerHTML="Score Card"
+    S.appendChild(q);
+
+  for (i=0; i<Answered.length; i++){
+  qid='q'+i
+  var q = document.createElement('div');
+  q.style.fontSize="x-large"
+  q.style.textAlign="left"
+    q.id = qid;
+    q.innerHTML = i+1;
+    if (Answered[i]==0){
+      q.style.color='red'
+      Check=q.innerHTML
+      Check+=" &#x2610"
+      q.innerHTML=Check
+    }
+    if (Answered[i]>0){
+      q.style.color='green'
+      Check=q.innerHTML
+      Check+=" &#9745"
+      q.innerHTML=Check
+    }
+    S.appendChild(q);
+}}
+
+
+
+
+difficulty=1
+function diff(k){
+  if (difficulty+k<10 && difficulty+k>0){
+  difficulty+=k
+  initialize()
+  document.getElementById("difficulty").innerText='Difficulty Level: ' + difficulty}
+}
+
+diff(difficulty)
+
+
+get_entries()
+function get_entries(){
+  Entries=[[],[],[],[]]
+  for (i=0; i<4; i++){
+    for (j=0; j<5; j++){
+      Entries[i].push(document.getElementById("A"+i+j))
+    }
+  }
+    return(Entries)}
+
+
+
+function get_inputs(){
+  Inputs=[[],[],[],[]]
+  for (i=0; i<4; i++){
+    for (j=0; j<5; j++){
+      Inputs[i].push(document.getElementById("X"+i+j))
+    }
+  }
+    return(Inputs)}
+
+
+
+
+
+function rationalize(fraction){
+numerator=fraction
+denominator=1
+
+
+    var slash_index=0
+      for (var k=0; k<fraction.length; k++){
+        is_slash=true
+        if (fraction[k]>-9999999){
+          is_slash=false}
+          if (is_slash==true){
+            slash_index=k}
+          }
+
+      if (slash_index>0){
+        numerator=fraction.substring(0,slash_index)
+    denominator=fraction.substring(slash_index+1,fraction.length)}
+
+    return([numerator, denominator])
+      }
+
+function fractionalize(A){
+  if (A[1]==1 || A[0]==0){
+          f=A[0]
+        }    
+        if (A[1]!=1 && A[0]!=0){
+          f=A[0]+'&frasl;'+A[1]
+        }
+        return(f)
+}
+
+
+function remove_solution_boxes(element_name){
+
+var solution_box = document.getElementById(element_name)
+while(solution_box.firstChild){
+  solution_box.removeChild(solution_box.firstChild)}
+}
+
+
+
+function make_solution_boxes(element_name){
+
+variables=['x','y','z','w']
+var solution_box = document.getElementById(element_name)
+while(solution_box.firstChild){
+  solution_box.removeChild(solution_box.firstChild)}
+
+for (i=0; i<4; i++){
+  var sol = document.createElement('div');
+  sol.style.position='absolute'
+  sol.style.width='60px'
+  sol.style.height='30px'
+  sol.style.fontSize='20px'
+  sol.innerHTML=variables[i]+' = '
+  sol.style.top=35*i+"px"
+
+  solution_box.appendChild(sol)
+  var inp = document.createElement('input');
+  inp.style.position='absolute'
+  inp.style.left='50px'
+  inp.style.width='25px'
+  inp.style.height='20px'
+  inp.id=variables[i]+element_name
+  sol.appendChild(inp)
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+function set(complexity){
+
+B0=Math.round(10*(Math.random()+Math.random()))-10
+B1=Math.round(10*(Math.random()+Math.random()))-10
+B2=Math.round(10*(Math.random()+Math.random()))-10
+B3=Math.round(10*(Math.random()+Math.random()))-10
+b=[[1,1],[0,1],[0,1],[0,1],[B0,1]]
+g=[[0,1],[1,1],[0,1],[0,1],[B1,1]]
+r=[[0,1],[0,1],[1,1],[0,1],[B2,1]]
+y=[[0,1],[0,1],[0,1],[1,1],[B3,1]]
+var Mat_Vals=[b,g,r,y]
+
+//set rank
+r=Math.random()
+rank=4
+if (r<0.3){
+  rank-=1
+  Mat_Vals[1]=[[0,1],[0,1],[0,1],[0,1],[0,1]]}
+if (r<0.1){
+  rank-=1
+  Mat_Vals[2]=[[0,1],[0,1],[0,1],[0,1],[0,1]]  }        
+
+
+
+for (j=0; j<complexity; j++){
+
+  //Switch 2 rows
+    if (Math.random()<0.5){
+        m=Math.floor(4*Math.random())
+        n=Math.floor(4*Math.random())
+        var Row1=Mat_Vals[m]
+        var Row2=Mat_Vals[n]
+        Mat_Vals[m]=Row2
+        Mat_Vals[n]=Row1}
+
+  //Multiply row by integer
+    if (Math.random()<0.5){
+        m=Math.floor(4*Math.random())
+        c=Math.round(10*Math.random())-5
+        if (c!=0){
+            for (k=0; k<5; k++){
+                Mat_Vals[m][k][0]*=c}}}
+
+    //Divide row by positive integer
+      if (Math.random()<0.3){
+        m=Math.floor(4*Math.random())
+        c=Math.ceil(4*Math.random())
+            for (k=0; k<5; k++){
+                Mat_Vals[m][k][1]*=c}}
+
+//Add one row to another
+    if (Math.random()<0.9){
+        m=Math.floor(4*Math.random())
+        n=Math.floor(4*Math.random())
+        for (k=0; k<5; k++){
+                var t0=Mat_Vals[m][k][0]*Mat_Vals[n][k][1]
+                    +Mat_Vals[m][k][1]*Mat_Vals[n][k][0]
+                var t1=Mat_Vals[m][k][1]*Mat_Vals[n][k][1]
+                Mat_Vals[n][k][0]=t0
+                Mat_Vals[n][k][1]=t1
+            }}
+       
+}
+
+//Make Input Matrix
+
+var Input=document.getElementById("input_mat")
+while(Input.firstChild){
+  Input.removeChild(Input.firstChild)}
+
+for (i=0; i<4; i++){
+var row = document.createElement('div');
+row.style.position="absolute"
+  row.style.height="50px"
+  row.style.width="400px"
+  row.style.top=60*i+"px"
+  Input.appendChild(row);
+
+for (j=0; j<4; j++){
+var entry = document.createElement('input');
+entry.style.position="absolute"
+entry.style.height="45px"
+entry.style.width="80px"
+entry.style.left=80*j+"px"
+entry.style.fontSize="30px"
+entry.style.lineHeight="40px"
+new_id='X'
+new_id+=i
+new_id+=j
+entry.id=new_id
+
+
+entry.value=0
+if (i==j){
+  entry.value=1}
+
+
+  row.appendChild(entry);
+}}
+
+
+
+//Make Augmented Matrix
+
+var Augmented=document.getElementById("augmented")
+while(Augmented.firstChild){
+  Augmented.removeChild(Augmented.firstChild)}
+
+var Augmented=document.getElementById("augmented")
+for (i=0; i<4; i++){
+var row = document.createElement('div');
+row.style.position="absolute"
+  row.style.height="50px"
+  row.style.width="400px"
+  row.style.top=60*i+"px"
+  Augmented.appendChild(row);
+
+for (j=0; j<5; j++){
+var entry = document.createElement('div');
+entry.style.position="absolute"
+entry.style.height="50px"
+entry.style.width="80px"
+entry.style.left=80*j+"px"
+entry.style.backgroundColor=Colors[i]
+entry.style.fontSize="30px"
+entry.style.lineHeight="50px"
+new_id='A'
+new_id+=i
+new_id+=j
+entry.id=new_id
+
+
+entry.innerHTML=fractionalize(Mat_Vals[i][j])
+
+  row.appendChild(entry);
+}}
+
+
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+function write_equations(){
+
+ Entries=get_entries()
+
+    Eq_el=document.getElementById("equations")
+    Eq_list=[]
+    variables=['x','y','z','w']
+    for (i=0; i<4; i++){
+      eq=''
+      for (j=0; j<4; j++){
+        if (Entries[i][j].innerHTML=='1'){
+          eq+='+'+variables[j]}
+          if (Entries[i][j].innerHTML=='-1'){
+          eq+='-'+variables[j]}
+          if (Entries[i][j].innerHTML!='-1' && Entries[i][j].innerHTML!='0' && Entries[i][j].innerHTML!='1'){
+          if (Entries[i][j].innerHTML[0]=='-'){
+            eq+=Entries[i][j].innerHTML+variables[j]}
+          if (Entries[i][j].innerHTML[0]!='-'){
+            eq+='+'+Entries[i][j].innerHTML+variables[j]}
+        }}
+        eq+='='+Entries[i][4].innerHTML
+        if (eq[0]=='+'){
+          eq=' '+eq.substring(1,eq.length)}
+        if (eq[0]=='='){
+          eq=''}
+        
+Eq_list.push(eq)
+
+      }
+    
+  while(Eq_el.firstChild){
+  Eq_el.removeChild(Eq_el.firstChild)}
+for (i=0; i<4; i++){
+  var new_eq = document.createElement('div');
+  new_eq.style.position='absolute'
+  new_eq.style.width='260px'
+  new_eq.style.height='30px'
+  new_eq.style.fontSize='20px'
+  new_eq.innerHTML=Eq_list[i]
+  new_eq.style.top=15+75*i+"px"
+  new_eq.style.left="50px"
+  new_eq.style.color=Colors[i]
+  Eq_el.appendChild(new_eq)}
+
+
+}
+
+
+
+
+
+
+
+function initialize(){
+set(difficulty)
+reduce()
+write_equations()
+States=[]
+remove_solution_boxes("solutions1")
+remove_solution_boxes("solutions2")
+make_solution_boxes("solutions1")
+if (rank<4){
+make_solution_boxes("solutions2")}
+score()
+
+}
+
+
+initialize()
+function record_state(){
+    Entries=get_entries()
+ 
+var state=[]
+for (var i=0; i<Entries.length; i++){
+  var rowstate=[]
+  for (var j=0; j<Entries[i].length; j++){
+    rowstate.push(Entries[i][j].innerHTML)
+  }
+  state.push(rowstate)
+}
+    States.push([state[0],state[1],state[2],state[3]])
+}
+
+
+
+
+
+function revert(){
+  S=States[States.length-1]
+
+Entries=get_entries()
+for (i=0; i<Entries.length; i++){
+  for (j=0; j<Entries[i].length; j++){
+Entries[i][j].innerHTML=S[i][j]}}
+
+
+   
+  States.splice(States.length-1,1)
+}
+
+
+
+
+
+function swi(i){
+  record_state()
+  BLUE=document.getElementById("bluetip")
+  GREEN=document.getElementById("greentip")
+  RED=document.getElementById("redtip")
+  YELLOW=document.getElementById("yellowtip")
+   Entries=get_entries()
+    COL=[BLUE,GREEN,RED,YELLOW]
+    First=Entries[i-1]
+    Second=Entries[i]
+    FirstColor=COL[i-1].style.backgroundColor
+    SecondColor=COL[i].style.backgroundColor
+    var FirstHTML=[]
+    var SecondHTML=[]
+    for (var j=0; j<5; j++){
+    FirstHTML.push(First[j].innerHTML)
+    SecondHTML.push(Second[j].innerHTML)
+    }
+
+    for (var j=0; j<5; j++){
+    First[j].innerHTML=SecondHTML[j]
+    First[j].style.backgroundColor=SecondColor
+    Second[j].innerHTML=FirstHTML[j]
+    Second[j].style.backgroundColor=FirstColor
+    }
+
+    COL[i-1].style.backgroundColor=SecondColor
+    COL[i].style.backgroundColor=FirstColor
+    write_equations()
+    }
+
+
+
+
+
+    function mult(i){
+      record_state()
+
+    b=document.getElementById("in1")
+    g=document.getElementById("in2")
+    r=document.getElementById("in3")
+    y=document.getElementById("in4")
+
+    constants=[b,g,r,y]
+    
+    Entries=get_entries()
+    Row=Entries[i-1]
+    Constant=rationalize(constants[i-1].value)
+
+
+  var rowVals=[]
+    for (var j=0; j<5; j++){
+    rowVals.push(rationalize(Row[j].innerHTML))
+    }
+
+       for (var j=0; j<5; j++){
+        if (Constant[0]!=0){
+        rowVals[j][0]*=Constant[0]
+        rowVals[j][1]*=Constant[1]}}
+
+
+
+    for (var j=0; j<5; j++){
+      if (rowVals[j][1]==1){
+        Row[j].innerHTML=rowVals[j][0]
+      }
+      if (rowVals[j][1]!=1){
+    Row[j].innerHTML=rowVals[j][0]+"&frasl;"+rowVals[j][1]
+    }
+    }
+  
+
+
+    if (Constant[0]==0){
+  alert("If you multiply an equation by 0 you will lose all the information \
+  contained in that equation!")
+}
+
+    constants[i-1].value=''
+    reduce()
+    write_equations()
+    }
+
+
+
+  
+function add(Z0,Z1){
+
+start=99
+end=99
+    if (0<Z0 && Z0<50){start=0}
+    if (75<Z0 && Z0<125){start=1}
+    if (150<Z0 && Z0<200){start=2}
+    if (225<Z0 && Z0<275){start=3}
+
+    if (0<Z1 && Z1<50){end=0}
+    if (75<Z1 && Z1<125){end=1}
+    if (150<Z1 && Z1<200){end=2}
+    if (225<Z1 && Z1<275){end=3}
+
+    if (start!=end){
+      record_state()
+  Entries=get_entries()
+
+    b=document.getElementById("in1")
+    g=document.getElementById("in2")
+    r=document.getElementById("in3")
+    y=document.getElementById("in4")
+
+constants=[b,g,r,y]
+
+var C=rationalize(constants[start].value.toString())
+
+ startRow=Entries[start]
+ endRow=Entries[end]
+ newVals=[]
+ for (i=0; i<startRow.length; i++){
+var S=rationalize(startRow[i].innerHTML)
+var E=rationalize(endRow[i].innerHTML)
+newVals.push([C[0]*S[0]*E[1]+E[0]*C[1]*S[1],C[1]*S[1]*E[1]])}
+
+       for (var j=0; j<5; j++){
+        numer=newVals[j][0]
+        denom=newVals[j][1]
+        if (denom==1){Entries[end][j].innerHTML=numer}
+        if (denom!=1){Entries[end][j].innerHTML=numer+"&frasl;"+denom}}
+
+    constants[start].value=''
+    reduce()
+    write_equations()
+       }
+    }
+  
+
+
+    function reduce(){
+    
+
+    Entries=get_entries()
+  
+
+   for (i=0; i<Entries.length; i++){
+    for (j=0; j<Entries[i].length; j++){
+     var n=rationalize(Entries[i][j].innerHTML)
+  
+
+var n0=n[0]
+var n1=n[1]
+lcm=1
+for (m=0; m<n1+1; m++){
+  if (Number.isInteger(n1/m)==true && Number.isInteger(n0/m)==true){
+    lcm=m
+  }
+}
+n0/=lcm
+n1/=lcm
+
+if (n1==1){
+  Entries[i][j].innerHTML=n0}
+  if (n1!=1){
+  Entries[i][j].innerHTML=n0+"&frasl;"+n1}
+ 
+    }
+  }
+}
+    
+
+
+function check_one(e){
+ 
+Entries=get_entries()
+
+var x = (document.getElementById('xsolutions'+e).value)
+var y = (document.getElementById('ysolutions'+e).value)
+var z = (document.getElementById('zsolutions'+e).value)
+var w = (document.getElementById('wsolutions'+e).value)
+correct_eqs=-1
+
+
+if (x!='' || y!='' || z!='' || w!=''){
+  correct_eqs=0
+  
+x=rationalize(x)
+y=rationalize(y)
+z=rationalize(z)
+w=rationalize(w)
+
+
+
+
+
+vector=[x,y,z,w]
+for (i=0; i<4; i++){
+  Constant=rationalize(Entries[i][4].innerHTML)
+  C=Constant[0]/Constant[1]
+
+  dot_prod=0
+  for (j=0; j<4; j++){
+    Mij=rationalize(Entries[i][j].innerHTML)
+    dot_prod+=Mij[0]/Mij[1]*vector[j][0]/vector[j][1]}
+
+    if (C==dot_prod){
+      correct_eqs+=1
+    }
+  }
+
+
+}
+  return([correct_eqs,[x,y,z,w]])
+
+}
+
+
+
+
+function check_both(){
+  solved=0
+if (rank==4){
+  correct=check_one(1)[0]
+  if (correct>=0){
+  if (correct==4){
+    alert('Good Job')
+    Answered[difficulty-1]+=1
+    solved=1
+ }
+
+  if (correct<4){
+    alert('Only ' + correct + ' of the 4 equations were correct')}
+  }
+if (correct<0){
+  alert('Please fill all solution boxes')
+}
+
+
+}
+
+if (rank<4){
+  correct1=check_one(1)[0]
+  correct2=check_one(2)[0]
+  ans1=check_one(1)[1]
+  ans2=check_one(2)[1]
+
+if (correct1>=0 && correct2>=0){
+
+  same=1
+  for (q=0; q<4; q++){
+  if (ans1[q][0]*ans2[q][1]!=ans1[q][1]*ans2[q][0]){
+    same=0} }
+
+
+if (same==0){
+
+  if (correct1==4 && correct2==4){
+    alert('Good Job.')
+    Answered[difficulty-1]+=1
+    solved=1
+}
+
+
+  if (correct1==4 && correct2<4){
+    alert('Your second solution is incorrect.')}
+
+  if (correct1<4 && correct2==4){
+    alert('Your first solution is incorrect.')}
+
+  if (correct1<4 && correct2<4){
+    alert('Both solutions are incorrect.')}
+  }
+
+
+if (same==1){
+  alert('Your answers are the same.')
+}
+
+}
+
+
+
+
+
+  if  (correct1<0 || correct2<0){
+    alert('Please check that all solution boxes are filled.')
+  }
+}
+
+
+if (solved==1){
+  diff(1)
+}
+
+
+}
+
+
+
+
+
+
+
+function clear()
+{
+ if (window.getSelection) {window.getSelection().removeAllRanges();}
+ else if (document.selection) {document.selection.empty();}
+}
+
+
+
+function mobilize(tip) {
+    tip.onmousedown = move;  
+
+  function move(e) {
+    Y0 = e.clientY;
+    x0 = e.clientX;
+    y0 = e.clientY;
+    document.onmousemove = drag;
+    document.onmouseup = close;
+  }
+
+function drag(e) {
+    dx = e.clientX-x0;
+    dy = e.clientY-y0;
+    x0 = e.clientX;
+    y0 = e.clientY;
+    tip.style.left = (tip.offsetLeft + dx) + "px";
+    tip.style.top = (tip.offsetTop + dy) + "px";
+    clear()
+  }
+
+function close(e) {
+	document.onmouseup = null;
+	document.onmousemove = null;
+    document.getElementById("bluetip").style.left="100px";
+    document.getElementById("bluetip").style.top="0px";
+    document.getElementById("greentip").style.left="100px";
+    document.getElementById("greentip").style.top="75px";
+    document.getElementById("redtip").style.left="100px";
+    document.getElementById("redtip").style.top="150px";
+    document.getElementById("yellowtip").style.left="100px";
+    document.getElementById("yellowtip").style.top="225px";
+    Y1=e.clientY
+    ABS=document.getElementById('outer').getBoundingClientRect()
+    off=(ABS.top)
+    add(Y0-off,Y1-off)
+ }
+  
+  
+}
+
+
+
+bt=document.getElementById("bluetip")
+mobilize(bt)
+
+gt=document.getElementById("greentip")
+mobilize(gt)
+rt=document.getElementById("redtip")
+mobilize(rt)
+
+yt=document.getElementById("yellowtip")
+mobilize(yt)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var page=0
+var quests=[
+"1.Excellent, now find two vectors with length approximately equal to 1 and dot product approximately equal to 1",
+"2. Good job, now find two vectors with length approximately equal to 1 and dot product approximately equal to 0.5",
+"3. Excellent,  now find two vectors with length approximately equal to 1 and dot product approximately equal to 0",
+"4. Good job,  now find two vectors with length approximately equal to 1 and dot product approximately equal to -0.5",
+"5. Excellent, now find two vectors with length approximately equal to 1 and dot product approximately equal to -1",
+"Good job!!!"]
+var ans=[
+[1,1,1,0.1,0.1,0.1],
+[1,1,0.5,0.1,0.1,0.1],
+[1,1,0,0.1,0.1,0.1],
+[1,1,-0.5,0.1,0.1,0.1],
+[1,1,-1,0.1,0.1,0.1]
+]
+
+
+
+
+
+</script>
+
+
+
+</body>
+</html>
