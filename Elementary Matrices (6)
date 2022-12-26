@@ -5,16 +5,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Linear Algebra: Elementary Matrices</title>
 
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+    }
+  </script>
+
   <!-- The following adds MathJax to render LaTeX notation -->
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"></script>
   <!-- This adds some Google Font(s) -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Source+Serif+Pro">
   
   <style>
-    #matrices
+    .float
     {
       display: flex;
       justify-content: space-around;
+      align-items: center;
+    }
+
+    .expand
+    {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #matrixPrompt
+    {
+      width: 500px;
+      height: 100px;
+      border: 1px black solid;
+    }
+
+    #questionArea
+    {
+      width: 690px;
+      height: 80px;
+      border: 1px black solid;
+    }
+
+    #questionBox
+    {
+      width: 700px;
+      height: 200px;
+      border: 1px black solid;
+    }
+
+    #matrixEquation
+    {
+      width: 600px;
+      height: 100px;
+      border: 2px black solid;
+    }
+
+    .box
+    {
+      width: 200px;
+      height: 100px;
+      border: 1px black solid;
     }
 
     .entry
@@ -36,6 +87,24 @@
     {
       height: 20px;
       border-radius: 5px;
+    }
+
+    .navigationButton
+    {
+      height: 20px;
+      border-radius: 5px;
+      background: radial-gradient(#FFFFFF, #DDDDDD);
+      cursor: pointer;
+    }
+
+    .navigationButton:hover
+    {
+      background: radial-gradient(#FFFFFF, #FFB000);
+    }
+
+    .navigationButton:active
+    {
+      background: #FFB000;
     }
 
     .operationButton
@@ -61,19 +130,23 @@
       position: relative;
       left: 10px;
     }
+
+    .greytext {
+      color: grey;
+    }
   </style>
 </head>
 <body>
     <h2><center>Module 6: Elementary Matrices</center></h2>
     <div id="intro">
-      <p>Every elementary row operation on a matrix can be traced back to the action of multiplying an elementary matrix by that matrix. 
+      <p>Every elementary row operation applied onto a matrix can be traced back to the action of multiplying an elementary matrix by that matrix. 
       We shall explore and understand this maxim through the following module.</p>
       <p>Each elementary matrix is a square matrix resembling an identity matrix, but with a twist depending on their type. 
       In general, we have the following types of elementary matrices:</p>
       <ul>
       <li>
-        [Swap Rows] Swap Row \(i\) with Row \(j\) - This is represented by multiplying by the matrix of the form 
-        \[\begin{bmatrix}
+        [Swap Rows] Swap Row $i$ with Row $j$ - This is represented by multiplying by the matrix of the form 
+        $$\begin{bmatrix}
         1 &        &   &   &   &        &   &   &   &        &   \\
           & \ddots &   &   &   &        &   &   &   &        &   \\
           &        & 1 &   &   &        &   &   &   &        &   \\
@@ -85,12 +158,12 @@
           &        &   &   &   &        &   &   & 1 &        &   \\
           &        &   &   &   &        &   &   &   & \ddots &   \\
           &        &   &   &   &        &   &   &   &        & 1 
-        \end{bmatrix},\]
-          where the only entries with \(1\) off the main diagonal are at positions \((i, j)\) and \((j, i)\), whereas the only entries with \(0\) on the main diagonal are at positions \((i, i)\) and \((j, j)\).
+        \end{bmatrix},$$
+          where the only entries with $1$ off the main diagonal are at positions $(i, j)$ and $(j, i)$, whereas the only entries with $0$ on the main diagonal are at positions $(i, i)$ and $(j, j)$.
         </li>
       <li>
-        [Scale Row] Scale Row \(i\) by a nonzero \(c\) - This is represented by multiplying by the matrix of the form 
-        \[\begin{bmatrix}
+        [Scale Row] Scale Row $i$ by a nonzero $c$ - This is represented by multiplying by the matrix of the form 
+        $$\begin{bmatrix}
         1 &        &   &   &   &        &   \\
           & \ddots &   &   &   &        &   \\
           &        & 1 &   &   &        &   \\
@@ -98,12 +171,12 @@
           &        &   &   & 1 &        &   \\
           &        &   &   &   & \ddots &   \\
           &        &   &   &   &        & 1 
-        \end{bmatrix},\]
-        where the \((i,i)\)-entry is \(c\).
+        \end{bmatrix},$$
+        where the $(i,i)$-entry is $c$.
       </li>
       <li>
-        [Add Row] Add \(c\) times of Row \(i\) to Row \(j\) - This is represented by multiplying by the matrix of the form 
-        \[\begin{bmatrix}
+        [Add Row] Add $c$ times of Row $i$ to Row $j$ - This is represented by multiplying by the matrix of the form 
+        $$\begin{bmatrix}
         1 &        &   &   &         &   &   &        &   \\
           & \ddots &   &   &         &   &   &        &   \\
           &        & 1 &   &         &   &   &        &   \\
@@ -113,59 +186,88 @@
           &        &   &   &         &   & 1 &        &   \\
           &        &   &   &         &   &   & \ddots &   \\
           &        &   &   &         &   &   &        & 1 
-        \end{bmatrix},\]
-        where the \((j, i)\)-entry of the matrix is \(c\).
+        \end{bmatrix},$$
+        where the $(j, i)$-entry of the matrix is $c$.
       </li>
       </ul>
     </div>
 
     <div id="instructions">
-      <p> In the following module, you may specify the type of row operations, followed by the associated parameters, namely, some combination of row indices \(i\) and \(j\) and scalar \(c\).
+      <p> In the following module, the main objective is to encourage you to be comfortable with creating elementary matrices on your own.
+
+      At the initial stage, to create an elementary matrix, you may specify the type of row operation, followed by the associated parameters, namely, some combination of row indices $i$ and $j$ and scalar $c$.
+      This would be displayed as matrix $E$ below. 
+      A matrix $A$ is provided for you to apply the effects of a row operation.
+      You are welcome to change any of its entries. 
+      Next, you may click on 'Multiply Matrix' to see the effect of the multiplication on $A$.
+      The result of the multiplication shall be shown in the area called 'Matrix equation'.
+     </p>
+
+      <p> 
+      Note that rational numbers may be entered as long as they are in the form $a/b$, where $a$ is some integer and $b$ is a nonzero integer.
       </p>
     </div>
 
-    <div id="question">
-      <button onclick = "displayQuestions(3)" id="submit">Start</button>
-      <button>Previous</button>
-      <button>Next</button>
+    <div id="question" class="expand">
+      <div id="questionBox">
+        <h2>Current question:</h2>
+        <div id="questionArea">
+          <p id="questionToDisplay">Click 'Start' whenever you are ready. Good luck!</p>
+        </div>
+        <button onclick ="updateQuestions()" id="submitButton" class="navigationButton">Start</button>
+        <button onclick="previousPage()" class="navigationButton">Previous</button>
+        <button onclick="nextPage()" class="navigationButton">Next</button>
+        <button onclick="automaticSucceed()" class="navigationButton">Succeed Automatically</button>
+      </div>
 
-      <h2>Current question:</h2>
-      <p id="questionToDisplay"></p>
+      <div id="matrixPrompt">
+      </div>
     </div>
 
-  <div id="matrixOptions">
-      <h3>Elementary row operation</h3>
-      Operation type:
-      <select onchange="disableParameters()" id="operationType" name="operationType" class="dropdown">
-        <option value="null"> </option>
-          <option value="swap">Swap Rows</option>
-          <option value="scale">Scale Row</option>
-          <option value="add">Add Row</option>
-        </select><br>
-      Row \(i=\)
-      <select id="row_i" name="row_i" class="dropdown">
-        <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-        </select><br>
-        Row \(j=\)
-      <select id="row_j" name="row_j" class="dropdown">
-        <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-        </select><br>
-      Scalar \(c=\)
-      <input type="number" class="entry" id="scalar" name="scalar" value=1 step=0.1><br><br>
+    <div id="matrixOptions" class="float">
+      <div>
+        <h3>Elementary row operation</h3>
+        Operation type:
+        <select onchange="disableParameters()" id="operationType" name="operationType" class="dropdown">
+          <option value="null"> </option>
+            <option value="swap">Swap Rows</option>
+            <option value="scale">Scale Row</option>
+            <option value="add">Add Row</option>
+          </select><br>
+        Row \(i=\)
+        <select id="row_i" name="row_i" class="dropdown">
+          <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select><br>
+          Row \(j=\)
+        <select id="row_j" name="row_j" class="dropdown">
+          <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select><br>
+        Scalar \(c=\)
+        <input type="number" class="entry" id="scalar" name="scalar" value=1 step=0.1><br><br>
 
-      <button onclick="createMatrix()" class="operationButton" id="createMatrix"> Create Matrix </button>
-      <button onclick="executeOperation()" class="operationButton" id="executeOperation"> Execute Operation </button>
-      <button onclick="reset()" class="operationButton" id="resetOperation"> Reset </button>
-  </div>
+        <button onclick="createMatrix()" class="operationButton" id="createMatrix"> Create Matrix </button>
+        <button onclick="multiplyMatrix()" class="operationButton" id="multiplyMatrix"> Multiply Matrix </button>
+        <button onclick="resetSettings()" class="operationButton" id="resetSettings"> Reset Settings </button>
+      </div>
 
-    <div id="matrices">
-      <div id="elementaryMatrix" class="matrixOperation">
+      <div id="displayArea">
+        <h3>Matrix equation</h3>
+        <div id="matrixEquation">
+        </div>
+      </div>
+
+      <div class="box">
+      </div> 
+    </div>
+
+    <div id="matrices" class="float">
+      <div id="elementaryMatrix">
         <h3>Matrix \(E\)</h3>
         <!--Row 1-->
         <input type="text" id="e11" name="e11" class="entry" value=1>
@@ -189,7 +291,7 @@
         <input type="text" id="e44" name="e44" class="entry" value=1>
       </div>
       
-      <div id="augmentedMatrixOne" class="matrixOperation">
+      <div id="augmentedMatrixOne">
         <h3>Matrix \(A\)</h3>
         <!--Row 1-->
         <input type="text" id="a11" name="a11" class="entry" value=1>
@@ -197,60 +299,64 @@
         <input type="text" id="a13" name="a13" class="entry" value=1>
         <input type="text" id="a14" name="a14" class="entry" value=1>
         <input type="text" id="a15" name="a15" class="entry" value=1>
-        <input type="text" id="a16" name="a16" class="entry column" value=5><br><br>
+        <input type="text" id="a16" name="a16" class="entry column" value=1><br><br>
         <!--Row 2-->
-        <input type="text" id="a21" name="a21" class="entry" value=2>
-        <input type="text" id="a22" name="a22" class="entry" value=1>
-        <input type="text" id="a23" name="a23" class="entry" value=0>
-        <input type="text" id="a24" name="a24" class="entry" value=1>
-        <input type="text" id="a25" name="a25" class="entry" value=2>
-        <input type="text" id="a26" name="a26" class="entry column" value=11><br><br>
+        <input type="text" id="a21" name="a21" class="entry" value=0>
+        <input type="text" id="a22" name="a22" class="entry" value=-1>
+        <input type="text" id="a23" name="a23" class="entry" value=2>
+        <input type="text" id="a24" name="a24" class="entry" value=-1>
+        <input type="text" id="a25" name="a25" class="entry" value=0>
+        <input type="text" id="a26" name="a26" class="entry column" value=-2><br><br>
         <!--Row 3-->
-        <input type="text" id="a31" name="a31" class="entry" value=1>
+        <input type="text" id="a31" name="a31" class="entry" value=2>
         <input type="text" id="a32" name="a32" class="entry" value=-1>
-        <input type="text" id="a33" name="a33" class="entry" value=1>
-        <input type="text" id="a34" name="a34" class="entry" value=-1>
-        <input type="text" id="a35" name="a35" class="entry" value=1>
-        <input type="text" id="a36" name="a36" class="entry column" value=15><br><br>
+        <input type="text" id="a33" name="a33" class="entry" value=0>
+        <input type="text" id="a34" name="a34" class="entry" value=1>
+        <input type="text" id="a35" name="a35" class="entry" value=-2>
+        <input type="text" id="a36" name="a36" class="entry column" value=-14><br><br>
         <!--Row 4-->
         <input type="text" id="a41" name="a41" class="entry" value=1>
-        <input type="text" id="a42" name="a42" class="entry" value=0>
-        <input type="text" id="a43" name="a43" class="entry" value=2>
-        <input type="text" id="a44" name="a44" class="entry" value=-1>
-        <input type="text" id="a45" name="a45" class="entry" value=0>
-        <input type="text" id="a46" name="a46" class="entry column" value=8><br><br>
+        <input type="text" id="a42" name="a42" class="entry" value=-2>
+        <input type="text" id="a43" name="a43" class="entry" value=3>
+        <input type="text" id="a44" name="a44" class="entry" value=-4>
+        <input type="text" id="a45" name="a45" class="entry" value=5>
+        <input type="text" id="a46" name="a46" class="entry column" value=28><br><br>
       </div>
-      
+
+      <!--
       <div id="augmentedMatrixTwo" class="matrixOperation">
         <h3>Matrix \(B\)</h3>
-        <!--Row 1-->
+        <!--Row 1--\>
         <input type="text" id="b11" name="b11" class="output" disabled>
         <input type="text" id="b12" name="b12" class="output" disabled>
         <input type="text" id="b13" name="b13" class="output" disabled>
         <input type="text" id="b14" name="b14" class="output" disabled>
         <input type="text" id="b15" name="b15" class="output" disabled>
         <input type="text" id="b16" name="b16" class="output column" disabled><br><br>
-        <!--Row 2-->
+        <!--Row 2--\>
         <input type="text" id="b21" name="b21" class="output" disabled>
         <input type="text" id="b22" name="b22" class="output" disabled>
         <input type="text" id="b23" name="b23" class="output" disabled>
         <input type="text" id="b24" name="b24" class="output" disabled>
         <input type="text" id="b25" name="b25" class="output" disabled>
         <input type="text" id="b26" name="b26" class="output column" disabled><br><br>
-        <!--Row 3-->
+        <!--Row 3--\>
         <input type="text" id="b31" name="b31" class="output" disabled>
         <input type="text" id="b32" name="b32" class="output" disabled>
         <input type="text" id="b33" name="b33" class="output" disabled>
         <input type="text" id="b34" name="b34" class="output" disabled>
         <input type="text" id="b35" name="b35" class="output" disabled>
         <input type="text" id="b36" name="b36" class="output column" disabled><br><br>
-        <!--Row 4-->
+        <!--Row 4--\>
         <input type="text" id="b41" name="b41" class="output" disabled>
         <input type="text" id="b42" name="b42" class="output" disabled>
         <input type="text" id="b43" name="b43" class="output" disabled>
         <input type="text" id="b44" name="b44" class="output" disabled>
         <input type="text" id="b45" name="b45" class="output" disabled>
         <input type="text" id="b46" name="b46" class="output column" disabled><br><br>
+      </div>
+      -->
+      <div class="box">
       </div>
     </div>
 
@@ -259,33 +365,100 @@
     </div>
 
     <div id="score">
-    
     </div>
 
     <script>
       page = 0
-      function displayQuestions(page){
-        questions = 
-        [
-          "1. Find an elementary matrix that swaps entries in Row 1 and Row 2.",
-          "2. What about an elementary matrix that swaps entries in Row 2 and Row 4?",
-          "3. Create an elementary matrix that scales entries in Row 3 by \\(2\\).",
-          "4. What about an elementary matrix that multiplies the entire Row 4 by \\(-1\\)?",
-          "5. Determine an elementary matrix that adds Row 4 to Row 3.",
-          "6. Can you find an elementary matrix that adds -3 times of Row 3 to Row 1?",
-          "7. Now, look at the two displayed matrices \\(A\\) and \\(B\\). \\(B\\) is obtained from \\(A\\) from a row swap. Name an elementary matrix that undoes this swap.",
-          "8. Next, \\(B\\) is obtained from \\(A\\) from scaling a row. Name an elementary matrix that undoes this scaling.",
-          "9. Alright, \\(B\\) is obtained from \\(A\\) from adding a multiple of one row to another. Name an elementary matrix that undoes this addition.",
-          "10. Let's move to a different type of questions. \\(B\\) is obtained from \\(A\\) using two elementary row operations. Identify the row operations in the correct order and enter the respective elementary matrices, one after another."
-          "11. Now, \\(B\\) is obtained from \\(A\\) using another two elementary row operations. Identify the row operations in the correct order and enter the respective elementary matrices, one after another."
-          "12. Finally, \\(B\\) is obtained from \\(A\\) using two elementary row operations. Identify two row operations that undo these operations and enter the respective elementary matrices, one after another."
-        ]
+      beginQuestions = "false"
+      questions = [
+        "1. Find an elementary matrix that swaps entries in Row $1$ and Row $2$.",
+        "2. What about an elementary matrix that swaps entries in Row $2$ and Row $4$?",
+        "3. Create an elementary matrix that scales entries in Row $3$ by $2$.",
+        "4. What about an elementary matrix that multiplies the entire Row $4$ by $-1$?",
+        "5. Determine an elementary matrix that adds Row $4$ to Row $3$.",
+        "6. Can you find an elementary matrix that adds $-3$ times of Row 3 to Row 1?",
+        "7. Now, look at the two displayed matrices $A$ and $B$. $B$ is obtained from $A$ from a row swap. Name an elementary matrix that undoes this swap.",
+        "8. Next, $B$ is obtained from $A$ from scaling a row. Name an elementary matrix that undoes this scaling.",
+        "9. Alright, $B$ is obtained from $A$ from adding a multiple of one row to another. Name an elementary matrix that undoes this addition.",
+        "10. Let's move to a different type of question. $B$ is obtained from $A$ using two elementary row operations. Identify the row operations in the correct order and enter the respective elementary matrices, one after another.",
+        "11. Now, $B$ is obtained from $A$ using another two elementary row operations. Identify the row operations in the correct order and enter the respective elementary matrices, one after another.",
+        "12. Finally, $B$ is obtained from $A$ using two elementary row operations. Identify two row operations that undo these operations and enter the respective elementary matrices, one after another."
+      ]
+      answered = [0,0,0,0,0,0,0,0,0,0,0,0]
+      
+      function updateQuestions(){
+        if (beginQuestions == "false"){
+          button = document.getElementById("submitButton")
+          button.textContent = "Submit"
+          beginQuestions = "true"
+          displayQuestion(page)
+          return 
+        } else if (beginQuestions == "false"){
+          if (0<=page && page<6){
+            E = readMatrix("e")
+            if (gradeRowOperations(E)=="true"){
+              appendCompletedQuestion(page)
+              page += 1
+              displayQuestion(page)
+            }
+          } else if (6<=page && page<=9){
+            E = readMatrix("e")
+            if (gradeInverse(E)=="true"){
+              appendCompletedQuestion(page)
+              page += 1
+              displayQuestion(page)
+            }
+          } else {
+            E1 = readMatrix("e")
+            E2 = readMatrix("e")
+            if (gradeDecomposition(E1, E2)=="true"){
+              appendCompletedQuestion(page)
+              page += 1
+              displayQuestion(page)
+            }
+          }
+        }
+      }
+
+      function automaticSucceed(){
+        if (beginQuestions != "true"){
+          return }
+        appendCompletedQuestion(page)
+        MathJax.typesetPromise()
+        if (page<12-1){
+          page += 1
+          displayQuestion(page)
+        }
+      }
+
+      function appendCompletedQuestion(page){
+        if (answered[page] == 0){
+          answered[page] = 1
+          completedQuestions = document.getElementById("completed")
+          var answeredQuestion = document.createElement('div')
+          answeredQuestion.textContent = questions[page]
+          answeredQuestion.setAttribute('class', 'greytext')
+          completedQuestions.appendChild(answeredQuestion)
+        }
+      }
+
+      function displayQuestion(page){
         displayArea = document.getElementById("questionToDisplay") 
         displayArea.innerHTML = questions[page]
         MathJax.typesetPromise()
       }
 
-      displayQuestions(0)
+      function nextPage(){
+        if (page<12-1){
+          page += 1
+          displayQuestion(page)}
+      }
+
+      function previousPage(){
+        if (page>0){
+          page -= 1
+          displayQuestion(page)}
+      }
     </script>
 
     <script>
@@ -344,28 +517,28 @@
       }
 
       // This functions resets the entire progress of row operations
-      function resetProgress(){
+      function resetSettings(){
         let i = 1
         let j = 1
         let c = 1
         let E = [[1,0,0,0], [0,1,0,0], [0,0,1,0], [0,0,0,1]]
-        let A = [[1,1,1,1,1,5], [2,1,0,1,2,11], [1,-1,1,-1,1,15], [1,0,2,-1,0,8]]
-        e = ""
-        let B = [[e,e,e,e,e,e], [e,e,e,e,e,e], [e,e,e,e,e,e], [e,e,e,e,e,e]]
-
+        let A = [[1,1,1,1,1,1], [0,-1,2,-1,0,-2], [2,-1,0,1,-2,-14], [1,-2,3,-4,5,28]]
+        
         operationType = document.getElementById("operationType")
         ithRow = document.getElementById("row_i")
         jthRow = document.getElementById("row_j")
         scalingFactor = document.getElementById("scalar")
+
+        // This resets the settings for row operations
         operationType.value = "null"
         ithRow.value = i
         jthRow.value = j
         scalingFactor.value = c
-
+        
         // This resets the matrices' entries
         writeMatrix(E, "e")
         writeMatrix(A, "a")
-        writeMatrix(B, "b")
+
         reset = true
       }
 
@@ -417,24 +590,89 @@
         writeMatrix(E, "e")
       }
 
-      function executeOperation(){
-        A = readMatrix("a")
+      function texifyMatrix(matrixM){
+        let string = "\\begin{bmatrix} \n"
+        for (let i=0; i<matrixM.length; i++){
+          for (let j=0; j<matrixM[i].length; j++){
+            string += String(matrixM[i][j]) + " "
+            if (j<matrixM[i].length-1){
+              string += "& "
+            }
+          } 
+          if (i<matrixM.length-1){
+            string += "\\\\\n"
+          }
+        }
+        string += "\n\\end{bmatrix}"
+        return string
+      }
+
+      function displayMatrix(matrixE, matrixA, matrixB){
+        stringE = texifyMatrix(matrixE)
+        stringA = texifyMatrix(matrixA)
+        stringB = texifyMatrix(matrixB)
+        s = "$$\\small{" + stringE + "\\cdot" + stringA + "=" + stringB + ".}$$"
+
+        address = document.getElementById("matrixEquation")
+        address.textContent = s
+        MathJax.typesetPromise()
+      }
+
+      function verifyElementary(matrixE){
+        let index1 = []
+        let index2 = []
+        for (let i=0; i<matrixE.length; i++){
+          for (let j=0; j<matrixE[i].length; j++){
+            if (i==j && matrixE[i][j]!=1){ 
+              if (index1.length >= 2){
+                return false
+              }
+              index1.push(i)
+            } else if (i!=j && matrixE[i][j]!=0){
+               if (index2.length >= 2){
+                return false
+               }
+               index2.push([i, j])
+            }
+          }
+        }
+        // Type 1: swap rows
+        if (index1.length==2 && index2.length==2){
+          x = index1[0]; y = index1[1]
+          x1 = index2[0][0]; y1 = index2[0][1]
+          x2 = index2[1][0]; y2 = index2[1][1]
+          cond1 = (x1==x && y1==y && x2==y && y2==x)
+          cond2 = (x1==y && y1==x && x2==x && y2==y)
+          cond3 = (matrixE[x1][y1]==1 && matrixE[x2][y2]==1)
+          cond4 = (matrixE[x][x]==0 && matrixE[y][y]==0)
+          return (cond1 || cond2) && cond3 && cond4
+        }
+        // Type 2: scale row
+        else if (index1.length==1 && index2.length==0){
+          x = index1[0]
+          return  (matrixE[x][x]!=0)
+        }
+        // Type 3: add row
+        else if (index1.length==0 && index2.length<=1){
+          return true
+        }
+        return false
+      }
+
+      function multiplyMatrix(){
         E = readMatrix("e")
-        B = matrixMultiply(E, A)
-        writeMatrix(B, "b")
+        if (!verifyElementary(E)){
+          alert("The given matrix E is not elementary.")
+          return 
+        }
+        A = readMatrix("a")
+        B = matrixMultiplication(E, A)
+        displayMatrix(E, A, B)
         reset = false
       }
 
-      function advanceMatrix(){
-        if (reset){
-          return
-        }
-        B = readMatrix("b")
-        writeMatrix(B, "a")
-      }
-
       // These functions perform matrix operations
-      function matrixMultiply(matrixA, matrixB){
+      function matrixMultiplication(matrixA, matrixB){
         m = matrixA.length
         p = matrixB.length
         n = matrixB[0].length
@@ -522,7 +760,8 @@
           return new RationalNumber(this.denominator, this.numerator)}
 
         divide(that){
-          return this.multiply(that.invert())}}
+          return this.multiply(that.invert())}
+      }
 
       function parseRational(string){
         n = string.length
@@ -532,32 +771,42 @@
           if (string[i] == '-'){
             if (i!=index+1 || i==n-1){
               alert("This is not a rational number.")
-              return }} 
-            else if (string[i] == '/'){
-            if (i==0 || i==n-1 || index>0){
+              return 
+            }
+          } else if (string[i] == '/'){
+              if (i==0 || i==n-1 || index>0){
+                alert("This is not a rational number.")
+                return 
+              }
+              index = i
+          } else if (isNaN(string[i])){
               alert("This is not a rational number.")
-              return }
-            index = i} 
-            else if (isNaN(string[i])){
-            alert("This is not a rational number.")
-            return } 
-            else{
-            if (!numberExist[0] && index==-1){
-              numberExist[0] = true} 
-            else if (!numberExist[1] && index > 0){
-              numberExist[1] = true}}}
+              return 
+          } else{
+              if (!numberExist[0] && index==-1){
+                numberExist[0] = true
+              } else if (!numberExist[1] && index > 0){
+                numberExist[1] = true
+            }
+          }
+        }
+
         if(index==-1){
           if (!numberExist[0]){
             alert("This is not a rational number.")
-            return }
+            return 
+          }
           let a = parseInt(string)
-          return new RationalNumber(a, 1) }
+          return new RationalNumber(a, 1) 
+        }
         if (!numberExist[0] || !numberExist[1]){
           alert("This is not a rational number.")
-          return }
+          return 
+        }
         let a = parseInt(string.slice(0, index))
         let b = parseInt(string.slice(index+1, n))
-        return new RationalNumber(a, b)}
+        return new RationalNumber(a, b)
+      }
     </script>
 </body>
 </html>
