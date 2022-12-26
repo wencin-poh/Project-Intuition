@@ -489,6 +489,10 @@ h
 </div>
 
 
+
+
+
+
 <div id="outer">
     <input id = "in1"  type='text' style='font-size: 22px'></input>
     <input id = "in2"  type='text' style='font-size: 22px'></input>
@@ -619,9 +623,12 @@ difficulty=1
 function diff(k){
   if (difficulty+k<10 && difficulty+k>0){
   difficulty+=k
-  initialize()
+  initialize()}
+  if (difficulty==9){
+  score()}
+
   document.getElementById("difficulty").innerText='Difficulty Level: ' + difficulty}
-}
+
 
 function get_entries(){
     var b1=document.getElementById("blue1")
@@ -656,23 +663,45 @@ function get_entries(){
 
 
 function rationalize(fraction){
-numerator=fraction
+
+
+
+if (fraction.includes('.')){
+numerator=parseFloat(fraction)
 denominator=1
 
+  while (Number.isInteger(numerator)==false & denominator<1000){
+    numerator*=10
+    denominator*=10
+  }
+}
+
+else{
+  numerator=fraction
+denominator=1
 
     var slash_index=0
       for (var k=0; k<fraction.length; k++){
-        is_slash=true
-        if (fraction[k]>-9999999){
-          is_slash=false}
-          if (is_slash==true){
+
+
+    
+        if ('-0123456789'.includes(fraction[k])==false){
             slash_index=k}
           }
 
       if (slash_index>0){
         numerator=fraction.substring(0,slash_index)
     denominator=fraction.substring(slash_index+1,fraction.length)}
+numerator=parseFloat(numerator)
+denominator=parseFloat(denominator)
+        if (isNaN(numerator) || isNaN(denominator)){
+          denominator=0
+        }
 
+        if (denominator<0){
+          denominator*=-1
+          numerator*=-1
+        }}
     return([numerator, denominator])
       }
 
@@ -966,7 +995,38 @@ function swi(i){
     }
 
 
+ins=["in1","in2","in3","in4"]
 
+    
+
+var in1 = document.getElementById("in1");
+in1.addEventListener("keydown", function (e) {
+    if (e.code === "Enter") { 
+        mult(1);
+    }
+})
+var in2 = document.getElementById("in2");
+in2.addEventListener("keydown", function (e) {
+    if (e.code === "Enter") {  
+        mult(2);
+    }
+})
+var in3 = document.getElementById("in3");
+in3.addEventListener("keydown", function (e) {
+    if (e.code === "Enter") { 
+        mult(3);
+    }
+})
+var in4 = document.getElementById("in4");
+in4.addEventListener("keydown", function (e) {
+    if (e.code === "Enter") {
+        mult(4);
+    }
+})
+
+
+
+    
 
 
     function mult(i){
@@ -978,10 +1038,29 @@ function swi(i){
     y=document.getElementById("in4")
 
     constants=[b,g,r,y]
+
     
     Entries=get_entries()
     Row=Entries[i-1]
     Constant=rationalize(constants[i-1].value)
+
+
+
+  
+    if (Constant[1]==0){
+      alert("Please enter a number or fraction, or exact decimal")
+    }
+
+
+
+if (Constant[0]==0){
+      alert("If you multiply an equation by 0 you will lose all the information \
+  contained in that equation!")
+    }
+
+
+
+    if (Constant[0]!=0  && Constant[1]!=0){
 
 
   var rowVals=[]
@@ -989,8 +1068,9 @@ function swi(i){
     rowVals.push(rationalize(Row[j].innerHTML))
     }
 
+
+
        for (var j=0; j<5; j++){
-        if (Constant[0]!=0){
         rowVals[j][0]*=Constant[0]
         rowVals[j][1]*=Constant[1]}}
 
@@ -1007,10 +1087,9 @@ function swi(i){
   
 
 
-    if (Constant[0]==0){
-  alert("If you multiply an equation by 0 you will lose all the information \
-  contained in that equation!")
-}
+
+
+
 
     constants[i-1].value=''
     reduce()
@@ -1334,8 +1413,3 @@ var ans=[
 
 </body>
 </html>
-
-
-
-
-
