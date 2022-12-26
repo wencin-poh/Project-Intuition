@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- The following adds MathJax to render LaTeX notation -->
+  	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"></script>
+	
+	<title>A Mathjax Example</title>
+</head>
+
+<body>
+	<h1>A MathJax Example</h1>
+	<p>Change the input of the \(2\times 3\) matrix below and hit the `Display Matrix' button.
+	   Watch the MathJax content change as the values change.</p>
+
+    Matrix \(A\):<br><br>
+
+	<!-- Row 1 -->
+	<input type="number" id="a11" value=0>
+	<input type="number" id="a12" value=0>
+	<input type="number" id="a13" value=0><br><br>
+	<!-- Row 2 -->
+	<input type="number" id="a21" value=0>
+	<input type="number" id="a22" value=0>
+	<input type="number" id="a23" value=0><br><br>
+
+	<button onclick = "displayMatrix()">Display Matrix</button>
+
+	<div>
+		<p>Tada! We have</p>
+		<!-- This is the element where we shall edit the MathJax commands -->
+		<div id="displayField">
+		</div>
+	</div>
+
+	<script>
+		// This function pulls the value of each input from the relevant positions
+		// of the matrix A and stores it as an array of array of numbers. 
+		function readMatrix(){
+			A = []
+			for (let i=0; i<2; i++){
+				row = []
+				for (let j=0; j<3; j++){
+					//IDs for matrix entries need to be unique and iterable 
+					//for this loop to work.
+					entryId = "a"+(i+1)+(j+1)
+					entry = document.getElementById(entryId)
+					row.push(entry.value)
+				}
+				A.push(row)
+			}
+			return A
+		}
+
+		// This function constructs the MathJax syntax to properly display matrix
+		// A. Notice that an extra backslash is used to escape the use of the 
+		// character itself.
+		function displayMatrix(){
+			matrixA = readMatrix()
+			let initial = "\\[A = \\begin{bmatrix} " 
+			let final = "\\end{bmatrix}.\\]"
+
+			let s = initial
+			for (let i=0; i<2; i++){
+				for (let j=0; j<3; j++){
+					s += matrixA[i][j]+" "
+					if (j<3-1){
+						s += "& "
+					}
+				}
+				if (i<2-1){
+					s += "\\\\ "	
+				}
+			}
+			s += final
+
+			// This replaces the existing HTML in the element it with s.
+			toDisplay = document.getElementById("displayField")
+			toDisplay.innerHTML = s
+			// We need this line to render MathJax after the update.
+			MathJax.typesetPromise()
+		}
+	</script>
+</body>
+</html>
