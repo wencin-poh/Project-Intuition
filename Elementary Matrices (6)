@@ -249,7 +249,7 @@
             <option value="4">4</option>
           </select><br>
         Scalar \(c=\)
-        <input type="number" class="entry" id="scalar" name="scalar" value=1 step=0.1><br><br>
+        <input type="text" class="entry" id="scalar" name="scalar" value=1><br><br>
 
         <button onclick="createMatrix()" class="operationButton" id="createMatrix"> Create Matrix </button>
         <button onclick="multiplyMatrix()" class="operationButton" id="multiplyMatrix"> Multiply Matrix </button>
@@ -395,22 +395,22 @@
           return 
         } else if (beginQuestions == "false"){
           if (0<=page && page<6){
-            E = readMatrix("e")
+            E = readRationalMatrix("e")
             if (gradeRowOperations(E)=="true"){
               appendCompletedQuestion(page)
               page += 1
               displayQuestion(page)
             }
           } else if (6<=page && page<=9){
-            E = readMatrix("e")
+            E = readRationalMatrix("e")
             if (gradeInverse(E)=="true"){
               appendCompletedQuestion(page)
               page += 1
               displayQuestion(page)
             }
           } else {
-            E1 = readMatrix("e")
-            E2 = readMatrix("e")
+            E1 = readRationalMatrix("e")
+            E2 = readRationalMatrix("e")
             if (gradeDecomposition(E1, E2)=="true"){
               appendCompletedQuestion(page)
               page += 1
@@ -462,28 +462,28 @@
     </script>
 
     <script>
-      function readMatrix(string){
+      function readRationalMatrix(string){
         M = []
-        var limit = string==="e" ? 4 : 6
+        let limit = string==='e' ? 4 : 6
         for (let i=0; i<4; i++){
           row = []
           for (let j=0; j<limit; j++){
-          entryAddressM = string+String(i+1)+String(j+1)
-          entryM = document.getElementById(entryAddressM)
-          row.push(Number(entryM.value))
+            entryAddressM = string+String(i+1)+String(j+1)
+            entryM = document.getElementById(entryAddressM)
+            row.push(parseRational(entryM.value))
           }
           M.push(row)
         }
         return M
       }
 
-      function writeMatrix(matrixM, string){
+      function writeRationalMatrix(matrixM, string){
         let limit = string==="e" ? 4 : 6
         for (let i=0; i<4; i++){
           for (let j=0; j<limit; j++){
-          entryAddressM = string+String(i+1)+String(j+1)
-          entryM = document.getElementById(entryAddressM)
-          entryM.value = String(matrixM[i][j])
+            entryAddressM = string+String(i+1)+String(j+1)
+            entryM = document.getElementById(entryAddressM)
+            entryM.value = String(matrixM[i][j])
           }
         }
       }
@@ -536,8 +536,8 @@
         scalingFactor.value = c
         
         // This resets the matrices' entries
-        writeMatrix(E, "e")
-        writeMatrix(A, "a")
+        writeRationalMatrix(E, "e")
+        writeRationalMatrix(A, "a")
 
         reset = true
       }
@@ -587,7 +587,20 @@
         if (!selected){
           return 
         }
-        writeMatrix(E, "e")
+        writeRationalMatrix(E, "e")
+      }
+
+      // This function is created for debugging purposes
+      function printMatrix(matrixM){
+        A = []
+        for (let i=0; i<matrixM.length; i++){
+          row = []
+          for (let j=0; j<matrixM[i].length; j++){
+            row.push(String(matrixM[i][j]))
+          }
+          A.push(row)
+        }
+        return A
       }
 
       function texifyMatrix(matrixM){
@@ -621,14 +634,16 @@
       function verifyElementary(matrixE){
         let index1 = []
         let index2 = []
+        let One = parseRational("1")
+        let Zero = parseRational("0")
         for (let i=0; i<matrixE.length; i++){
           for (let j=0; j<matrixE[i].length; j++){
-            if (i==j && matrixE[i][j]!=1){ 
+            if (i==j && One.doesNotEqual(matrixE[i][j])){ 
               if (index1.length >= 2){
                 return false
               }
               index1.push(i)
-            } else if (i!=j && matrixE[i][j]!=0){
+            } else if (i!=j && Zero.doesNotEqual(matrixE[i][j])){
                if (index2.length >= 2){
                 return false
                }
@@ -643,14 +658,14 @@
           x2 = index2[1][0]; y2 = index2[1][1]
           cond1 = (x1==x && y1==y && x2==y && y2==x)
           cond2 = (x1==y && y1==x && x2==x && y2==y)
-          cond3 = (matrixE[x1][y1]==1 && matrixE[x2][y2]==1)
-          cond4 = (matrixE[x][x]==0 && matrixE[y][y]==0)
+          cond3 = (One.equals(matrixE[x1][y1]) && One.equals(matrixE[x2][y2]))
+          cond4 = (Zero.equals(matrixE[x][x]) && Zero.equals(matrixE[y][y]))
           return (cond1 || cond2) && cond3 && cond4
         }
         // Type 2: scale row
         else if (index1.length==1 && index2.length==0){
           x = index1[0]
-          return  (matrixE[x][x]!=0)
+          return  (Zero.doesNotEqual(matrixE[x][x]))
         }
         // Type 3: add row
         else if (index1.length==0 && index2.length<=1){
@@ -660,12 +675,12 @@
       }
 
       function multiplyMatrix(){
-        E = readMatrix("e")
+        E = readRationalMatrix("e")
         if (!verifyElementary(E)){
           alert("The given matrix E is not elementary.")
           return 
         }
-        A = readMatrix("a")
+        A = readRationalMatrix("a")
         B = matrixMultiplication(E, A)
         displayMatrix(E, A, B)
         reset = false
@@ -681,9 +696,10 @@
         for (let i=0; i<m; i++){
           let row = []
           for (let j=0; j<n; j++){
-            let sum = 0
+            let sum = parseRational("0")
             for (let k=0; k<p; k++){
-              sum += matrixA[i][k]*matrixB[k][j]
+              let prod = matrixA[i][k].multiply(matrixB[k][j])
+              sum = sum.add(prod) 
             }
             row.push(sum)
           }
@@ -700,6 +716,8 @@
           return }
         if (a < 0){
           return gcd(-a, b)}
+        if (a==0 && b>0){
+          return b}
         if (b == 0){
           return a}
         if (b < 0){
@@ -764,6 +782,10 @@
       }
 
       function parseRational(string){
+        if (!isNaN(string) && parseInt(string)==string){
+          return new RationalNumber(string, 1)
+        }
+
         n = string.length
         let numberExist = [false, false]
         let index = -1
