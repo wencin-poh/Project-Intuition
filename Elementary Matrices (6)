@@ -134,6 +134,12 @@
     .greytext {
       color: grey;
     }
+
+    #score {
+      position: absolute;
+      left: 800px;
+      top: 20px;
+    }
   </style>
 </head>
 <body>
@@ -214,10 +220,10 @@
         <div id="questionArea">
           <p id="questionToDisplay">Click 'Start' whenever you are ready. Good luck!</p>
         </div>
-        <button onclick ="updateQuestions()" id="submitButton" class="navigationButton">Start</button>
-        <button onclick="previousPage()" class="navigationButton">Previous</button>
-        <button onclick="nextPage()" class="navigationButton">Next</button>
-        <button onclick="automaticSucceed()" class="navigationButton">Succeed Automatically</button>
+        <button onclick ="updateQuestions()" id="submitButton">Start</button>
+        <button onclick="previousPage()">Previous</button>
+        <button onclick="nextPage()">Next</button>
+        <!--<button onclick="automaticSucceed()">Succeed Automatically</button>-->
       </div>
 
       <div id="matrixPrompt">
@@ -251,9 +257,9 @@
         Scalar \(c=\)
         <input type="text" class="entry" id="scalar" name="scalar" value=1><br><br>
 
-        <button onclick="createMatrix()" class="operationButton" id="createMatrix"> Create Matrix </button>
-        <button onclick="multiplyMatrix()" class="operationButton" id="multiplyMatrix"> Multiply Matrix </button>
-        <button onclick="resetSettings()" class="operationButton" id="resetSettings"> Reset Settings </button>
+        <button onclick="createMatrix()" id="createMatrix"> Create Matrix </button>
+        <button onclick="multiplyMatrix()" id="multiplyMatrix"> Multiply Matrix </button>
+        <button onclick="resetSettings()" id="resetSettings"> Reset Settings </button>
       </div>
 
       <div id="displayArea">
@@ -268,7 +274,7 @@
 
     <div id="matrices" class="float">
       <div id="elementaryMatrix">
-        <h3>Matrix \(E\)</h3>
+        <h3>Matrix $E$</h3>
         <!--Row 1-->
         <input type="text" id="e11" name="e11" class="entry" value=1>
         <input type="text" id="e12" name="e12" class="entry" value=0>
@@ -292,7 +298,7 @@
       </div>
       
       <div id="augmentedMatrixOne">
-        <h3>Matrix \(A\)</h3>
+        <h3>Matrix $A$</h3>
         <!--Row 1-->
         <input type="text" id="a11" name="a11" class="entry" value=1>
         <input type="text" id="a12" name="a12" class="entry" value=1>
@@ -393,7 +399,7 @@
           beginQuestions = "true"
           displayQuestion(page)
           return 
-        } else if (beginQuestions == "false"){
+        } else if (beginQuestions == "true"){
           if (0<=page && page<6){
             E = readRationalMatrix("e")
             if (gradeRowOperations(E)=="true"){
@@ -449,13 +455,13 @@
       }
 
       function nextPage(){
-        if (page<12-1){
+        if (page<12-1 && beginQuestions=="true"){
           page += 1
           displayQuestion(page)}
       }
 
       function previousPage(){
-        if (page>0){
+        if (page>0 && beginQuestions=="true"){
           page -= 1
           displayQuestion(page)}
       }
@@ -714,14 +720,14 @@
         if (a==0 && b==0){
           alert("Both integers cannot be both zero.")
           return }
-        if (a < 0){
-          return gcd(-a, b)}
         if (a==0 && b>0){
           return b}
         if (b == 0){
           return a}
         if (b < 0){
           return gcd(a, -b)}
+        if (a < 0){
+          return gcd(-a, b)}
         return gcd(b, a%b)}
 
       class RationalNumber{
