@@ -206,6 +206,8 @@
   </style>
 
   <body>
+  <h2><center>Module 2: Dot Product</center></h2>
+
   <p>The dot product of two vectors conveys several types of information.
   For example, two vectors are perpendicular to each other if and only if their dot product is $0$.
   Also, the dot product of any vector with itself is the square of its length.
