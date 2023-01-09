@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <!-- The following adds MathJax to render LaTeX notation -->
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"></script>
+      </head>
 <style>
 #blank {
   position: relative;
@@ -33,20 +38,19 @@
   
  #matrix {
   position: absolute;
-  height: 60px;
-  width: 350px;
-  left: 10px;
-  top: 10px;
-  background-color: grey;
-  text-align: center;
-  border: 9px solid #d3d3d3;}
+  height: 260px;
+  width: 370px;
+  left: 425px;
+  top: 90px;
+  background-color: lightgrey;
+  text-align: center;}
   
   #M11 {
   position: absolute;
   height: 20px;
   width: 60px;
-  left: 10px;
-  top: 10px;
+  left: 20px;
+  top: 50px;
   background-color: blue;
   text-align: center;}
   
@@ -54,8 +58,8 @@
   position: absolute;
   height: 20px;
   width: 60px;
-  left: 10px;
-  top: 30px;
+  left: 20px;
+  top: 70px;
   background-color: blue;
   text-align: center;}
   
@@ -63,8 +67,8 @@
   position: absolute;
   height: 20px;
   width: 60px;
-  left: 70px;
-  top: 10px;
+  left: 80px;
+  top: 50px;
   background-color: red;
   text-align: center;}
 
@@ -72,8 +76,8 @@
   position: absolute;
   height: 20px;
   width: 60px;
-  left: 70px;
-  top: 30px;
+  left: 80px;
+  top: 70px;
   background-color: red;
   text-align: center;}
   
@@ -81,18 +85,18 @@
   position: absolute;
   height: 20px;
   width: 20px;
-  left: 140px;
-  top: 20px;
-  background-color: white;
+  left: 145px;
+  top: 60px;
+  background-color: lightgrey;
   text-align: center;}
 
        #equals {
   position: absolute;
   height: 20px;
   width: 20px;
-  left: 245px;
-  top: 20px;
-  background-color: white;
+  left: 235px;
+  top: 60px;
+  background-color: lightgrey;
   text-align: center;}
   
   
@@ -101,7 +105,7 @@
   height: 20px;
   width: 60px;
   left: 170px;
-  top: 10px;
+  top: 50px;
   background-color: blue;
   text-align: center;}
   
@@ -110,29 +114,31 @@
   height: 20px;
   width: 60px;
   left: 170px;
-  top: 30px;
+  top: 70px;
   background-color: red;
   text-align: center;}
   
-  #W1 {
+  #w1 {
   position: absolute;
   height: 20px;
-  width: 65px;
-  left: 280px;
-  top: 10px;
-  background-color: purple;
-  text-align: center;}
+  width: 45px;
+  left: 265px;
+  top: 50px;
+  color: purple;
+  text-align: center;
+  border: 1px solid black;}
   
   
   
-    #W2 {
+    #w2 {
   position: absolute;
   height: 20px;
-  width: 65px;
-  left: 280px;
-  top: 30px;
-  background-color: purple;
-  text-align: center;}
+  width: 45px;
+  left: 265px;
+  top: 70px;
+  color: purple;
+  text-align: center;
+  border: 1px solid black;}
  
     #but {
   position: absolute;
@@ -155,8 +161,8 @@
  #sub {
   position: absolute;
   height: 30px;
-  width: 80px;
-  left: 380px;
+  width: 380px;
+  left: 40px;
   top: 50px;
   background-color: white;
   text-align: center;}
@@ -165,29 +171,77 @@
   position: absolute;
   height: 30px;
   width: 80px;
-  left: 380px;
+  left: 560px;
+  top: 55px;
+  background-color: white;
+  text-align: center;}
+  
+
+  #score {
+  position: absolute;
+  height: 220px;
+  width: 90px;
+  left: 990px;
   top: 10px;
   background-color: white;
   text-align: center;}
+  #MatEq {
+  position: absolute;
+  top: 95px;
+  height: 60px;
+  width: 370px;
+  background-color: lightgrey;
+  text-align: center;}
+
+  #completed {
+  position: absolute;
+  left: 10px;
+  top: 500px}
+
+  #question {
+  position: relative;
+  height: 10px;
+}
   
  </style>
 
  
 <body>
 <div>
+    <h2><center>Module 3: Matrix Multiplication (Column Picture)</center></h2>
 <p>
-This module explores matrix-vector multiplication.  In particular, it emphasizes how a matrix vector product can be viewed as a linear combination of the columns of the matrix.
+This module explores matrix-vector multiplication.  In particular, it emphasizes how a matrix-vector product can be viewed as a linear combination of the columns of the matrix.
 </p>
+
+
+We start with a matrix expression in the form 
+\(\begin{bmatrix} \textcolor{blue} {a_{11}} & \textcolor{red}{a_{12}}\\ \textcolor{blue}{a_{21}} & \textcolor{red}{a_{22}} \end{bmatrix}  
+\begin{bmatrix} \textcolor{blue}{c_1}\\\textcolor{red}{c_2} \end{bmatrix}\).  From the column perspective this expression tells
+us to take \(\textcolor{blue}{c_1}\) times the vector \(\begin{bmatrix} \textcolor{blue} {a_{11}}\\ \textcolor{blue}{a_{21}}  \end{bmatrix}   \)
+and add it to \(\textcolor{red}{c_2}\) times the vector \(\begin{bmatrix} \textcolor{red} {a_{12}}\\ \textcolor{red}{a_{22}}  \end{bmatrix}   \).
+</p>
+
+<p>
+  For instance, in the initialized example below we have the matrix expression:
+  \(\begin{bmatrix} \textcolor{blue} {-1} & \textcolor{red}{0.8}\\ \textcolor{blue}{0.2} & \textcolor{red}{0.6} \end{bmatrix}  
+\begin{bmatrix} \textcolor{blue}{1}\\ \textcolor{red}{0.5} \end{bmatrix}   \). 
+This expression tells
+us to take \(\textcolor{blue}{1}\) times the vector \(\begin{bmatrix} \textcolor{blue} {-1}\\ \textcolor{blue}{0.2}  \end{bmatrix}   \)
+and add it to \(\textcolor{red}{0.5}\) times the vector \(\begin{bmatrix} \textcolor{red} {0.8}\\ \textcolor{red}{0.6}  \end{bmatrix}   \)
+which yields  \(\begin{bmatrix} \textcolor{blue} {-1}\\ \textcolor{blue}{0.2}  \end{bmatrix}  + 
+\begin{bmatrix} \textcolor{red} {0.4}\\ \textcolor{red}{0.3}  \end{bmatrix}   \) which in turn equals
+\(\begin{bmatrix} \textcolor{purple} {-0.6}\\ \textcolor{purple}{0.5}  \end{bmatrix}   \).
+</p>  
+
+
+
 <p>
 To complete this module, you'll need to choose matrices and vectors so that their product has some desired characteristics.  The matrix is shown on the left of the multiplication sign, and the vectors represented by its columns are shown on the graph.  They are color coordinated with the columns. 
-</p>
-<p>
+
 You can adjust the matrix in 3 different ways:  by dragging the gray boxes at the ends of the vectors; by typing in numerical values in the matrix; and by using the up and down arrow buttons next to the numbers.  Give it a try!
-</p>
-<p>
+
 You'll also need to adjust the vector on the right side of the multiplication sign.  You can do this by typing in numerical values or using the arrow buttons.  Notice that each vector entry is color coordinated with the matrix column that it multiplies.
-</p>
-<p>
+
 The product of your matrix and vector is on the right side of the equation, and also shown on the graph.  Both are in purple.  You'll want to carefully observe how this product is a combination of the blue and red vectors encoded in the matrix.
 </p>
 <div id="question">
@@ -197,24 +251,24 @@ Ready to begin?  Click "Start" to view your first question.
 </div>
 <div id="blank">
 <div id="matrix">
-
+<h3>Matrix Equation:</h3>
 <div id="M11">
 <input type="number" id="m11"   style="width: 3em" value="-1" step=0.1 onChange="match()">
 </div>
 
 
 <div id="M12">
-<input type="number" id="m12"   style="width: 3em" value="1" step=0.1 onChange="match()">
+<input type="number" id="m12"   style="width: 3em" value="0.8" step=0.1 onChange="match()">
 </div>
 
 
 <div id="M21">
-<input type="number" id="m21"   style="width: 3em" value="1" step=0.1 onChange="match()">
+<input type="number" id="m21"   style="width: 3em" value="0.2" step=0.1 onChange="match()">
 </div>
 
 
 <div id="M22">
-<input type="number" id="m22"   style="width: 3em" value="1" step=0.1 onChange="match()">
+<input type="number" id="m22"   style="width: 3em" value="0.6" step=0.1 onChange="match()">
 </div>
 
 <div id="times">
@@ -224,7 +278,7 @@ Ready to begin?  Click "Start" to view your first question.
 </div>
 
 <div id="V1">
-<input type="number" id="v1"   style="width: 3em" value="0.5" step=0.1 onChange="match()">
+<input type="number" id="v1"   style="width: 3em" value="1" step=0.1 onChange="match()">
 </div>
 
 <div id="V2">
@@ -237,22 +291,32 @@ Ready to begin?  Click "Start" to view your first question.
 </b>
 </div>
 
-<div id="W1">
-<input type="number" id="w1"   style="width: 3.5em" value="0" step=0.01 onChange="match()">
+<div id="w1">
+0
 </div>
 
-<div id="W2">
-<input type="number" id="w2"   style="width: 3.5em" value="1" step=0.01 onChange="match()">
+<div id="w2">
+1
 </div>
+<div id="MatEq">
 
+</div>
 </div>
 
 
 
 
 <div id="sub">
-<button  onclick="submit()">Start</button>
-</div>
+    <span>
+      <button  onclick="submit()">Start</button>
+    </span>
+    <span>
+      <button  onclick="forward()">Skip</button>
+    </span>
+    <span>
+      <button  onclick="back()">Previous</button>
+    </span>
+  </div>
 <div id="try">
 
 </div>
@@ -276,12 +340,112 @@ style="border:1px solid #c3c3c3;">
 </div>
 
 
+
+<div id="score">
+</div>
+<div id="completed">
+    <h2>Completed Questions:</h2>
+  </div>
 </div>
 
 
 
+</div>
+
 
 <script>
+
+
+    Answered=[0,0,0,0,0,0,0,0,0,0,0,0,0]
+
+
+
+
+
+    function make_mat(){
+var a11=(document.getElementById("m11").value)
+var a21=(document.getElementById("m21").value)
+
+
+
+var a12=(document.getElementById("m12").value)
+var a22=(document.getElementById("m22").value)
+
+
+var i1=(document.getElementById("v1").value)
+var i2=(document.getElementById("v2").value)
+var c1=Math.round(100*(i1*a11+i2*a12))/100
+var c2=Math.round(100*(i1*a21+i2*a22))/100
+
+
+var Mat=document.getElementById('MatEq')
+
+
+if (a12>=0){a12s='+ '+a12}
+if (a12<0){a12s='- '+(-a12)}
+if (a22>=0){a22s='+ '+a22}
+if (a22<0){a22s='- '+(-a22)}
+    Mat.innerHTML='<h3>Linear Combination of Column Vectors:</h3>\
+    <span  style="color:blue; font-size:19px">['+i1+'&times('+a11+','+a21+')]  </span>  +   \
+    <span style="color:red; font-size:19px">['+i2+'&times('+a12+','+a22+')] </span>  =  \
+    <span style="color:purple; font-size:19px">('+c1+','+c2+')</span>'
+
+
+}
+make_mat()
+function score(){
+  scoreBoard = document.getElementById("score")
+  while(scoreBoard.firstChild){
+    scoreBoard.removeChild(scoreBoard.firstChild)
+  }
+
+  var scoreCard = document.createElement('h1');
+  scoreCard.style.fontSize="x-large"
+  scoreCard.style.textAlign="left"
+  scoreCard.innerHTML="Score Card"
+  scoreBoard.appendChild(scoreCard);
+
+  for (i=0; i<Answered.length; i++){
+    question_id = 'q' + i
+    var question = document.createElement('div');
+    question.style.fontSize = "x-large"
+    question.style.textAlign = "left"
+    question.id = question_id;
+    question.innerHTML =  i + 1;
+    if (Answered[i]==0){
+      question.style.color = 'red'
+      Check = question.innerHTML
+      Check += " &#x2610"
+      question.innerHTML = Check
+    }
+    if (Answered[i]==1){
+      question.style.color = 'green'
+      Check = question.innerHTML
+      Check += " &#9745"
+      question.innerHTML = Check
+    }
+    scoreBoard.appendChild(question);
+  }
+}
+
+
+score()
+
+
+function forward(){
+  if (page<Answered.length){
+    page+=1
+    document.getElementById("question").innerText=quests[page]
+    document.getElementById("try").innerText=""}
+}
+
+function back(){
+  if (page>0){
+    page-=1
+    document.getElementById("question").innerText=quests[page]
+    document.getElementById("try").innerText=""}
+}
+
 function draw(){
 
 
@@ -404,6 +568,7 @@ ctx.beginPath();
 ctx.arc(cr1, cr2, 4, 0, 7);
 ctx.stroke();
 ctx.fill();
+
 }
 
 
@@ -443,7 +608,7 @@ document.getElementById("m22").value=Math.round(G2/10)/10
 
 
 
-
+make_mat()
 
 }
 
@@ -593,7 +758,7 @@ gt.style.top=A22+"px"
 
 draw()
 purp()
-
+make_mat()
 }
 
 
@@ -626,7 +791,8 @@ Y=Math.round(100*(a21*x+a22*y))/100
 
 document.getElementById("w1").value=X
 document.getElementById("w2").value=Y
-
+document.getElementById("w1").innerHTML=X
+document.getElementById("w2").innerHTML=Y
 
 
 
@@ -641,16 +807,19 @@ document.getElementById("w2").value=Y
 var initialized=0
 var page=0
 var quests=[
-"1. Make a linear combination that includes 2 copies of the first column of the matrix, and 3 copies of the second.",
-"2. Make a linear combination that adds 4 of the first column and subtracts 2 of the second.",
+"1. Make a linear combination that includes 2 copies of the first column of the matrix, and 1 copy of the second.",
+"2. Make a linear combination that adds 1 of the first column and subtracts one half of the second.",
 "3. Find a linear combination where the result does not depend at all on the second column of the matrix.  You can check your answer by changing the red vector and making sure the result does not change.",
 "4. Find a linear combination where the result does not depend at all on the second column of the matrix, and the result is the vector (-1, 0).",
 "5. Find a two vectors in the second quadrant, and a linear combination of them which lies in the first quadrant.",
 "6. Good job, now find a vector in the first quadrant and a vector in the third quadrant along with a linear combination of them in the fourth quadrant.",
-"7. Let's think about making the three vector end-points colinear (i.e. the gray squares and black dot all lying on one line).  First, make the vector in the matrix-vector product equal to (1,1).  Then, find a matrix where the columns are approximately colinear with the product.",
-"8. Next, find a vector so that any matrix will result in all our vectors being colinear.  Hint: you'll need the product (the black dot) to always land right in between the gray squares.",
-"9. Find a vector so that the matrix-vector product is always the same, no matter what matrix you use.",
-"10. Find a matrix so that we can multiply it with any vector and get the same vector as the product (i.e. vectors are unchanged by multiplication with this matrix)",
+"7. Make the vector in the matrix-vector product equal to (1,1) and the first column of the matrix also equal to (1,1).  Then, find the second column so that the black dot lies on the line between the two grey squares.",
+"8. Find a vector so that for any matrix the black dot lies on one of the grey squares",
+"9. Set the top entry in the vector to 0.5. Find the bottom entry of the vector so that any matrix will result in  black dot lying on the line (not shown) between the two grey squares.",
+"10. Set the bottom entry in the vector to 0.3. Find the top entry of the vector so that any matrix will result in  black dot lying on the line (not shown) between the two grey squares.",
+"11. Set the bottom entry in the vector to -1. Find the top entry of the vector so that any matrix will result in  one of the grey squares lying on the line between the black dot and the other grey square.",
+"12. Find a vector so that the matrix-vector product is always the same, no matter what matrix you use.",
+"13. Find a matrix so that we can multiply it with any vector and get the same vector back (i.e. vectors are unchanged by multiplication with this matrix)",
 
 "Good job!!!"]
 
@@ -683,9 +852,23 @@ document.getElementById("try").innerText="Not Quite"}
 
 if (grade(page,M11,M21,M12,M22,V1,V2,W1,W2)==1)
 {
+    Answered[page]+=1
 document.getElementById("try").innerText=""
+
+
+var answeredQuestion = document.createElement('div')
+      answeredQuestion.innerHTML = quests[page]
+      answeredQuestion.innerHTML += ' Your answer: '+V1+'&times('+M11+','+M21+')'
+      answeredQuestion.innerHTML += ' + '+V2+'&times('+M12+','+M22+')'
+     answeredQuestion.style.color="grey"
+      var completedQuestions = document.getElementById("completed")
+      completedQuestions.appendChild(answeredQuestion)
+
+
+
 page+=1
 document.getElementById("question").innerText=quests[page]
+score()
 }
 
 
@@ -704,11 +887,11 @@ function grade(p,m11,m21,m12,m22,v1,v2,w1,w2){
 correct=0
 
 if (p==0){
-  if(v1==2 && v2==3){
+  if(v1==2 && v2==1){
     correct = 1}}
 
 if (p==1){
-  if(v1==4 && v2== -2){
+  if(v1==1 && v2== -0.5){
     correct = 1}}
 
 if (p==2){
@@ -734,14 +917,26 @@ if (p==6){
     correct = 1}}
 
 if (p==7){
-  if (v1==0.5 && v2==0.5){
+  if (v1==1 || v2==1){
     correct=1}}
 
-if (p==8){
+    if (p==8){
+  if (v2==0.5){
+    correct=1}}  
+
+    if (p==9){
+  if (v1==0.7){
+    correct=1}} 
+
+    if (p==10){
+  if (v1==2){
+    correct=1}} 
+
+if (p==11){
   if (v1==0 && v2==0){
     correct=1}}
 
-if (p==9){
+if (p==12){
   if (m11==1 && m12==0 && m21==0 && m22==1){
     correct=1}}
   
@@ -749,7 +944,7 @@ if (p==9){
 return(correct)
 }
 
-
+match()
 </script>
 
 
