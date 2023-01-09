@@ -191,7 +191,7 @@
   #completed {
     position: absolute;
     left: 10px;
-    top: 550px;}
+    top: 560px;}
 
   #score {
     position: absolute;
