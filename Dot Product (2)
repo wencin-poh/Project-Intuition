@@ -40,7 +40,7 @@
     position: absolute;
     height: 20px;
     width: 20px;
-    left: 290px;
+    left: 390px;
     top: 90px;
     background-color: grey;}
 
@@ -48,37 +48,29 @@
     position: absolute;
     height: 20px;
     width: 20px;
-    left: 190px;
-    top: 290px;
+    left: 240px;
+    top: 90px;
     background-color: grey;}
     
   #matrix {
     position: absolute;
-    height: 130px;
-    width: 300px;
+    height: 110px;
+    width: 330px;
     left: 10px;
     top: 10px;
-    background-color: grey;
+    background-color: rgb(168, 168, 168);
     text-align: center;
     border: 9px solid #d3d3d3;}
 
 
-  #vector_u {
-    position: absolute;
-    left: 15px;
-    top: 5px}
 
-  #vector_v {
-    position: absolute;
-    left: 100px;
-    top: 5px}
     
   #U1 {
     position: absolute;
     height: 20px;
     width: 70px;
     left: 10px;
-    top: 30px;
+    top: 20px;
     background-color: green;
     text-align: center;}
     
@@ -87,7 +79,7 @@
     height: 20px;
     width: 70px;
     left: 10px;
-    top: 50px;
+    top: 40px;
     background-color: green;
     text-align: center;}
 
@@ -95,8 +87,8 @@
     position: absolute;
     height: 20px;
     width: 70px;
-    left: 95px;
-    top: 30px;
+    left: 115px;
+    top: 20px;
     background-color: red;
     text-align: center;}
 
@@ -104,53 +96,14 @@
     position: absolute;
     height: 20px;
     width: 70px;
-    left: 95px;
-    top: 50px;
+    left: 115px;
+    top: 40px;
     background-color: red;
     text-align: center;}
 
-  #u_length {
-    position: absolute;
-    left: 5px;
-    top: 75px}
 
-  #v_length {
-    position: absolute;
-    left: 90px;
-    top: 75px}
-
-  #dot_product {
-    position: absolute;
-    left: 175px;
-    top: 75px}
   
-  #GL {
-    position: absolute;
-    height: 22px;
-    width: 70px;
-    left: 10px;
-    top: 100px;
-    background-color: green;
-    text-align: center;}
-    
-  #RL {
-    position: absolute;
-    height: 22px;
-    width: 70px;
-    left: 95px;
-    top: 100px;
-    background-color: red;
-    text-align: center;}
-
-  #DP {
-    position: absolute;
-    height: 22px;
-    width: 70px;
-    left: 195px;
-    top: 100px;
-    background-color: yellow;
-    text-align: center;}
-
+  
   #but {
     position: absolute;
     height: 30px;
@@ -174,7 +127,7 @@
     position: absolute;
     height: 30px;
     width: 200px;
-    left: 350px;
+    left: 370px;
     top: 50px;
     background-color: white;
     text-align: center;}
@@ -183,7 +136,7 @@
     position: absolute;
     height: 30px;
     width: 90px;
-    left: 350px;
+    left: 370px;
     top: 10px;
     background-color: white;
     text-align: center;}
@@ -191,7 +144,7 @@
   #completed {
     position: absolute;
     left: 10px;
-    top: 550px;}
+    top: 570px;}
 
   #score {
     position: absolute;
@@ -206,6 +159,7 @@
   </style>
 
   <body>
+    <h2><center>Module 2: The Dot Product</center></h2>
   <p>The dot product of two vectors conveys several types of information.
   For example, two vectors are perpendicular to each other if and only if their dot product is $0$.
   Also, the dot product of any vector with itself is the square of its length.
@@ -214,17 +168,33 @@
   <p>In general, the dot product of two vectors $\mathbf{u}$ and $\mathbf{v}$ is given by 
   \[\mathbf{u}\cdot \mathbf{v}=\|\mathbf{u}\|\|\mathbf{v}\|\cos\theta,\]
   where $\|\cdot\|$ denotes the length of a vector and $\theta$ is the angle between the two vectors.
-  In the case of $\mathbf{u}$ and $\mathbf{v}$ being two-dimensional vectors, with $\mathbf{u}=\begin{bmatrix} x_1 \\ y_1 \end{bmatrix}$ and $\mathbf{v}=\begin{bmatrix} x_2 \\ y_2 \end{bmatrix}$, we have
-  \[\mathbf{u}\cdot \mathbf{v}= x_1 x_2 + y_1 y_2.\] 
+  In the case of $\mathbf{u}$ and $\mathbf{v}$ being two-dimensional vectors, 
+  with $\textcolor{green}{\mathbf{u}=\begin{bmatrix} x_1 \\ y_1 \end{bmatrix}}$ and 
+  $\textcolor{red}{\mathbf{v}=\begin{bmatrix} x_2 \\ y_2 \end{bmatrix}}$, we have
+  \[\textcolor{green}{\mathbf{u}}\cdot \textcolor{red}{\mathbf{v}}
+  = \textcolor{green}{x_1} \textcolor{red}{x_2} + \textcolor{green}{y_1} \textcolor{red}{y_2}.\] 
   </p>
+
+
+  <p>
+For instance, in the initial example in the diagram below 
+$\textcolor{green}{\mathbf{u}=\begin{bmatrix} 2 \\ 1 \end{bmatrix}}$ and 
+  $\textcolor{red}{\mathbf{v}=\begin{bmatrix} 0.5 \\ 1 \end{bmatrix}}$ so that 
+  $\textcolor{green}{\mathbf{u}}\cdot \textcolor{red}{\mathbf{v}}
+  = \textcolor{green}{(2)} \textcolor{red}{(1)} + \textcolor{green}{(0.5)} \textcolor{red}{(1)} =\textcolor{gold}{2}$.
+Note that this quantity is equal to the length of the green vector ($\textcolor{green}{2.24}$) times the amount that the
+red vector extends in the direction of the green vector (this is the length of the dotted red line
+running through the green vector--in this case $\textcolor{red}{0.89}$).  Since the yellow rectangle  has
+these dimensions ($\textcolor{green}{2.24} \times \textcolor{red}{0.89}$) its area gives a graphical representation of the value of the dot product.
+(When the value of the dot product becomes negative the color of rectangle turns from yellow to orange.) 
+</p>
 
   <p>For this module, you may change the vectors $\mathbf{u}$ and $\mathbf{v}$ in either one of two ways:
   <ul>
-    <li> You may change the component entries for $\mathbf{u}$ and $\mathbf{v}$ either by scrolling or by typing, or</li>
-    <li> You may drag the vectors, $\mathbf{u}$ in green and $\mathbf{v}$ in red, in the canvas below.</li>
+    <li> You may change the component entries for $\mathbf{u}$ and $\mathbf{v}$ either by clicking the up/down arrows or by typing, or</li>
+    <li> You may drag the vectors, $\mathbf{u}$ in green and $\mathbf{v}$ in red, in the diagram below.</li>
   </ul>
-  At the rightmost column, the lengths of each vector are shown, together with the dot product of the vectors. 
-  Notice that the area and color of the rectangle change according to the size and the sign of the dot product.
+  
   </p>
 
   <div>
@@ -237,11 +207,30 @@
 
   <div id="blank">
     <div id="matrix">
-      <div id="vector_u" class="whitetext">
-        Vector $\mathbf{u}$
-      </div>
+
+        <div  style="color:green; font-size:19px; position:absolute; left:40px; top:0px">
+            <span>$\mathbf{u}$ </span> 
+          </div>
+          <div  style="color:red; font-size:19px; position:absolute; left:145px; top:0px">
+            <span>$\mathbf{v}$ </span> 
+          </div>
+          <div id="u_length" style="color:green; font-size:17px; position:absolute; left:10px; top:65px">
+            <span>$||\mathbf{u}|| = $ </span> <span id="green_length">1.41</span>
+          </div>
+    
+    
+          <div id="v_length" style="color:red; font-size:17px; position:absolute; left:115px; top:65px">
+            <span>$||\mathbf{v}|| = $ </span> <span id="red_length">1</span>
+          </div>
+    
+        
+          <div id="dot_product" style="color:rgb(247, 247, 27); font-size:21px; position:absolute; left:215px; top:40px">
+            <span>$\mathbf{u}\cdot\mathbf{v}  = $ </span> <span id="dot">1</span>
+          </div>
+
 
       <div id="U1">
+
         <input type="number" id="u1"   style="width: 4em" value="1" step=0.01 onChange="match()">
       </div>
 
@@ -249,47 +238,25 @@
         <input type="number" id="u2"   style="width: 4em" value="1" step=0.01 onChange="match()">
       </div>
 
-      <div id="vector_v" class="whitetext">
-        Vector $\mathbf{v}$
-      </div>
+ 
 
       <div id="V1">
         <input type="number" id="v1"   style="width: 4em" value="0" step=0.01 onChange="match()">
       </div>
 
       <div id="V2">
-        <input type="number" id="v2"   style="width: 4em" value="-1" step=0.01 onChange="match()">
+        <input type="number" id="v2"   style="width: 4em" value="1" step=0.01 onChange="match()">
       </div>
 
-      <div id="u_length" class="whitetext">
-        Length of $\mathbf{u}$
-      </div>
+      
 
-      <div id="GL">
-        <input type="number" id="gl"   style="width: 4em" value="1.41" step=0.01 onChange="match()">
-      </div>
-
-      <div id="v_length" class="whitetext">
-        Length of $\mathbf{v}$
-      </div>
-
-      <div id="RL">
-        <input type="number" id="rl"   style="width: 4em" value="1" step=0.01 onChange="match()">
-      </div>
-
-      <div id="dot_product" class="whitetext">
-        Dot product, $\mathbf{u}\cdot\mathbf{v}$
-      </div>
-
-      <div id="DP">
-        <input type="number" id="dot"   style="width: 4em" value="-1" step=0.01 onChange="match()">
-      </div>
+     
     </div>
 
     <div id="sub">
       <button  onclick="submit()">Start</button>
       <button onclick="previousPage()">Previous</button>
-      <button onclick="nextPage()">Next</button>
+      <button onclick="nextPage()">Skip</button>
     </div>
 
     <div id="try">
@@ -321,6 +288,11 @@
   
 
   <script>
+
+
+
+
+
   function draw(){
     gt=document.getElementById("greentip")
     rt=document.getElementById("redtip")
@@ -410,7 +382,7 @@
     ctx.stroke();
 
     ctx.beginPath();
-    ctx.strokeStyle="red"
+    ctx.strokeStyle="pink"
     ctx.lineWidth=3
     ctx.moveTo(200, 200);
     ctx.lineTo(s1, s2);
@@ -448,9 +420,9 @@
     R=Math.pow(R1*R1+R2*R2,0.5)/100
     G=G.toFixed(2)
     R=R.toFixed(2)
-    document.getElementById("dot").value=D
-    document.getElementById("gl").value=G
-    document.getElementById("rl").value=R
+    document.getElementById("dot").innerHTML=D
+    document.getElementById("green_length").innerHTML=G
+    document.getElementById("red_length").innerHTML=R
     document.getElementById("u1").value=G1/100
     document.getElementById("u2").value=G2/100
     document.getElementById("v1").value=R1/100
@@ -459,6 +431,7 @@
   </script>
 
   <script>
+  fill()
   draw()
   </script>
 
@@ -524,9 +497,9 @@
     D=D.toFixed(2)
     G=G.toFixed(2)
     R=R.toFixed(2)
-    document.getElementById("dot").value=D
-    document.getElementById("gl").value=G
-    document.getElementById("rl").value=R
+    document.getElementById("dot").innerHTML=D
+    document.getElementById("green_length").innerHTML=G
+    document.getElementById("red_length").innerHTML=R
 
     draw()
   }
@@ -536,20 +509,23 @@
   var initialized=0
   var page=0
   var questions=[
-  "1. Find two vectors with length roughly equal to $1$ and dot product roughly equal to $1$.",
+  "1. Find two vectors with length roughly  equal (within $0.1$ of) to $1$  and dot product roughly equal to $1$.",
   "2. Good job, now find two vectors with length roughly equal to $1$ and dot product roughly equal to $0.5$.",
   "3. Excellent,  now find two vectors with length roughly equal to $1$ and dot product roughly equal to $0$.",
   "4. Good job,  now find two vectors with length roughly equal to $1$ and dot product roughly equal to $-0.5$.",
   "5. Excellent, now find two vectors with length roughly equal to $1$ and dot product roughly equal to $-1$.",
-  "6. Good, find two vectors $\\mathbf{u}$ and $\\mathbf{v}$ such that they are roughly parallel and that their dot product roughly equal to $1.2$.",
-  "7. Great, find two vectors $\\mathbf{u}$ and $\\mathbf{v}$ such that they are roughly parallel and that their dot product roughly equal to $-0.3.$",
-  "8. Great, set vector $\\mathbf{u}$ to be in the second quadrant. Find a vector $\\mathbf{v}$ such that it makes an angle of roughly $60^{\\circ}$ and that the dot product is roughly $0.8$.",
-  "9. Nice, set vector $\\mathbf{v}$ to be in the fourth quadrant. Find a vector $\\mathbf{u}$ such that it makes an angle of roughly $120^{\\circ}$ and that the dot product is roughly $-0.6$.",
-  "10. Set vector $\\mathbf{u}$ to have length roughly equal to 1.5. Which unit vector $\\mathbf{v}$ maximizes the value of the dot product between them?",
-  "11. Set vector $\\mathbf{v}$ to have length roughly equal to 0.5. Which unit vector $\\mathbf{u}$ minimizes the value of the dot product between them?",
+  "6. Good, find two vectors $\\mathbf{u}$ and $\\mathbf{v}$ such that lie on the same line and that have dot product roughly equal to $1.2$.",
+  "7. Great, find two vectors $\\mathbf{u}$ and $\\mathbf{v}$ such that lie on the same line and that have dot product roughly equal to $-0.3.$",
+  "8. Find a vector $\\mathbf{u}$ such that the changing the second coordinate of $\\mathbf{v}$ with the arrow keys does not change the dot product.",
+  "9. Find a vector $\\mathbf{v}$ such that the changing the first coordinate of $\\mathbf{u}$ with the arrow keys does not change the dot product.",
+  "10. Find vectors $\\mathbf{u}$ and $\\mathbf{v}$ such that the length that $\\mathbf{v}$ extends in the direction of $\\mathbf{u}$ is equal to the length of $\\mathbf{u}$ (this will make the yellow rectangle into a square).",
+  "11. Find vectors $\\mathbf{u}$ and $\\mathbf{v}$ such that the projection of  $\\mathbf{v}$ onto $\\mathbf{u }$ (the red dotted line) extends in the opposite direction as the green vector a distance roughly half the length of the green vector.",
+  "12. Great, set vector $\\mathbf{u}$ to be in the second quadrant. Find a vector $\\mathbf{v}$ such that it makes an angle of roughly $60^{\\circ}$ and that the dot product is roughly $0.8$.",
+  "13. Set vector $\\mathbf{u}$ to have length roughly equal to 1.5. Find  a unit (length of 1) vector $\\mathbf{v}$ that maximizes (largest yellow rectangle) the value of the dot product between them?",
+  "14. Set vector $\\mathbf{v}$ to have length roughly equal to 0.5. Find a unit vector $\\mathbf{u}$ minimizes (largest orange rectangle) the value of the dot product between them?",
   "Good job!!!"]
 
-  answered = [0,0,0,0,0,0,0,0,0,0,0]
+  answered = [0,0,0,0,0,0,0,0,0,0,0,0,0,0]
   function score(){
     scoreBoard = document.getElementById("score")
     while(scoreBoard.firstChild){
@@ -595,10 +571,13 @@
     if (p==4){ if (Math.abs(G-1)<=0.1 && Math.abs(R-1)<=0.1 && Math.abs(d-(-1))<=0.1){correct=1}}
     if (p==5){ if (Math.abs(g1*r2-g2*r1)<=0.1 && Math.abs(d-1.2)<=0.1){correct=1}}
     if (p==6){ if (Math.abs(g1*r2-g2*r1)<=0.1 && Math.abs(d-(-0.3))<=0.1){correct=1}}
-    if (p==7){ if (g1<=0 && g2>=0 && Math.abs(d-0.8)<=0.1 && Math.abs(d/(G*R)-0.5)<=0.1){correct=1}}
-    if (p==8){ if (r1>=0 && r2<=0 && Math.abs(d-(-0.6))<=0.1 && Math.abs(d/(G*R)-(-0.5))<=0.1){correct=1}}
-    if (p==9){ if (Math.abs(d-G*R)<=0.1 && Math.abs(G-1.5)<=0.1 && Math.abs(R-1)<=0.1){correct=1}}
-    if (p==10){ if (Math.abs(d-(-G*R))<=0.1 && Math.abs(R-0.5)<=0.1 && Math.abs(G-1)<=0.1){correct=1}}
+    if (p==7){ if (Math.abs(g2)<0.03){correct=1}}
+    if (p==8){ if (Math.abs(r1)<0.03){correct=1}}
+    if (p==9){ if ( (g1*g1+g2*g2)/d<1.05 && (g1*g1+g2*g2)/d>0.95   )   {correct=1}}
+    if (p==10){ if ( (g1*g1+g2*g2)/d<-1.8 && (g1*g1+g2*g2)/d>-2.2   )   {correct=1}}
+    if (p==11){ if (g1<=0 && g2>=0 && Math.abs(d-0.8)<=0.1 && Math.abs(d/(G*R)-0.5)<=0.15){correct=1}}
+    if (p==12){ if (Math.abs(d-G*R)<=0.1 && Math.abs(G-1.5)<=0.1 && Math.abs(R-1)<=0.1){correct=1}}
+    if (p==13){ if (Math.abs(d-(-G*R))<=0.1 && Math.abs(R-0.5)<=0.1 && Math.abs(G-1)<=0.1){correct=1}}
     return(correct)
   }
   
@@ -613,9 +592,9 @@
       gy=(document.getElementById("u2").value)
       rx=(document.getElementById("v1").value)
       ry=(document.getElementById("v2").value)
-      dot=(document.getElementById("dot").value)
-      gL=(document.getElementById("gl").value)
-      rL=(document.getElementById("rl").value)
+      dot=parseFloat(document.getElementById("dot").innerHTML)
+      gL=parseFloat(document.getElementById("green_length").innerHTML)
+      rL=parseFloat(document.getElementById("red_length").innerHTML)
       
       var feed=document.getElementById("try").innerText
       if (feed==""){
@@ -642,7 +621,7 @@
   }
 
   function nextPage(){
-    if (initialized && page<12-1){
+    if (initialized && page<answered.length-1){
       page += 1
       displayQuestion(page)}
   }
@@ -657,7 +636,11 @@
     if (answered[page] == 0){
       answered[page] = 1
       var answeredQuestion = document.createElement('div')
-      answeredQuestion.textContent = questions[page]
+      gx=(document.getElementById("u1").value)
+      gy=(document.getElementById("u2").value)
+      rx=(document.getElementById("v1").value)
+      ry=(document.getElementById("v2").value)
+      answeredQuestion.textContent = questions[page]+" Your answer: ("+gx+","+gy+"),  ("+rx+","+ry+")"
       answeredQuestion.setAttribute('class', 'greytext')
       document.getElementById("completed").appendChild(answeredQuestion)
     }
