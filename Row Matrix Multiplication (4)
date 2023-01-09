@@ -9,7 +9,6 @@
 <style>
 #intro {
   position: relative;
-  width: 600px;
 }
 
 #blank {
@@ -20,18 +19,23 @@
   height: 400px;
   width: 400px;
   left: 0px;
-  top: 90px;
+  top: 40px;
   background-color: white;
   text-align: center;
   border: 9px solid #d3d3d3;}
+
+  #question {
+  position: relative;
+  height: 50px;
+}
   
 #matrix {
   position: absolute;
-  height: 60px;
-  width: 350px;
-  left: 10px;
-  top: 10px;
-  background-color: grey;
+  height: 310px;
+  width: 290px;
+  left: 450px;
+  top: 40px;
+  background-color: lightgrey;
   text-align: center;
   border: 9px solid #d3d3d3;}
   
@@ -40,7 +44,7 @@
   height: 20px;
   width: 60px;
   left: 10px;
-  top: 10px;
+  top: 50px;
   background-color: blue;
   text-align: center;}
   
@@ -49,7 +53,7 @@
   height: 20px;
   width: 60px;
   left: 10px;
-  top: 30px;
+  top: 70px;
   background-color: red;
   text-align: center;}
   
@@ -57,8 +61,8 @@
   position: absolute;
   height: 20px;
   width: 60px;
-  left: 70px;
-  top: 10px;
+  left: 65px;
+  top: 50px;
   background-color: blue;
   text-align: center;}
   
@@ -66,64 +70,59 @@
   position: absolute;
   height: 20px;
   width: 60px;
-  left: 70px;
-  top: 30px;
+  left: 65px;
+  top: 70px;
   background-color: red;
   text-align: center;}
 
 
-#times {
-  position: absolute;
-  height: 20px;
-  width: 20px;
-  left: 140px;
-  top: 20px;
-  background-color: white;
-  text-align: center;}
+
 
 #equals {
   position: absolute;
   height: 20px;
   width: 20px;
-  left: 245px;
-  top: 20px;
-  background-color: white;
+  left: 155px;
+  top: 60px;
+  background-color: lightgrey;
   text-align: center;}
 
   
-#V1 {
+#v1 {
   position: absolute;
   height: 20px;
-  width: 60px;
-  left: 170px;
-  top: 10px;
-  background-color: purple;
-  text-align: center;}
+  width: 20px;
+  left: 130px;
+  top: 50px;
+  background-color: white;
+  text-align: center;
+  border: 1px solid black;}
   
-#V2 {
+#v2 {
   position: absolute;
   height: 20px;
-  width: 60px;
-  left: 170px;
-  top: 30px;
-  background-color: purple;
-  text-align: center;}
+  width: 20px;
+  left: 130px;
+  top: 70px;
+  background-color: white;
+  text-align: center;
+  border: 1px solid black;}
   
 #W1 {
   position: absolute;
   height: 20px;
-  width: 65px;
-  left: 280px;
-  top: 10px;
+  width: 60px;
+  left: 185px;
+  top: 50px;
   background-color: blue;
   text-align: center;}
   
 #W2 {
   position: absolute;
   height: 20px;
-  width: 65px;
-  left: 280px;
-  top: 30px;
+  width: 60px;
+  left: 185px;
+  top: 70px;
   background-color: red;
   text-align: center;}
  
@@ -148,9 +147,9 @@
 #sub {
   position: absolute;
   height: 30px;
-  width: 80px;
-  left: 450px;
-  top: 15px;
+  width: 280px;
+  left: 50px;
+  top: 0px;
   text-align: center;}
 
 #try {
@@ -165,9 +164,17 @@
   position: absolute;
   height: 220px;
   width: 90px;
-  left: 700px;
-  top: 500px;
+  left: 990px;
+  top: 0px;
   background-color: white;
+  text-align: center;}
+
+  #MatEq {
+  position: absolute;
+  top: 95px;
+  height: 60px;
+  width: 290px;
+  background-color: lightgrey;
   text-align: center;}
 
 #completed {
@@ -181,9 +188,10 @@
  
 <body>
 
-<h2> <center>Linear Algebra: Module 4 </center></h2>
+<h2> <center>Module 4: Matrix Multiplication (Row Picture) </center></h2>
 
 <div id="intro">
+<!--
 <p>
   Let us explore another perspective of matrix multiplication in the context of the rows of matrix.
   Here, we view the matrix equation \(Ax = b\) in the following framework:
@@ -204,21 +212,62 @@
 
   As you change the values in \(A\) and \(b\), ponder what these changes mean geometrically for the respective straight lines.
 </p>
+-->
 
-  <div id="question">
+
+
+
+<p>
+  Let us explore another perspective of matrix multiplication in the context of the rows of matrix.
+  </p>
+  <p>
+  We start with a matrix equation in the form 
+  \(\begin{bmatrix} \textcolor{blue} {a_{11}} & \textcolor{blue}{a_{12}}\\ \textcolor{red}{a_{21}} & \textcolor{red}{a_{22}} \end{bmatrix}  
+  \begin{bmatrix} x\\y \end{bmatrix}  
+  =\begin{bmatrix}\textcolor{blue}{ b_1}\\\textcolor{red}{b_2} \end{bmatrix} \).  From the row perspective this matrix equation asks the question:
+  </p>
+  <p>
+  "What pair of values \( (x,y) \) satisfies both of the linear equations \(\textcolor{blue}{a_{11}x+a_{12}y=b_1}\)
+  and \(\textcolor{red}{a_{21}x+a_{22}y=b_2}\) at the same time?"
+</p>
+  <p>
+Each one of these equations specifies a line representing all of the values of the pair \( (x,y) \) that
+satisfy that equation.  At the point where these lines intersect, both equations are satisfied.  
+  </p>
+<p>
+    For instance, in the initialized example below we have the matrix equation:
+    \(\begin{bmatrix} \textcolor{blue} {2} & \textcolor{blue}{1}\\ \textcolor{red}{1} & \textcolor{red}{-2} \end{bmatrix}  
+  \begin{bmatrix} x\\y \end{bmatrix}  
+  =\begin{bmatrix}\textcolor{blue}{ 0}\\\textcolor{red}{1} \end{bmatrix} \)
+  which represent the two equations  \(\textcolor{blue}{2x+1y=0}\)
+  and \(\textcolor{red}{1x-2y=1}\).  
+  The two corresponding lines intersect at the point \( \textcolor{purple} {(0.20, -0.40)}\) which 
+  means that this is the solution to the matrix equation.
+</p>  
+<p>
+In order to answer the questions you must manipulate the values inside the two by two matrix
+as well as the values in the two by one vector to the right of the equals sign. In other words,
+you are not solving a matrix equation but rather setting one up that has the properties 
+specified in the question.
+
+ </p>
+
+
+
+  <p id="question">
 
 
   Ready to begin?  Click "Start" to view your first question.
 
 
-  </div>
+  </p>
 </div>
 
 <div id="blank">
   <div id="matrix">
-
+<h3>Matrix Equation</h3>
     <div id="M11">
-    <input type="number" id="m11"   style="width: 3em" value="-1" step=0.1 onChange="draw()">
+    <input type="number" id="m11"   style="width: 3em" value="2" step=0.1 onChange="draw()">
     </div>
 
     <div id="M12">
@@ -230,21 +279,17 @@
     </div>
 
     <div id="M22">
-    <input type="number" id="m22"   style="width: 3em" value="1" step=0.1 onChange="draw()">
+    <input type="number" id="m22"   style="width: 3em" value="-2" step=0.1 onChange="draw()">
     </div>
 
-    <div id="times">
-    <b>
-    &times
-    </b>
+
+
+    <div id="v1" style="font-style: italic; font-size: 15px;">
+     x
     </div>
 
-    <div id="V1">
-    <input type="text" id="v1"   style="width: 3em" value="x" step=0.1 >
-    </div>
-
-    <div id="V2">
-    <input type="text" id="v2"   style="width: 3em" value="y"  >
+    <div id="v2" style="font-style: italic; font-size: 15px;">
+    y  
     </div>
 
     <div id="equals">
@@ -254,24 +299,32 @@
     </div>
 
     <div id="W1">
-    <input type="number" id="w1"   style="width: 3.5em" value="0" step=0.1 onChange="draw()">
+    <input type="number" id="w1"   style="width: 3em" value="0" step=0.1 onChange="draw()">
     </div>
 
     <div id="W2">
-    <input type="number" id="w2"   style="width: 3.5em" value="1" step=0.1 onChange="draw()">
+    <input type="number" id="w2"   style="width: 3em" value="1" step=0.1 onChange="draw()">
+    </div>
+    <div id="MatEq">
     </div>
   </div>
 
+
+
+
+
+
+
   <div id="sub">
-    <p>
+    <span>
       <button  onclick="submit()">Start</button>
-    </p>
-    <p>
+    </span>
+    <span>
       <button  onclick="forward()">Skip</button>
-    </p>
-    <p>
+    </span>
+    <span>
       <button  onclick="back()">Previous</button>
-    </p>
+    </span>
   </div>
 
   <div id="try">
@@ -283,16 +336,86 @@
   </canvas>
   </div>
 
+
+
+<div id="score">
+</div>
   <div id="completed">
     <h2>Completed Questions:</h2>
   </div>
 </div>
 
-<div id="score">
-</div>
+
 
 
 <script>
+    usejax=0
+var initialized=0
+Answered = [0,0,0,0,0,0,0,0,0,0,0,0,0]
+var page=0
+var quests=[
+"1. Set up a matrix equation that corresponds to two lines, one with zero slope and the other with positive slope, on the diagram below.",
+"2. Set up a matrix equation that corresponds to two lines, both with negative slopes, on the diagram below.",
+"3. Set up a matrix equation that corresponds to two lines, one with slope 1 and the other with slope -1, such that both have positive y-intercepts.",
+"4. Set up a matrix equation that corresponds to two lines, one with slope 1 and the other with slope -1, such that both have negative x-intercepts.",
+"5. Find two lines, one with positive slope and the other with negative slope, that intersect somewhere strictly in the first quadrant.",
+"6. Superb!! Determine two lines, with slopes -0.5 and -1 respectively that intersect somewhere within the fourth quadrant.",
+"7. Wonderful! Next, find two lines, both with negative slope, that intersect somewhere on the x-axis.",
+"8. Excellent! Now find two lines, both with positive slope, that intersect somewhere on the y-axis.",
+"9. Terrific! Find two lines, one with positive slope and the other with negative slope, that intersect somewhere near (-1, 1).",
+"10. Great!! Let's now find two lines, with slopes 1 and 2 respectively that intersect somewhere near the point (-2, -1).",
+"11. Awesome, let's try a different type of question. Set the first row of the matrix A to have only entries with negative signs, and the second row to have only entries with positive signs. Find a value of vector b so that the two lines intersect at exactly one point.",
+"12. Nice! Set the first row of the matrix A to have only entries with negative signs, and the second row to have only entries with positive signs. Find a value of vector b so that the two lines intersect at more than one point.",
+"13. Way to go! Set the first row of the matrix A to have only entries with negative signs, and the second row to have only entries with positive signs. Find value of vector b so that the two lines never intersect.",
+"Good job!!!"]
+function make_mat(){
+var a11=(document.getElementById("m11").value)
+var a21=(document.getElementById("m21").value)
+
+
+
+var a12=(document.getElementById("m12").value)
+var a22=(document.getElementById("m22").value)
+
+
+var i1=(document.getElementById("v1").value)
+var i2=(document.getElementById("v2").value)
+var c1=(document.getElementById("w1").value)
+var c2=(document.getElementById("w2").value)
+
+
+var Mat=document.getElementById('MatEq')
+if (usejax==1){
+Mat_string='Matrix Equation: \\[ \\begin{bmatrix}\\textcolor{blue}{'+a11+'}&\\textcolor{blue}{'+a12+'}\\\\'
+Mat_string+='\\textcolor{red}{'+a21+'}&\\textcolor{red}{'+a22+'} \\end{bmatrix}'
+
+Mat_string+='\\begin{bmatrix}\\textcolor{black}{x}\\\\ \\textcolor{black}{y} \\end{bmatrix}'
+Mat_string+='=\\begin{bmatrix}\\textcolor{blue}{'+c1+'}\\\\ \\textcolor{red}{'+c2+'} \\end{bmatrix}\\]'
+Mat_string+='Equations of the Lines:\\[ \\textcolor{blue}{'+a11+'x+'+a12+'y='+c1+'}        \\]'
+Mat_string+='\\[ \\textcolor{red}{'+a21+'x+'+a22+'y='+c2+'}        \\]'
+Mat_string+='Intersection Point:\\[ \\textcolor{purple}{ ('+i1+','+i2+')} \\]'
+Mat.innerHTML=Mat_string
+MathJax.typesetPromise()}
+
+
+if (usejax==0){
+if (a12>=0){a12s='+ '+a12}
+if (a12<0){a12s='- '+(-a12)}
+if (a22>=0){a22s='+ '+a22}
+if (a22<0){a22s='- '+(-a22)}
+    Mat.innerHTML='<h3>Equations of the Lines:</h3>\
+    <span  style="color:blue; font-size:20px">'+a11+'<i>x</i> '+a12s+'<i>y</i> = '+c1+'</span> \
+    <p style="color:red; font-size:20px">'+a21+'<i>x</i> '+a22s+'<i>y</i> = '+c2+'</p> \
+    <h3>Point of Intersection:</h3> \
+    <span style="color:purple; font-size:20px"> ('+i1+','+i2+')</span>'
+
+
+}
+
+
+}
+
+score()
 draw()
 function draw(){
 
@@ -359,30 +482,13 @@ function draw(){
   if (a11*a22==a12*a21){
     document.getElementById("v1").value=''
     document.getElementById("v2").value=''}
+    make_mat()
 }
-</script>
 
 
-<script>
-var initialized=0
-var page=0
-var quests=[
-"1. Determine two lines, one with zero slope and the other with positive slope, on the diagram below.",
-"2. Determine two lines, both with negative slopes, on the diagram below.",
-"3. Determine two lines, one with slope 1 and the other with slope -1, such that both have positive y-intercepts.",
-"4. Determine two lines, one with slope 1 and the other with slope -1, such that both have negative x-intercepts.",
-"5. Find two lines, one with positive slope and the other with negative slope, that intersect somewhere strictly in the first quadrant.",
-"6. Superb!! Determine two lines, with slopes -0.5 and -1 respectively that intersect somewhere within the fourth quadrant.",
-"7. Wonderful! Next, find two lines, both with negative slope, that intersect somewhere on the x-axis.",
-"8. Excellent! Now find two lines, both with positive slope, that intersect somewhere on the y-axis.",
-"9. Terrific! Find two lines, one with positive slope and the other with negative slope, that intersect somewhere near (-1, 1).",
-"10. Great!! Let's now find two lines, with slopes 1 and 2 respectively that intersect somewhere near the point (-2, -1).",
-"11. Awesome, let's try a different type of question. Set the first row of the matrix A to have only entries with negative signs, and the second row to have only entries with positive signs. Find a value of vector b so that the two lines intersect at exactly one point.",
-"12. Nice! Set the first row of the matrix A to have only entries with negative signs, and the second row to have only entries with positive signs. Find a value of vector b so that the two lines intersect at more than one point.",
-"13. Way to go! Set the first row of the matrix A to have only entries with negative signs, and the second row to have only entries with positive signs. Find value of vector b so that the two lines never intersect.",
-"Good job!!!"]
 
-Answered = [0,0,0,0,0,0,0,0,0,0,0,0,0]
+
+
 function score(){
   scoreBoard = document.getElementById("score")
   while(scoreBoard.firstChild){
@@ -417,7 +523,6 @@ function score(){
     scoreBoard.appendChild(question);
   }
 }
-score()
 
 function forward(){
   if (page<Answered.length){
@@ -436,11 +541,13 @@ function back(){
 
 function submit(){
   if (initialized==0){
+
   document.getElementById("sub").getElementsByTagName("button")[0].innerText="Submit"
   document.getElementById("question").innerText=quests[page]
   }
 
   if (initialized==1){
+
     M11=document.getElementById("m11").value
     M21=document.getElementById("m21").value
     M12=document.getElementById("m12").value
@@ -469,6 +576,8 @@ function submit(){
       // This creates a new element to display completed questions
       var answeredQuestion = document.createElement('div')
       answeredQuestion.innerHTML = quests[page]
+      answeredQuestion.innerHTML += ' Your answer: '+M11+'<i>x</i> + '+M12+'<i>y</i> = '+W1
+      answeredQuestion.innerHTML += ', '+M21+'<i>x</i> + '+M22+'<i>y</i> = '+W2
       answeredQuestion.setAttribute('class', 'greytext')
       var completedQuestions = document.getElementById("completed")
       completedQuestions.appendChild(answeredQuestion)
@@ -589,6 +698,7 @@ function grade(page,m11,m21,m12,m22,w1,w2){
   score()
   return(correct)
 }
+
 </script>
 </body>
 </html>
