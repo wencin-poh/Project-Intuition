@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
 
-
+<head>
+  <!-- The following adds MathJax to render LaTeX notation -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"></script>
+</head>
 <style>
 
 
@@ -130,9 +134,11 @@
   height: 20px;
   width: 50px;
   left: 320px;
-  top: 50px;
+  top: 30px;
   background-color: white;
   text-align: center;}
+
+
   
 
 
@@ -444,10 +450,10 @@
   
   #MatEq {
   position: absolute;
-  height: 300px;
+  height: 100px;
   width: 300px;
   left: 500px;
-  top: 300px;
+  top: 350px;
   background-color: lightgrey;
   text-align: center;}
 
@@ -465,7 +471,7 @@
 <body>
 
 
-  <h2> <center>Linear Algebra: Module 1 </center></h2>
+  <h2> <center>Module 1: Linear Combinations </center></h2>
 
 
 <div id="intro">
@@ -493,7 +499,9 @@ An octahedron has 6 vertices, 12 edges, and 8 faces.
 </span>
 
 <p>
-Use the up and down arrows to add or subtract each type of solid from your shopping basket to answer the following questions. If there is no solution (or the only solution is an empty basket) submit an empty basket:
+Use the up and down arrows to add or subtract each type of solid from your shopping basket to 
+answer the following questions. If there is no solution click "No Solution." 
+The matrix equation representing your selection is shown to the right.
 
 
 </div>
@@ -553,8 +561,11 @@ Use the up and down arrows to add or subtract each type of solid from your shopp
 
 <div id="sub">
   <p>
-<button  onclick="submit()">Start</button>
+<button  onclick="submit(0)">Start</button>
   </p>
+    <p>
+  <button  onclick="submit(1)">No Solution</button>
+    </p>
 <p>
   <button  onclick="forward()">Skip</button>
 </p>
@@ -693,7 +704,8 @@ Faces
 </div>
 
 <div id="MatEq">
-<h2>Matrix Equations (Jeff)</h2>
+
+
 </div>
 
 
@@ -702,6 +714,37 @@ Faces
 
 
 
+function make_mat(){
+m11=parseFloat(document.getElementById("M11").innerText)
+m21=parseFloat(document.getElementById("M21").innerText)
+m31=parseFloat(document.getElementById("M31").innerText)
+c1=parseFloat(document.getElementById("tnum").innerText)
+
+
+m12=parseFloat(document.getElementById("M12").innerText)
+m22=parseFloat(document.getElementById("M22").innerText)
+m32=parseFloat(document.getElementById("M32").innerText)
+c2=parseFloat(document.getElementById("snum").innerText)
+
+m13=parseFloat(document.getElementById("M13").innerText)
+m23=parseFloat(document.getElementById("M23").innerText)
+m33=parseFloat(document.getElementById("M33").innerText)
+c3=parseFloat(document.getElementById("onum").innerText)
+
+v1=parseFloat(document.getElementById("V1").innerText)
+v2=parseFloat(document.getElementById("V2").innerText)
+v3=parseFloat(document.getElementById("V3").innerText)
+
+Mat=document.getElementById('MatEq')
+Mat_string='\\[ \\begin{bmatrix}\\textcolor{blue}{'+m11+'}&\\textcolor{yellow}{'+m12+'}&\\textcolor{red}{'+m13+'}\\\\'
+Mat_string+='\\textcolor{blue}{'+m21+'}&\\textcolor{yellow}{'+m22+'}&\\textcolor{red}{'+m23+'}\\\\'
+Mat_string+='\\textcolor{blue}{'+m31+'}&\\textcolor{yellow}{'+m32+'}&\\textcolor{red}{'+m33+'}\\end{bmatrix}'
+Mat_string+='\\begin{bmatrix}\\textcolor{blue}{'+c1+'}\\\\ \\textcolor{yellow}{'+c2+'}\\\\ \\textcolor{red}{'+c3+'}\\end{bmatrix}'
+Mat_string+='=\\begin{bmatrix}\\textcolor{green}{'+v1+'}\\\\ \\textcolor{green}{'+v2+'}\\\\ \\textcolor{green}{'+v3+'}\\end{bmatrix}\\]'
+Mat.innerHTML=Mat_string
+MathJax.typesetPromise()
+
+}
 
 function zero(){
 
@@ -732,7 +775,10 @@ document.getElementById("A22").innerText="0"
 document.getElementById("A32").innerText="0"
 document.getElementById("A13").innerText="0"
 document.getElementById("A23").innerText="0"
-document.getElementById("A33").innerText="0"}
+document.getElementById("A33").innerText="0"
+make_mat()
+
+}
 zero()
 </script>
 
@@ -807,7 +853,7 @@ document.getElementById("A23").innerText=b
 document.getElementById("A33").innerText=c
 document.getElementById("onum").innerText=t}
 
-
+make_mat()
 
 }
 </script>
@@ -838,7 +884,7 @@ var quests=[
 "11. Good job, now find a basket with the same number of tetrahedron faces, cube faces, and octahedron faces",
 "12. Good job, now find a basket with the same number of tetrahedron edges, cube edges, and octahedron edges",
 "13. Good job, now find a basket with the same number of tetrahedron vertices, cube vertices, and octahedron vertices",
-"14. Good job, now find a basket with the same number of tetrahedron vertices, tetrahedron edges and tetrahedron faces",
+"14. Good job, now find a non-empty basket with the same number of tetrahedron vertices, tetrahedron edges and tetrahedron faces",
 "Good job!!!"]
 
 Answered=[0,0,0,0,0,0,0,0,0,0,0,0,0,0]
@@ -879,22 +925,22 @@ function score(){
 score()
 
 
-function grade(p,v1,v2,v3,t,c,o){
+function grade(p,v1,v2,v3,t,c,o,x){
 correct=0
 
-if (p==0){ if (v1==12 && v2==18 && v3==10){correct=1}}
-if (p==1){ if (v1==10 && v2==18 && v3==12){correct=1}}
-if (p==2){ if (v1==14 && v2==24 && v3==16){correct=1}}
-if (p==3){ if (v1==v3 && t>=5 && c>=5 && o>=5){correct=1}}
-if (p==4){ if (v1==32 && v2==48 && v3==32){correct=1}}
-if (p==5){ if (v1==28 && v2==48 && v3==28){correct=1}}
-if (p==6){ if (v1==30 && v2==48 && v3==30){correct=1}}
-if (p==7){ if (v1==0 && v2==0 && v3==0){correct=1}}
-if (p==8){ if (v1>v3 && t>=1 && c>=1 && o>=1){correct=1}}
-if (p==9){ if (v1==0 && v2==0 && v3==0){correct=1}}
-if (p==10){ if (4*t==6*c && 6*c==8*o){correct=1}}
-if (p==11){ if (6*t==12*c && 12*c==12*o){correct=1}}
-if (p==12){ if (4*t==8*c && 8*c==6*o){correct=1}}
+if (p==0){ if (x==0 && v1==12 && v2==18 && v3==10){correct=1}}
+if (p==1){ if (x==0 && v1==10 && v2==18 && v3==12){correct=1}}
+if (p==2){ if (x==0 && v1==14 && v2==24 && v3==16){correct=1}}
+if (p==3){ if (x==0 && v1==v3 && t>=5 && c>=5 && o>=5){correct=1}}
+if (p==4){ if (x==0 && v1==32 && v2==48 && v3==32){correct=1}}
+if (p==5){ if (x==0 && v1==28 && v2==48 && v3==28){correct=1}}
+if (p==6){ if (x==0 && v1==30 && v2==48 && v3==30){correct=1}}
+if (p==7){ if (x==1){correct=1}}
+if (p==8){ if (x==0 && v1>v3 && t>=1 && c>=1 && o>=1){correct=1}}
+if (p==9){ if (x==1){correct=1}}
+if (p==10){ if (x==0 && 4*t==6*c && 6*c==8*o){correct=1}}
+if (p==11){ if (x==0 && 6*t==12*c && 12*c==12*o){correct=1}}
+if (p==12){ if (x==0 && 4*t==8*c && 8*c==6*o){correct=1}}
 if (p==13){ if (v1==0){correct=1}}
 
 Answered[p]+=correct
@@ -918,7 +964,9 @@ function back(){
 
 
 
-function submit(){
+function submit(x){
+
+ 
 if (initialized==0){
 document.getElementById("sub").getElementsByTagName("button")[0].innerText="Submit"
 document.getElementById("question").innerText=quests[page]
@@ -944,7 +992,7 @@ document.getElementById("try").innerText="Not Quite"}
 
 
 
-if (grade(page,v1,v2,v3,tet,cub,oct)==1)
+if (grade(page,v1,v2,v3,tet,cub,oct,x)==1)
 {
 document.getElementById("try").innerText=""
 
@@ -953,7 +1001,11 @@ document.getElementById("try").innerText=""
 
       
       var answered_question = document.createElement('div')
-      answered_question.innerHTML=quests[page]
+      if (x==0){
+      answered_question.innerHTML=quests[page]+': '+ tet +' tetrahedron(s), '+cub +' cube(s), '+oct +' octahedron(s).'
+}
+if (x==1){
+      answered_question.innerHTML=quests[page]+': No Solution.'}
       var previous=document.getElementById("previous")
       previous.appendChild(answered_question)
       answered_question.style.color='grey'
@@ -967,6 +1019,7 @@ document.getElementById("try").innerText=""
 page+=1
 document.getElementById("question").innerText=quests[page]
 zero()
+make_mat()
 }
 
 

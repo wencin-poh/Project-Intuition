@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <!-- The following adds MathJax to render LaTeX notation -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"></script>
-  </head>
+
 
 <style>
 
@@ -438,6 +434,10 @@
  
  
 <body>
+
+  <h2> <center>Module 5: Row Operations </center></h2>
+
+
 <p>
 You are required to solve the set of equations appearing in the black box.  
 To help you do this you may use the augmented matrix to the left of the equations. 
@@ -850,6 +850,7 @@ for (j=0; j<complexity; j++){
 
 
 function write_equations(){
+  
  Entries=get_entries()
  var B=document.getElementById("bluetip").style.backgroundColor
   var G=document.getElementById("greentip").style.backgroundColor
@@ -858,7 +859,7 @@ function write_equations(){
     Colors=[B,G,R,Y]
     Eq_el=document.getElementById("equations")
     Eq_list=[]
-    variables=['x','y','z','w']
+    var variables=['x','y','z','w']
     for (i=0; i<4; i++){
       eq=''
       for (j=0; j<4; j++){
@@ -907,6 +908,7 @@ for (i=0; i<4; i++){
 
 
 function initialize(){
+
 set(difficulty)
 reduce()
 write_equations()
@@ -917,6 +919,7 @@ make_solution_boxes("solutions1")
 if (rank<4){
 make_solution_boxes("solutions2")}
 score()
+
 }
 
 
@@ -1386,22 +1389,6 @@ mobilize(yt)
 
 
 
-
-var page=0
-var quests=[
-"1.Excellent, now find two vectors with length approximately equal to 1 and dot product approximately equal to 1",
-"2. Good job, now find two vectors with length approximately equal to 1 and dot product approximately equal to 0.5",
-"3. Excellent,  now find two vectors with length approximately equal to 1 and dot product approximately equal to 0",
-"4. Good job,  now find two vectors with length approximately equal to 1 and dot product approximately equal to -0.5",
-"5. Excellent, now find two vectors with length approximately equal to 1 and dot product approximately equal to -1",
-"Good job!!!"]
-var ans=[
-[1,1,1,0.1,0.1,0.1],
-[1,1,0.5,0.1,0.1,0.1],
-[1,1,0,0.1,0.1,0.1],
-[1,1,-0.5,0.1,0.1,0.1],
-[1,1,-1,0.1,0.1,0.1]
-]
 
 
 
