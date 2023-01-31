@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<!DOCTYPE html>
+<html>
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+#pic{
+
+position: absolute;
+height: 230px;
+width: 500px;
+left: 80px;
+top: 10px;
+background-color: white;
+}
+#info_box{
+
+  position: absolute;
+  height: 230px;
+  width: 780px;
+  left: 500px;
+  top: 10px;
+  background-color: white;
+}
+
+ 
+
+</style>
+</head>
+<body>
+    <div id="pic"> 
+        <img style="width:350px; heght:350px" src="https://photos.app.goo.gl/5snd2wNLHkmR3E7D6" alt="Jeff">
+
+    </div>
+    <div id="info_box"> 
+<p>
+Jeff Nichols is a PhD candidate in Applied Mathematics at the University of California, Davis.  He studies the dynamics of non-Newtonian fluids and the numerical methods required to simulate them.  His work helps to bridge the gap between mathematical theory and laboratory experiments.  At Davis, he has taught many courses, including Calculus, Differential Equations, and Real and Complex Analysis, 
+</p>
+<p>As an undergraduate, he studied Mechanical Engineering at Colorado School of Mines.  In Colorado, Jeff fell in love with both mathematics and an outdoor, athletic lifestyle.  When away from his research and teaching, you can find him training for triathlons and learning acrobatic yoga!
+</p>
+
+
+
+
+</p>
+    </div>
+</body>
+
+
+
+</html>
