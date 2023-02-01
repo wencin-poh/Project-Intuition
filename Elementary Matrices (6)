@@ -19,139 +19,90 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Source+Serif+Pro">
   
   <style>
-    .float
-    {
+    .float {
       display: flex;
       justify-content: space-around;
-      align-items: center;
-    }
+      align-items: center;}
 
-    .expand
-    {
+    .expand {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-    }
+      align-items: center;}
 
-    #matrixPrompt
-    {
-      width: 500px;
-      height: 100px;
-      border: 1px black solid;
-    }
+    #matrixPrompt {
+      width: 300px;
+      height: 200px;}
 
-    #questionArea
-    {
-      width: 690px;
-      height: 80px;
-      border: 1px black solid;
-    }
+    #questionArea {
+      width: 740px;
+      height: 60px;}
 
-    #questionBox
-    {
-      width: 700px;
-      height: 200px;
-      border: 1px black solid;
-    }
+    #questionBox {
+      width: 750px;
+      height: 170px;}
 
-    #matrixEquation
-    {
-      width: 600px;
-      height: 100px;
-      border: 2px black solid;
-    }
-
-    .box
-    {
+    #displayArea {
+      width: 750px;
+      height: 150px;}
+    
+    .box { 
       width: 200px;
-      height: 100px;
-      border: 1px black solid;
-    }
+      height: 100px;}
 
-    .entry
-    {
+    .smallbox { 
+      width: 150px;
+      height: 100px;}
+
+    .entry { 
+      width: 40px;
+      height: 15px;
+      border-radius: 5px;}
+
+    .output { 
       width: 40px;
       height: 15px;
       border-radius: 5px;
-    }
+      background-color: ghostwhite;}
 
-    .output
-    {
-      width: 40px;
-      height: 15px;
-      border-radius: 5px;
-      background-color: ghostwhite;
-    }
-
-    .dropdown
-    {
+    .dropdown {
       height: 20px;
-      border-radius: 5px;
-    }
+      border-radius: 5px;}
 
-    .navigationButton
-    {
+    .Button {
       height: 20px;
       border-radius: 5px;
       background: radial-gradient(#FFFFFF, #DDDDDD);
-      cursor: pointer;
-    }
+      cursor: pointer;}
 
-    .navigationButton:hover
-    {
-      background: radial-gradient(#FFFFFF, #FFB000);
-    }
+    .Button:hover {
+      background: radial-gradient(#FFFFFF, #FFB000);}
 
-    .navigationButton:active
-    {
-      background: #FFB000;
-    }
+    .Button:active {
+      background: #FFB000;}
 
-    .operationButton
-    {
-      height: 20px;
-      border-radius: 5px;
-      background: radial-gradient(#FFFFFF, #DDDDDD);
-      cursor: pointer;
-    }
-
-    .operationButton:hover
-    {
-      background: radial-gradient(#FFFFFF, #FFB000);
-    }
-
-    .operationButton:active
-    {
-      background: #FFB000;
-    }
-
-    .column
-    {
+    .column {
       position: relative;
-      left: 10px;
-    }
+      left: 10px;}
 
     .greytext {
-      color: grey;
-    }
+      color: grey;}
 
     #score {
       position: absolute;
-      left: 800px;
-      top: 20px;
-    }
+      left: 1100px;
+      top: 1250px;}
   </style>
 </head>
+
 <body>
     <h2><center>Module 6: Elementary Matrices</center></h2>
     <div id="intro">
-      <p>Every elementary row operation applied onto a matrix can be traced back to the action of multiplying an elementary matrix by that matrix. 
-      We shall explore and understand this maxim through the following module.</p>
-      <p>Each elementary matrix is a square matrix resembling an identity matrix, but with a twist depending on their type. 
+      <p>We shall explore the following idea in this module: for every elementary row operation applied onto a matrix, there is a way to achieve the same effect by left-multiplying said matrix with a suitable elementary matrix.</p>
+      <p>Each elementary matrix looks almost like an identity matrix, but the difference in entries depends on their type. 
       In general, we have the following types of elementary matrices:</p>
       <ul>
       <li>
-        [Swap Rows] Swap Row $i$ with Row $j$ - This is represented by multiplying by the matrix of the form 
+        [Swap Rows] Swap Row $i$ with Row $j$ - This effect is achieved by multiplying by a matrix of the form 
         $$\begin{bmatrix}
         1 &        &   &   &   &        &   &   &   &        &   \\
           & \ddots &   &   &   &        &   &   &   &        &   \\
@@ -168,7 +119,7 @@
           where the only entries with $1$ off the main diagonal are at positions $(i, j)$ and $(j, i)$, whereas the only entries with $0$ on the main diagonal are at positions $(i, i)$ and $(j, j)$.
         </li>
       <li>
-        [Scale Row] Scale Row $i$ by a nonzero $c$ - This is represented by multiplying by the matrix of the form 
+        [Scale Row] Scale Row $i$ by a nonzero $c$ - This effect is achieved by multiplying by a matrix of the form 
         $$\begin{bmatrix}
         1 &        &   &   &   &        &   \\
           & \ddots &   &   &   &        &   \\
@@ -181,7 +132,7 @@
         where the $(i,i)$-entry is $c$.
       </li>
       <li>
-        [Add Row] Add $c$ times of Row $i$ to Row $j$ - This is represented by multiplying by the matrix of the form 
+        [Add Row] Add $c$ times of Row $i$ to Row $j$ - This effect is achieved by multiplying by a matrix of the form 
         $$\begin{bmatrix}
         1 &        &   &   &         &   &   &        &   \\
           & \ddots &   &   &         &   &   &        &   \\
@@ -199,9 +150,9 @@
     </div>
 
     <div id="instructions">
-      <p> In the following module, the main objective is to encourage you to be comfortable with creating elementary matrices on your own.
+      <p> In this module, we would like to encourage you to be comfortable with creating elementary matrices on your own.
 
-      At the initial stage, to create an elementary matrix, you may specify the type of row operation, followed by the associated parameters, namely, some combination of row indices $i$ and $j$ and scalar $c$.
+      At the initial stage, to create an elementary matrix, you may specify the type of row operation, followed by some combination of row indices $i$ and $j$ and scalar $c$ as arguments.
       This would be displayed as matrix $E$ below. 
       A matrix $A$ is provided for you to apply the effects of a row operation.
       You are welcome to change any of its entries. 
@@ -216,7 +167,7 @@
 
     <div id="question" class="expand">
       <div id="questionBox">
-        <h2>Current question:</h2>
+        <h3>Current question:</h3>
         <div id="questionArea">
           <p id="questionToDisplay">Click 'Start' whenever you are ready. Good luck!</p>
         </div>
@@ -224,9 +175,14 @@
         <button onclick="previousPage()">Previous</button>
         <button onclick="nextPage()">Next</button>
         <!--<button onclick="automaticSucceed()">Succeed Automatically</button>-->
+        <div id="response">
+        </div>
       </div>
 
       <div id="matrixPrompt">
+      </div>
+
+      <div class="box">
       </div>
     </div>
 
@@ -258,17 +214,17 @@
         <input type="text" class="entry" id="scalar" name="scalar" value=1><br><br>
 
         <button onclick="createMatrix()" id="createMatrix"> Create Matrix </button>
-        <button onclick="multiplyMatrix()" id="multiplyMatrix"> Multiply Matrix </button>
+        <button onclick="showMatrixMultiplication()" id="multiplyMatrix"> Multiply Matrix </button>
         <button onclick="resetSettings()" id="resetSettings"> Reset Settings </button>
       </div>
 
       <div id="displayArea">
-        <h3>Matrix equation</h3>
+        <h3><center>Matrix equation</center></h3>
         <div id="matrixEquation">
         </div>
       </div>
 
-      <div class="box">
+      <div class="smallbox">
       </div> 
     </div>
 
@@ -276,57 +232,53 @@
       <div id="elementaryMatrix">
         <h3>Matrix $E$</h3>
         <!--Row 1-->
-        <input type="text" id="e11" name="e11" class="entry" value=1>
-        <input type="text" id="e12" name="e12" class="entry" value=0>
-        <input type="text" id="e13" name="e13" class="entry" value=0>
-        <input type="text" id="e14" name="e14" class="entry" value=0><br><br>
+        <input type="text" id="e11" class="entry" value=1>
+        <input type="text" id="e12" class="entry" value=0>
+        <input type="text" id="e13" class="entry" value=0>
+        <input type="text" id="e14" class="entry" value=0><br><br>
         <!--Row 2-->
-        <input type="text" id="e21" name="e21" class="entry" value=0>
-        <input type="text" id="e22" name="e22" class="entry" value=1>
-        <input type="text" id="e23" name="e23" class="entry" value=0>
-        <input type="text" id="e24" name="e24" class="entry" value=0><br><br>
+        <input type="text" id="e21" class="entry" value=0>
+        <input type="text" id="e22" class="entry" value=1>
+        <input type="text" id="e23" class="entry" value=0>
+        <input type="text" id="e24" class="entry" value=0><br><br>
         <!--Row 3-->
-        <input type="text" id="e31" name="e31" class="entry" value=0>
-        <input type="text" id="e32" name="e32" class="entry" value=0>
-        <input type="text" id="e33" name="e33" class="entry" value=1>
-        <input type="text" id="e34" name="e34" class="entry" value=0><br><br>
+        <input type="text" id="e31" class="entry" value=0>
+        <input type="text" id="e32" class="entry" value=0>
+        <input type="text" id="e33" class="entry" value=1>
+        <input type="text" id="e34" class="entry" value=0><br><br>
         <!--Row 4-->
-        <input type="text" id="e41" name="e41" class="entry" value=0>
-        <input type="text" id="e42" name="e42" class="entry" value=0>
-        <input type="text" id="e43" name="e43" class="entry" value=0>
-        <input type="text" id="e44" name="e44" class="entry" value=1>
+        <input type="text" id="e41" class="entry" value=0>
+        <input type="text" id="e42" class="entry" value=0>
+        <input type="text" id="e43" class="entry" value=0>
+        <input type="text" id="e44" class="entry" value=1>
       </div>
       
       <div id="augmentedMatrixOne">
         <h3>Matrix $A$</h3>
         <!--Row 1-->
-        <input type="text" id="a11" name="a11" class="entry" value=1>
-        <input type="text" id="a12" name="a12" class="entry" value=1>
-        <input type="text" id="a13" name="a13" class="entry" value=1>
-        <input type="text" id="a14" name="a14" class="entry" value=1>
-        <input type="text" id="a15" name="a15" class="entry" value=1>
-        <input type="text" id="a16" name="a16" class="entry column" value=1><br><br>
+        <input type="text" id="a11" class="entry" value=1>
+        <input type="text" id="a12" class="entry" value=0>
+        <input type="text" id="a13" class="entry" value=0>
+        <input type="text" id="a14" class="entry" value=0>
+        <input type="text" id="a15" class="entry column" value=1><br><br>
         <!--Row 2-->
-        <input type="text" id="a21" name="a21" class="entry" value=0>
-        <input type="text" id="a22" name="a22" class="entry" value=-1>
-        <input type="text" id="a23" name="a23" class="entry" value=2>
-        <input type="text" id="a24" name="a24" class="entry" value=-1>
-        <input type="text" id="a25" name="a25" class="entry" value=0>
-        <input type="text" id="a26" name="a26" class="entry column" value=-2><br><br>
+        <input type="text" id="a21" class="entry" value=0>
+        <input type="text" id="a22" class="entry" value=1>
+        <input type="text" id="a23" class="entry" value=0>
+        <input type="text" id="a24" class="entry" value=0>
+        <input type="text" id="a25" class="entry column" value=2><br><br>
         <!--Row 3-->
-        <input type="text" id="a31" name="a31" class="entry" value=2>
-        <input type="text" id="a32" name="a32" class="entry" value=-1>
-        <input type="text" id="a33" name="a33" class="entry" value=0>
-        <input type="text" id="a34" name="a34" class="entry" value=1>
-        <input type="text" id="a35" name="a35" class="entry" value=-2>
-        <input type="text" id="a36" name="a36" class="entry column" value=-14><br><br>
+        <input type="text" id="a31" class="entry" value=0>
+        <input type="text" id="a32" class="entry" value=0>
+        <input type="text" id="a33" class="entry" value=1>
+        <input type="text" id="a34" class="entry" value=0>
+        <input type="text" id="a35" class="entry column" value=3><br><br>
         <!--Row 4-->
-        <input type="text" id="a41" name="a41" class="entry" value=1>
-        <input type="text" id="a42" name="a42" class="entry" value=-2>
-        <input type="text" id="a43" name="a43" class="entry" value=3>
-        <input type="text" id="a44" name="a44" class="entry" value=-4>
-        <input type="text" id="a45" name="a45" class="entry" value=5>
-        <input type="text" id="a46" name="a46" class="entry column" value=28><br><br>
+        <input type="text" id="a41" class="entry" value=0>
+        <input type="text" id="a42" class="entry" value=0>
+        <input type="text" id="a43" class="entry" value=0>
+        <input type="text" id="a44" class="entry" value=1>
+        <input type="text" id="a45" class="entry column" value=4><br><br>
       </div>
 
       <!--
@@ -337,31 +289,28 @@
         <input type="text" id="b12" name="b12" class="output" disabled>
         <input type="text" id="b13" name="b13" class="output" disabled>
         <input type="text" id="b14" name="b14" class="output" disabled>
-        <input type="text" id="b15" name="b15" class="output" disabled>
-        <input type="text" id="b16" name="b16" class="output column" disabled><br><br>
+        <input type="text" id="b16" name="b15" class="output column" disabled><br><br>
         <!--Row 2--\>
         <input type="text" id="b21" name="b21" class="output" disabled>
         <input type="text" id="b22" name="b22" class="output" disabled>
         <input type="text" id="b23" name="b23" class="output" disabled>
         <input type="text" id="b24" name="b24" class="output" disabled>
-        <input type="text" id="b25" name="b25" class="output" disabled>
-        <input type="text" id="b26" name="b26" class="output column" disabled><br><br>
+        <input type="text" id="b26" name="b25" class="output column" disabled><br><br>
         <!--Row 3--\>
         <input type="text" id="b31" name="b31" class="output" disabled>
         <input type="text" id="b32" name="b32" class="output" disabled>
         <input type="text" id="b33" name="b33" class="output" disabled>
         <input type="text" id="b34" name="b34" class="output" disabled>
-        <input type="text" id="b35" name="b35" class="output" disabled>
-        <input type="text" id="b36" name="b36" class="output column" disabled><br><br>
+        <input type="text" id="b36" name="b35" class="output column" disabled><br><br>
         <!--Row 4--\>
         <input type="text" id="b41" name="b41" class="output" disabled>
         <input type="text" id="b42" name="b42" class="output" disabled>
         <input type="text" id="b43" name="b43" class="output" disabled>
         <input type="text" id="b44" name="b44" class="output" disabled>
-        <input type="text" id="b45" name="b45" class="output" disabled>
-        <input type="text" id="b46" name="b46" class="output column" disabled><br><br>
+        <input type="text" id="b46" name="b45" class="output column" disabled><br><br>
       </div>
       -->
+
       <div class="box">
       </div>
     </div>
@@ -370,352 +319,10 @@
       <h2>Completed questions:</h2>
     </div>
 
-    <div id="score">
-    </div>
+    <div id="score"></div>
 
     <script>
-      page = 0
-      beginQuestions = "false"
-      questions = [
-        "1. Find an elementary matrix that swaps entries in Row $1$ and Row $2$.",
-        "2. What about an elementary matrix that swaps entries in Row $2$ and Row $4$?",
-        "3. Create an elementary matrix that scales entries in Row $3$ by $2$.",
-        "4. What about an elementary matrix that multiplies the entire Row $4$ by $-1$?",
-        "5. Determine an elementary matrix that adds Row $4$ to Row $3$.",
-        "6. Can you find an elementary matrix that adds $-3$ times of Row 3 to Row 1?",
-        "7. Now, look at the two displayed matrices $A$ and $B$. $B$ is obtained from $A$ from a row swap. Name an elementary matrix that undoes this swap.",
-        "8. Next, $B$ is obtained from $A$ from scaling a row. Name an elementary matrix that undoes this scaling.",
-        "9. Alright, $B$ is obtained from $A$ from adding a multiple of one row to another. Name an elementary matrix that undoes this addition.",
-        "10. Let's move to a different type of question. $B$ is obtained from $A$ using two elementary row operations. Identify the row operations in the correct order and enter the respective elementary matrices, one after another.",
-        "11. Now, $B$ is obtained from $A$ using another two elementary row operations. Identify the row operations in the correct order and enter the respective elementary matrices, one after another.",
-        "12. Finally, $B$ is obtained from $A$ using two elementary row operations. Identify two row operations that undo these operations and enter the respective elementary matrices, one after another."
-      ]
-      answered = [0,0,0,0,0,0,0,0,0,0,0,0]
-      
-      function updateQuestions(){
-        if (beginQuestions == "false"){
-          button = document.getElementById("submitButton")
-          button.textContent = "Submit"
-          beginQuestions = "true"
-          displayQuestion(page)
-          return 
-        } else if (beginQuestions == "true"){
-          if (0<=page && page<6){
-            E = readRationalMatrix("e")
-            if (gradeRowOperations(E)=="true"){
-              appendCompletedQuestion(page)
-              page += 1
-              displayQuestion(page)
-            }
-          } else if (6<=page && page<=9){
-            E = readRationalMatrix("e")
-            if (gradeInverse(E)=="true"){
-              appendCompletedQuestion(page)
-              page += 1
-              displayQuestion(page)
-            }
-          } else {
-            E1 = readRationalMatrix("e")
-            E2 = readRationalMatrix("e")
-            if (gradeDecomposition(E1, E2)=="true"){
-              appendCompletedQuestion(page)
-              page += 1
-              displayQuestion(page)
-            }
-          }
-        }
-      }
-
-      function automaticSucceed(){
-        if (beginQuestions != "true"){
-          return }
-        appendCompletedQuestion(page)
-        MathJax.typesetPromise()
-        if (page<12-1){
-          page += 1
-          displayQuestion(page)
-        }
-      }
-
-      function appendCompletedQuestion(page){
-        if (answered[page] == 0){
-          answered[page] = 1
-          completedQuestions = document.getElementById("completed")
-          var answeredQuestion = document.createElement('div')
-          answeredQuestion.textContent = questions[page]
-          answeredQuestion.setAttribute('class', 'greytext')
-          completedQuestions.appendChild(answeredQuestion)
-        }
-      }
-
-      function displayQuestion(page){
-        displayArea = document.getElementById("questionToDisplay") 
-        displayArea.innerHTML = questions[page]
-        MathJax.typesetPromise()
-      }
-
-      function nextPage(){
-        if (page<12-1 && beginQuestions=="true"){
-          page += 1
-          displayQuestion(page)}
-      }
-
-      function previousPage(){
-        if (page>0 && beginQuestions=="true"){
-          page -= 1
-          displayQuestion(page)}
-      }
-    </script>
-
-    <script>
-      function readRationalMatrix(string){
-        M = []
-        let limit = string==='e' ? 4 : 6
-        for (let i=0; i<4; i++){
-          row = []
-          for (let j=0; j<limit; j++){
-            entryAddressM = string+String(i+1)+String(j+1)
-            entryM = document.getElementById(entryAddressM)
-            row.push(parseRational(entryM.value))
-          }
-          M.push(row)
-        }
-        return M
-      }
-
-      function writeRationalMatrix(matrixM, string){
-        let limit = string==="e" ? 4 : 6
-        for (let i=0; i<4; i++){
-          for (let j=0; j<limit; j++){
-            entryAddressM = string+String(i+1)+String(j+1)
-            entryM = document.getElementById(entryAddressM)
-            entryM.value = String(matrixM[i][j])
-          }
-        }
-      }
-    </script>
-
-    <script>
-      reset = true
-
-      // This function disables unnecessary parameters to prevent 
-      // users from changing their values
-      function disableParameters(){
-        type = document.getElementById("operationType").value
-        jthRow = document.getElementById("row_j")
-        scalingFactor = document.getElementById("scalar")
-        switch(type){ 
-          case "swap":
-            jthRow.disabled = false
-            scalingFactor.disabled = true
-            break
-
-          case "scale":
-            jthRow.disabled = true
-            scalingFactor.disabled = false
-            break
-
-          default:
-            jthRow.disabled = false
-            scalingFactor.disabled = false
-            break
-        }
-      }
-
-      // This functions resets the entire progress of row operations
-      function resetSettings(){
-        let i = 1
-        let j = 1
-        let c = 1
-        let E = [[1,0,0,0], [0,1,0,0], [0,0,1,0], [0,0,0,1]]
-        let A = [[1,1,1,1,1,1], [0,-1,2,-1,0,-2], [2,-1,0,1,-2,-14], [1,-2,3,-4,5,28]]
-        
-        operationType = document.getElementById("operationType")
-        ithRow = document.getElementById("row_i")
-        jthRow = document.getElementById("row_j")
-        scalingFactor = document.getElementById("scalar")
-
-        // This resets the settings for row operations
-        operationType.value = "null"
-        ithRow.value = i
-        jthRow.value = j
-        scalingFactor.value = c
-        
-        // This resets the matrices' entries
-        writeRationalMatrix(E, "e")
-        writeRationalMatrix(A, "a")
-
-        reset = true
-      }
-
-      // This function creates an elementary matrix
-      function createMatrix(){
-        let E = [[1,0,0,0], [0,1,0,0], [0,0,1,0], [0,0,0,1]]
-        let selected = true
-
-        type = document.getElementById("operationType").value
-        switch(type){
-          case "swap":
-            i = document.getElementById("row_i").value - 1
-            j = document.getElementById("row_j").value - 1
-            if (i===j){
-              alert("The row indices must be distinct.")
-              break
-            }
-            E[i][i] = 0
-            E[j][j] = 0
-            E[i][j] = 1
-            E[j][i] = 1
-            break
-
-          case "scale":
-            i = document.getElementById("row_i").value - 1
-            c = document.getElementById("scalar").value
-            E[i][i] = c
-            break
-
-          case "add":
-            i = document.getElementById("row_i").value - 1
-            j = document.getElementById("row_j").value - 1
-            if (i===j){
-              alert("The row indices must be distinct.")
-              break
-            }
-            c = document.getElementById("scalar").value
-            E[j][i] = c
-            break
-
-          case "null":
-            selected = false
-            break
-        }
-
-        if (!selected){
-          return 
-        }
-        writeRationalMatrix(E, "e")
-      }
-
-      // This function is created for debugging purposes
-      function printMatrix(matrixM){
-        A = []
-        for (let i=0; i<matrixM.length; i++){
-          row = []
-          for (let j=0; j<matrixM[i].length; j++){
-            row.push(String(matrixM[i][j]))
-          }
-          A.push(row)
-        }
-        return A
-      }
-
-      function texifyMatrix(matrixM){
-        let string = "\\begin{bmatrix} \n"
-        for (let i=0; i<matrixM.length; i++){
-          for (let j=0; j<matrixM[i].length; j++){
-            string += String(matrixM[i][j]) + " "
-            if (j<matrixM[i].length-1){
-              string += "& "
-            }
-          } 
-          if (i<matrixM.length-1){
-            string += "\\\\\n"
-          }
-        }
-        string += "\n\\end{bmatrix}"
-        return string
-      }
-
-      function displayMatrix(matrixE, matrixA, matrixB){
-        stringE = texifyMatrix(matrixE)
-        stringA = texifyMatrix(matrixA)
-        stringB = texifyMatrix(matrixB)
-        s = "$$\\small{" + stringE + "\\cdot" + stringA + "=" + stringB + ".}$$"
-
-        address = document.getElementById("matrixEquation")
-        address.textContent = s
-        MathJax.typesetPromise()
-      }
-
-      function verifyElementary(matrixE){
-        let index1 = []
-        let index2 = []
-        let One = parseRational("1")
-        let Zero = parseRational("0")
-        for (let i=0; i<matrixE.length; i++){
-          for (let j=0; j<matrixE[i].length; j++){
-            if (i==j && One.doesNotEqual(matrixE[i][j])){ 
-              if (index1.length >= 2){
-                return false
-              }
-              index1.push(i)
-            } else if (i!=j && Zero.doesNotEqual(matrixE[i][j])){
-               if (index2.length >= 2){
-                return false
-               }
-               index2.push([i, j])
-            }
-          }
-        }
-        // Type 1: swap rows
-        if (index1.length==2 && index2.length==2){
-          x = index1[0]; y = index1[1]
-          x1 = index2[0][0]; y1 = index2[0][1]
-          x2 = index2[1][0]; y2 = index2[1][1]
-          cond1 = (x1==x && y1==y && x2==y && y2==x)
-          cond2 = (x1==y && y1==x && x2==x && y2==y)
-          cond3 = (One.equals(matrixE[x1][y1]) && One.equals(matrixE[x2][y2]))
-          cond4 = (Zero.equals(matrixE[x][x]) && Zero.equals(matrixE[y][y]))
-          return (cond1 || cond2) && cond3 && cond4
-        }
-        // Type 2: scale row
-        else if (index1.length==1 && index2.length==0){
-          x = index1[0]
-          return  (Zero.doesNotEqual(matrixE[x][x]))
-        }
-        // Type 3: add row
-        else if (index1.length==0 && index2.length<=1){
-          return true
-        }
-        return false
-      }
-
-      function multiplyMatrix(){
-        E = readRationalMatrix("e")
-        if (!verifyElementary(E)){
-          alert("The given matrix E is not elementary.")
-          return 
-        }
-        A = readRationalMatrix("a")
-        B = matrixMultiplication(E, A)
-        displayMatrix(E, A, B)
-        reset = false
-      }
-
-      // These functions perform matrix operations
-      function matrixMultiplication(matrixA, matrixB){
-        m = matrixA.length
-        p = matrixB.length
-        n = matrixB[0].length
-
-        let product = []
-        for (let i=0; i<m; i++){
-          let row = []
-          for (let j=0; j<n; j++){
-            let sum = parseRational("0")
-            for (let k=0; k<p; k++){
-              let prod = matrixA[i][k].multiply(matrixB[k][j])
-              sum = sum.add(prod) 
-            }
-            row.push(sum)
-          }
-          product.push(row)
-        }
-        return product
-      }
-    </script>
-
-    <script>
+      /* This script handles rational numbers - both input and output. */
       function gcd(a, b){
         if (a==0 && b==0){
           alert("Both integers cannot be both zero.")
@@ -789,8 +396,7 @@
 
       function parseRational(string){
         if (!isNaN(string) && parseInt(string)==string){
-          return new RationalNumber(string, 1)
-        }
+          return new RationalNumber(string, 1)}
 
         n = string.length
         let numberExist = [false, false]
@@ -799,41 +405,474 @@
           if (string[i] == '-'){
             if (i!=index+1 || i==n-1){
               alert("This is not a rational number.")
-              return 
-            }
-          } else if (string[i] == '/'){
-              if (i==0 || i==n-1 || index>0){
-                alert("This is not a rational number.")
-                return 
-              }
-              index = i
-          } else if (isNaN(string[i])){
+              return } } 
+          else if (string[i] == '/'){
+            if (i==0 || i==n-1 || index>0){
               alert("This is not a rational number.")
-              return 
-          } else{
-              if (!numberExist[0] && index==-1){
-                numberExist[0] = true
-              } else if (!numberExist[1] && index > 0){
-                numberExist[1] = true
-            }
-          }
+              return }
+            index = i}
+          else if (isNaN(string[i])){
+            alert("This is not a rational number.")
+            return } 
+          else {
+            if (!numberExist[0] && index==-1){
+              numberExist[0] = true} 
+            else if (!numberExist[1] && index > 0){
+                numberExist[1] = true} }
         }
 
         if(index==-1){
           if (!numberExist[0]){
             alert("This is not a rational number.")
-            return 
-          }
+            return }
           let a = parseInt(string)
-          return new RationalNumber(a, 1) 
-        }
+          return new RationalNumber(a, 1)}
+
         if (!numberExist[0] || !numberExist[1]){
           alert("This is not a rational number.")
-          return 
-        }
+          return }
         let a = parseInt(string.slice(0, index))
         let b = parseInt(string.slice(index+1, n))
         return new RationalNumber(a, b)
+      }
+    </script>
+
+    <script>
+      /* This script handles matrix input and output.
+         It also checks for matrix equality. */
+
+      function readRationalMatrix(string){
+        M = []
+        let limit = string==='e' ? 4 : 5
+        for (let i=0; i<4; i++){
+          row = []
+          for (let j=0; j<limit; j++){
+            entryAddressM = string+String(i+1)+String(j+1)
+            entryM = document.getElementById(entryAddressM)
+            row.push(parseRational(entryM.value))
+          }
+          M.push(row)
+        }
+        return M
+      }
+
+      function writeRationalMatrix(matrixM, string){
+        let limit = string==="e" ? 4 : 5
+        for (let i=0; i<4; i++){
+          for (let j=0; j<limit; j++){
+            entryAddressM = string+String(i+1)+String(j+1)
+            entryM = document.getElementById(entryAddressM)
+            entryM.value = String(matrixM[i][j])
+          }
+        }
+      }
+
+      // Converts a matrix with raw input into a matrix with RationalNumber entries
+      function toRationalMatrix(matrixM){
+        A = []
+        for (let i=0; i<matrixM.length; i++){
+          row = []
+          for (let j=0; j<matrixM[i].length; j++){
+            row.push(parseRational(String(matrixM[i][j])))
+          }
+          A.push(row)
+        }
+        return A
+      }
+
+      // This function is created for debugging purposes
+      function printMatrix(matrixM){
+        A = []
+        for (let i=0; i<matrixM.length; i++){
+          row = []
+          for (let j=0; j<matrixM[i].length; j++){
+            row.push(String(matrixM[i][j]))
+          }
+          A.push(row)
+        }
+        return A
+      }
+
+      function matrixEquals(matrixA, matrixB){
+        if (!matrixA.length == matrixB.length){
+          return false}
+        if (!matrixA[0].length == matrixB[0].length){
+          return false}
+        for (let i=0; i<matrixA.length; i++){
+          for (let j=0; j<matrixA[i].length; j++){
+            if (!matrixA[i][j].equals(matrixB[i][j])){
+              return false}
+          }
+        }
+        return true
+      }
+
+      function matrixDoesNotEqual(matrixA, matrixB){
+        return !matrixEquals(matrixA, matrixB)
+      }
+
+      function texifyMatrix(matrixM){
+        let string = "\\begin{bmatrix} \n"
+        for (let i=0; i<matrixM.length; i++){
+          for (let j=0; j<matrixM[i].length; j++){
+            string += String(matrixM[i][j]) + " "
+            if (j < matrixM[i].length-1){
+              string += "& "}
+          } 
+          if (i < matrixM.length-1){
+            string += "\\\\\n"}
+        }
+        string += "\n\\end{bmatrix}"
+        return string
+      }
+
+      function texifyMatrixMultiplication(matrixE, matrixA, matrixB){
+        stringE = texifyMatrix(matrixE)
+        stringA = texifyMatrix(matrixA)
+        stringB = texifyMatrix(matrixB)
+        s = "$$" + stringE + "\\cdot" + stringA + "=" + stringB + ".$$"
+        address = document.getElementById("matrixEquation")
+        address.textContent = s
+      }
+
+      function promptMatrices(matrixA, matrixB){
+        stringA = texifyMatrix(matrixA)
+        stringB = texifyMatrix(matrixB)
+        s = "\\[\\begin{aligned} A &= " + stringA + ",\\\\ " + "& \\\\ B &= " + stringB + ".\\end{aligned}\\]"
+        address = document.getElementById("matrixPrompt")
+        address.textContent = s
+      }
+    </script>
+
+    <script>
+      /* This script handles row operations, elementary matrices and related settings */
+
+      // This function disables unnecessary parameters to prevent users from changing 
+      // their values
+      function disableParameters(){
+        type = document.getElementById("operationType").value
+        jthRow = document.getElementById("row_j")
+        scalingFactor = document.getElementById("scalar")
+        switch(type){ 
+          case "swap":
+            jthRow.disabled = false
+            scalingFactor.disabled = true
+            break
+
+          case "scale":
+            jthRow.disabled = true
+            scalingFactor.disabled = false
+            break
+
+          default:
+            jthRow.disabled = false
+            scalingFactor.disabled = false
+            break
+        }
+      }
+
+      // This function creates an elementary matrix
+      function createMatrix(){
+        E = [[1,0,0,0], [0,1,0,0], [0,0,1,0], [0,0,0,1]]
+        let selected = true
+
+        type = document.getElementById("operationType").value
+        ithRow = document.getElementById("row_i")
+        jthRow = document.getElementById("row_j")
+        scalingFactor = document.getElementById("scalar")
+        switch(type){
+          case "swap":
+            i = ithRow.value - 1
+            j = jthRow.value - 1
+            if (i===j){
+              alert("The row indices must be distinct.")
+              break}
+            E[i][i] = 0
+            E[j][j] = 0
+            E[i][j] = 1
+            E[j][i] = 1
+            break
+
+          case "scale":
+            i = ithRow.value - 1
+            c = scalingFactor.value
+            E[i][i] = c
+            break
+
+          case "add":
+            i = ithRow.value - 1
+            j = jthRow.value - 1
+            if (i===j){
+              alert("The row indices must be distinct.")
+              break}
+            c = scalingFactor.value
+            E[j][i] = c
+            break
+
+          case "null":
+            selected = false
+            break
+        }
+
+        if (!selected){
+          return }
+        writeRationalMatrix(E, "e")
+      }
+
+      // This function validates user input for an elementary matrix
+      function verifyElementary(matrixE){
+        let index1 = []
+        let index2 = []
+        let One = parseRational("1")
+        let Zero = parseRational("0")
+        for (let i=0; i<matrixE.length; i++){
+          for (let j=0; j<matrixE[i].length; j++){
+            if (i==j && One.doesNotEqual(matrixE[i][j])){ 
+              if (index1.length >= 2){
+                return false}
+              index1.push(i)} 
+            else if (i!=j && Zero.doesNotEqual(matrixE[i][j])){
+              if (index2.length >= 2){
+                return false}
+               index2.push([i, j])}
+          }
+        }
+        // Type 1: swap rows
+        if (index1.length==2 && index2.length==2){
+          x = index1[0]; y = index1[1]
+          x1 = index2[0][0]; y1 = index2[0][1]
+          x2 = index2[1][0]; y2 = index2[1][1]
+          cond1 = (x1==x && y1==y && x2==y && y2==x)
+          cond2 = (x1==y && y1==x && x2==x && y2==y)
+          cond3 = (One.equals(matrixE[x1][y1]) && One.equals(matrixE[x2][y2]))
+          cond4 = (Zero.equals(matrixE[x][x]) && Zero.equals(matrixE[y][y]))
+          return (cond1 || cond2) && cond3 && cond4}
+        // Type 2: scale row
+        if (index1.length==1 && index2.length==0){
+          x = index1[0]
+          return  (Zero.doesNotEqual(matrixE[x][x]))}
+        // Type 3: add row
+        if (index1.length==0 && index2.length<=1){
+          return true}
+        return false
+      }
+
+      function multiplyMatrices(matrixA, matrixB){
+        m = matrixA.length
+        p = matrixB.length
+        n = matrixB[0].length
+
+        let product = []
+        for (let i=0; i<m; i++){
+          let row = []
+          for (let j=0; j<n; j++){
+            let sum = parseRational("0")
+            for (let k=0; k<p; k++){
+              let prod = matrixA[i][k].multiply(matrixB[k][j])
+              sum = sum.add(prod) 
+            }
+            row.push(sum)
+          }
+          product.push(row)
+        }
+        return product
+      }
+
+      function showMatrixMultiplication(){
+        E = readRationalMatrix("e")
+        if (!verifyElementary(E)){
+          alert("The given matrix E is not elementary.")
+          return }
+        A = readRationalMatrix("a")
+        B = multiplyMatrices(E, A)
+        texifyMatrixMultiplication(E, A, B)
+        MathJax.typesetPromise()
+      }
+    </script>
+
+    <script>
+      /* This script handles questions display and scoring. 
+         It also contains navigational features.
+      */
+      page = 0
+      beginQuestions = "false"
+      questions = [
+        "1. Find an elementary matrix that swaps entries in Row $1$ and Row $2$.",
+        "2. What about an elementary matrix that swaps entries in Row $2$ and Row $4$?",
+        "3. Create an elementary matrix that scales entries in Row $3$ by $2$.",
+        "4. What about an elementary matrix that multiplies the entire Row $4$ by $-1$?",
+        "5. Determine an elementary matrix that adds Row $3$ to Row $4$.",
+        "6. Can you find an elementary matrix that adds $-3$ times of Row 3 to Row 1?",
+        "7. Look at the two displayed matrices $A$ and $B$. $B$ is obtained from $A$ from a certain elementary row operation. Name an elementary matrix that performs this operation.",
+        "8. Great, now specify an elementary matrix that transforms $B$ back into $A$.",
+        "9. Next, $B$ is obtained from $A$ from another elementary row operation. Specify an elementary matrix that is responsible for this operation.",
+        "10. Superb, now provide an elementary matrix that changes $B$ into $A$.",
+        "11. Alright, $B$ is obtained from $A$ from yet another elementary row operation. Name an elementary matrix that changes $A$ into $B$.",
+        "12. Terrific! Find an elementary matrix that reverts $B$ into $A$.",
+        "Awesome!"
+      ]
+      answered = [0,0,0,0,0,0,0,0,0,0,0,0]
+
+      function score(){
+        scoreBoard = document.getElementById("score")
+
+        // This creates the score board initially
+        if (scoreBoard.firstChild == null){
+          var scoreCard = document.createElement('h1')
+          scoreCard.style.fontSize="x-large"
+          scoreCard.style.textAlign="left"
+          scoreCard.innerHTML="Score Card"
+          scoreBoard.appendChild(scoreCard)
+
+          for(let i=0; i<answered.length; i++){
+            var question = document.createElement('div')
+            question.style.fontSize = "x-large"
+            question.style.textAlign = "left"
+            question.id = 'q' + i
+            question.innerHTML =  (i+1) + " &#x2610" 
+            question.style.color = 'red'
+            scoreBoard.appendChild(question)
+          } 
+          return }
+
+        // This looks for the question that was most recently answered correctly
+        // and modifies its HTML and CSS properties
+        for (let i=0; i<answered.length; i++){
+          question = document.getElementById('q'+i)
+          if (answered[i]==1 && question.style.color=='red'){
+            question.style.color = 'green'
+            question.innerHTML =  (i+1) + " &#9745"
+            break}
+        }
+      }
+      score()
+
+      function nextPage(){
+        if (page<answered.length && beginQuestions=="true"){
+          document.getElementById("response").textContent = ""
+          page += 1
+          displayQuestion(page)}
+      }
+
+      function previousPage(){
+        if (page>0 && beginQuestions=="true"){
+          document.getElementById("response").textContent = ""
+          page -= 1
+          displayQuestion(page)}
+      }
+
+      function pointOut(){
+        reply = document.getElementById("response")
+        texts = ["Not quite, please try again.", 
+                 "This is slightly incorrect, please check once more.",
+                 "You're almost there, don't give up!"]
+        for (let i=0; i<texts.length; i++){
+          if (reply.textContent == texts[i]){
+            reply.textContent = texts[(i+1)%3]
+            return }
+        }
+        reply.textContent = texts[0]
+      }
+
+      function gradeElementaryMatrices(page, matrixE){
+        let correct = "false"
+        E0 = toRationalMatrix([[0,1,0,0],[1,0,0,0],[0,0,1,0],[0,0,0,1]])
+        E1 = toRationalMatrix([[1,0,0,0],[0,0,0,1],[0,0,1,0],[0,1,0,0]])
+        E2 = toRationalMatrix([[1,0,0,0],[0,1,0,0],[0,0,2,0],[0,0,0,1]])
+        E3 = toRationalMatrix([[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,-1]])
+        E4 = toRationalMatrix([[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,1,1]])
+        E5 = toRationalMatrix([[1,0,-3,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]])
+        E6 = toRationalMatrix([[0,0,0,1],[0,1,0,0],[0,0,1,0],[1,0,0,0]])
+        E7 = toRationalMatrix([[0,0,0,1],[0,1,0,0],[0,0,1,0],[1,0,0,0]])
+        E8 = toRationalMatrix([[1,0,0,0],[0,3,0,0],[0,0,1,0],[0,0,0,1]])
+        E9 = toRationalMatrix([[1,0,0,0],[0,"1/3",0,0],[0,0,1,0],[0,0,0,1]])
+        E10 = toRationalMatrix([[1,0,0,0],[0,1,0,0],[0,"1/2",1,0],[0,0,0,1]])
+        E11 = toRationalMatrix([[1,0,0,0],[0,1,0,0],[0,"-1/2",1,0],[0,0,0,1]])
+        MatrixE = [E0, E1, E2, E3, E4, E5, E6, E7, E8, E9, E10, E11]
+        if (matrixEquals(matrixE, MatrixE[page])){
+          correct = "true"}
+        return correct
+      }
+
+      function appendCompletedQuestion(page){
+        if (answered[page] == 0){
+          answered[page] = 1
+          score()
+
+          var answeredQuestion = document.createElement('div')
+          answeredQuestion.textContent = questions[page]
+          answeredQuestion.setAttribute('class', 'greytext')
+          document.getElementById("completed").appendChild(answeredQuestion)}
+      }
+
+      MatrixA = [[1,0,0,0,1], [0,1,0,0,2], [0,0,1,0,3], [0,0,0,1,4]]
+      A0 = toRationalMatrix([[1,0,0,0,-1],[0,1,0,0,-2],[0,0,1,0,-3],[0,0,0,1,-4]])
+      B0 = toRationalMatrix([[0,0,0,1,-4],[0,1,0,0,-2],[0,0,1,0,-3],[1,0,0,0,-1]])
+      B1 = toRationalMatrix([[1,0,0,0,-1],[0,3,0,0,-6],[0,0,1,0,-3],[0,0,0,1,-4]])
+      B2 = toRationalMatrix([[1,0,0,0,-1],[0,1,0,0,-2],[0,"1/2",1,0,-4],[0,0,0,1,-4]])
+      MatricesA = [A0, B0, A0, B1, A0, B2]
+      MatricesB = [B0, B0, B1, B1, B2, B2]
+
+      function displayQuestion(page){
+        displayArea = document.getElementById("questionToDisplay") 
+        displayArea.innerHTML = questions[page]
+
+        if (6<=page && page<12){
+          promptMatrices(A0, MatricesB[page-6])
+          writeRationalMatrix(MatricesA[page-6], "a")} 
+        else {
+          document.getElementById("matrixPrompt").textContent=""
+          writeRationalMatrix(MatrixA, "a")}
+        MathJax.typesetPromise()
+      }
+
+      // This functions resets the entire progress of row operations
+      function resetSettings(){
+        let i = 1
+        let j = 1
+        let c = 1
+        E = [[1,0,0,0], [0,1,0,0], [0,0,1,0], [0,0,0,1]]
+
+        // This resets the settings for row operations
+        document.getElementById("operationType").value = "null"
+        document.getElementById("row_i").value = i
+        document.getElementById("row_j").value = j
+        document.getElementById("scalar").value = c
+        
+        // This resets the matrices' entries
+        writeRationalMatrix(E, "e")
+        if (6<=page && page<12){
+          writeRationalMatrix(MatricesA[page-6], "a")}
+        else {
+          writeRationalMatrix(MatrixA, "a")}
+      }
+
+      function updateQuestions(){
+        if (beginQuestions == "false"){
+          button = document.getElementById("submitButton")
+          button.textContent = "Submit"
+          beginQuestions = "true"
+          displayQuestion(0)
+          return } 
+        else if (beginQuestions == "true"){
+          E = readRationalMatrix("e")
+          if (page >= answered.length){
+            return }
+          if (gradeElementaryMatrices(page, E)=="true"){
+            document.getElementById("response").textContent = ""
+            appendCompletedQuestion(page)
+            nextPage()} 
+          else {
+            pointOut()} }
+      }
+
+      function automaticSucceed(){
+        if (beginQuestions != "true"){
+          return }
+        appendCompletedQuestion(page)
+        if (page < answered.length){
+          page += 1}
+        displayQuestion(page)
       }
     </script>
 </body>
