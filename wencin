@@ -25,7 +25,7 @@ body {
 
 <body>
     <div id="pic"> 
-        <img style="width:350px; height:350px" src="https://drive.google.com/file/d/150lXPMnBqyBAAPOKNcfvsk3Y4LJEpyuY/view?usp=sharing" alt="Wencin">
+        <img style="width:300px" src="https://drive.google.com/uc?id=150lXPMnBqyBAAPOKNcfvsk3Y4LJEpyuY" alt="Wencin">
     </div>
     <div id="info_box">
         <p> Wencin Poh graduated from the University of California, Davis in 2021, specializing in algebraic combinatorics. He worked as an online K-12 math instructor at Mathnasium of Daly City, and recently joined 
