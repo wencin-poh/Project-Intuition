@@ -34,12 +34,12 @@ background-color: white;
 </head>
 <body>
     <div id="pic"> 
-        <img style="width:350px; heght:350px" src="https://photos.app.goo.gl/5snd2wNLHkmR3E7D6" alt="Jeff">
+        <img style="width:350px; heght:350px" src="https://lh3.googleusercontent.com/gwMOk5HycR_rbp48xwTZmJEL-flZn0FN388iLM7ZBtyRYy6ylEEVMhCF0yu-eRSiNtATeR0u1A6lAyfPXLVGj1a8hwDxFnVhziTTB808JiWkFFVsNa75boTOPiMx-KHX_zKI--PfPq85WLQxb95Vkile7pTMBA6J1uW9AtXXiEW3IUIK_q1o8s8I9DbaBZUtFwrmsJp8eD5tBk8erVUjmJP1wBtcfqQH-6FKMXxKWKb1EwbdQYBJgob1xk_eQh28fid_eB-VLysqGyz_NAtLaf3_U-NLknSCbjj-f_T6aPDUyvx4qAxIQKNlXY8BFmUE51u-NdmhQdjDBx7fCmWWtH2-qGyUzeAcHSH3iwdrK6vsmaYAcXfNsMwnnK8QTD7-G4pWH4xzZ6BADbilgACwOsG-f1Le8R8Ev46jJAqWzOgUHTmfUDYSx79zCKULYLfCNKGtTCJ3upxaCOfKkTYy-_DzXN662Q_r_Eg4IHrSb3r2EzL5GHf_iAqgFXhphFJ5nY4BTqsJQB0j70IsCB-HFgp_UwN9-zKrsgVPSy3zLHXknZdq1VBbLILHtoxzhrMLgBsk_8cUc6HS4Y5AcoDYmTNQ6cGvOPrrbVVV9jOs9CmVp6SB2o0cTDoEksUfVbWErg4FgauqY35gohhy788ICRZ6aksjhEKIBwF9Nseo7Sog04VzKUFEpTdBh6JzEKRSfviviHsdUS2uuu6V7sZ_k7WC6u4P54TXja_XTrAUu-pPEMrHipIfSTSCY3P67i53xtleRZ-Sm2WQLcLK73_-qKC081sCxfMnLfsXbQzld808_95BQS94oLy4oX8tTPzeODBi_Am71v1v_ex5gmV7unyw0IKwD7zUH5neAvpHLsdUlMiDbpeVebKYFhKtlKOWJCxJjiLZuneE5LO8atFOJPCfbY7F_pY7Hg4XySVrDrak4A_5z87jp31LC6bTJvDrbuK-rizaV9cqyI8qpdBj=w2460-h1640-no?authuser=0" alt="Jeff">
 
     </div>
     <div id="info_box"> 
 <p>
-Jeff Nichols is a PhD candidate in Applied Mathematics at the University of California, Davis.  He studies the dynamics of non-Newtonian fluids and the numerical methods required to simulate them.  His work helps to bridge the gap between mathematical theory and laboratory experiments.  At Davis, he has taught many courses, including Calculus, Differential Equations, and Real and Complex Analysis, 
+Jeff Nichols is a PhD candidate in Applied Mathematics at the University of California, Davis.  He studies the dynamics of non-Newtonian fluids and the numerical methods required to simulate them.  His work helps to bridge the gap between mathematical theory and laboratory experiments.  At Davis, he has taught many courses, including Calculus, Differential Equations, and Real and Complex Analysis. 
 </p>
 <p>As an undergraduate, he studied Mechanical Engineering at Colorado School of Mines.  In Colorado, Jeff fell in love with both mathematics and an outdoor, athletic lifestyle.  When away from his research and teaching, you can find him training for triathlons and learning acrobatic yoga!
 </p>
