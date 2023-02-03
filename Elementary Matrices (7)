@@ -27,7 +27,7 @@
     .expand {
       display: flex;
       justify-content: space-between;
-      align-items: center;}
+      align-items: flex-end;}
 
     #matrixPrompt {
       width: 300px;
@@ -53,6 +53,10 @@
       width: 150px;
       height: 100px;}
 
+    .largebox { 
+      width: 500px;
+      height: 100px;}
+
     .entry { 
       width: 40px;
       height: 15px;
@@ -67,6 +71,12 @@
     .dropdown {
       height: 20px;
       border-radius: 5px;}
+
+    .multiplication {
+      width: 70px; 
+      position: relative; 
+      top: 25px;
+    }
 
     .Button {
       height: 20px;
@@ -95,9 +105,9 @@
 </head>
 
 <body>
-    <h2><center>Module 6: Elementary Matrices</center></h2>
+    <h2><center>Module 7: Row Operations and Elementary Matrices</center></h2>
     <div id="intro">
-      <p>We shall explore the following idea in this module: for every elementary row operation applied onto a matrix, there is a way to achieve the same effect by left-multiplying said matrix with a suitable elementary matrix.</p>
+      <p>We will explore the following idea in this module: for every elementary row operation applied onto a matrix, we could achieve the same effect by multiplying that matrix with a suitable elementary matrix.</p>
       <p>Each elementary matrix looks almost like an identity matrix, but the difference in entries depends on their type. 
       In general, we have the following types of elementary matrices:</p>
       <ul>
@@ -156,8 +166,8 @@
       This would be displayed as matrix $E$ below. 
       A matrix $A$ is provided for you to apply the effects of a row operation.
       You are welcome to change any of its entries. 
-      Next, you may click on 'Multiply Matrix' to see the effect of the multiplication on $A$.
-      The result of the multiplication shall be shown in the area called 'Matrix equation'.
+      Next, you may click on 'Multiply Matrices' to see the effect of the multiplication on $A$.
+      The result of the multiplication will be shown in the area called 'Matrix Equation'.
      </p>
 
       <p> 
@@ -178,6 +188,7 @@
         <div id="response">
         </div>
       </div>
+      
 
       <div id="matrixPrompt">
       </div>
@@ -214,12 +225,10 @@
         <input type="text" class="entry" id="scalar" name="scalar" value=1><br><br>
 
         <button onclick="createMatrix()" id="createMatrix"> Create Matrix </button>
-        <button onclick="showMatrixMultiplication()" id="multiplyMatrix"> Multiply Matrix </button>
-        <button onclick="resetSettings()" id="resetSettings"> Reset Settings </button>
+        <button onclick="resetSettings()" id="reset"> Reset </button>
       </div>
 
       <div id="displayArea">
-        <h3><center>Matrix equation</center></h3>
         <div id="matrixEquation">
         </div>
       </div>
@@ -252,6 +261,8 @@
         <input type="text" id="e43" class="entry" value=0>
         <input type="text" id="e44" class="entry" value=1>
       </div>
+
+      <button class="multiplication" onclick="showMatrixMultiplication()" id="multiplyMatrices"> Multiply Matrices </button>
       
       <div id="augmentedMatrixOne">
         <h3>Matrix $A$</h3>
@@ -311,7 +322,7 @@
       </div>
       -->
 
-      <div class="box">
+      <div class="largebox">
       </div>
     </div>
 
@@ -678,6 +689,7 @@
         return product
       }
 
+      displayMatrix = false
       function showMatrixMultiplication(){
         E = readRationalMatrix("e")
         if (!verifyElementary(E)){
@@ -685,6 +697,14 @@
           return }
         A = readRationalMatrix("a")
         B = multiplyMatrices(E, A)
+        if (!displayMatrix){
+          heading = document.createElement('h3')
+          heading.innerHTML = "<center>Matrix Equation</center>"
+          child = document.getElementById("matrixEquation")
+          parent = child.parentNode
+          parent.insertBefore(heading, child)
+          displayMatrix = true
+        } 
         texifyMatrixMultiplication(E, A, B)
         MathJax.typesetPromise()
       }
