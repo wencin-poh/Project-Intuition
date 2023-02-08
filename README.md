@@ -1,5 +1,10 @@
 # Linear-Lab
-These are the files for the website projectintuition.org. These files are the property of Project Intution. Do not copy or these files without the express permission of Graham Hawkes. The files in this repository belong to one of 5 folders:
+These are the files for the website projectintuition.org. 
+
+These files are the property of Project Intution. The use of any or all of this code by anyone other than
+Graham Hawkes, Wencin Poh, or Jeff Nichols is prohibited. 
+
+The files in this repository belong to one of 5 folders:
 
 1. Modules: Contains HTML/CSS and javaScript for each module appearing on projectintuition.org
 2. Bios: Contains HTML for the bios of Graham, Wencin, and Jeff
