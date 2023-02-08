@@ -1,0 +1,130 @@
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- The following adds MathJax to render LaTeX notation -->
+    <link type="text/css" rel="stylesheet" href="styles.css">
+    <script type="text/javascript" src="scripts.js"></script>
+  </head>
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+#pic{
+
+position: absolute;
+height: 230px;
+width: 800px;
+left: 80px;
+top: 10px;
+background-color: white;
+}
+#info_box{
+
+  position: absolute;
+  height: 230px;
+  width: 580px;
+  left: 800px;
+  top: 10px;
+  background-color: white;
+}
+
+
+
+ 
+
+</style>
+</head>
+<body>
+
+  <div class="navbar">
+    <div>
+      <a href="index.html">Home</a>
+      </div>
+    <div class="dropdown">
+      <button class="dropbtn">Lab Courses 
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content">
+          <a href="linear-lab.html"; style="color:blue">Linear Algebra</a>
+          <a style="color:grey">Calculus</a>
+          <a style="color:grey">Probability</a>
+          <a style="color:grey">Statistics</a>
+          <a style="color:grey">Discrete Math</a>
+      </div>
+  </div> 
+      <div class="dropdown">
+          <button class="dropbtn">The Team 
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-content">
+              <a href="graham.html"; style="color:blue">Dr. Graham Hawkes</a>
+              <a href="wencin.html"; style="color:blue">Dr. Wencin Poh</a>
+              <a href="jeff.html"; style="color:blue">Jeff Nichols</a>
+          </div>
+  
+  </div>
+  <a href="contact.html">Contact</a>
+  
+    <a href="research.html">Research</a>
+  
+    <a href="news.html">News</a>
+    </div>
+  
+
+    <h1 style="text-align: center;">Research</h1>
+    <p>
+In order to improve the educational experience, we need to know what works and what doesn't. Towards this
+end, we are engaging in two types of research around the effectiveness of our product.  The first type of 
+research involves the careful collection, interpretation, and analysis of data combed from students' interaction
+with our product.  Because of the interactive nature of our product we are able to collect not only data 
+on student responses to the questions in our modules but also statistics on how students interact with 
+the modules themselves.  
+</P>
+<P>
+
+
+For those curious to know how this actually works here is a short overview:  The content of Project Intuition 
+is stored on a server.  When a user navigates to our website, files are sent to the user's browser, which then
+compiles those files and displays the result.  At this point the user can view all of our content, interact with
+modules and answer questions without any additional flow of data between the server and the browser. However, by 
+keeping a connection open between the browser and the server, we are able to send data associated to student 
+behavior back to the server.  The server then interprets this data and stores it to a database.  
+
+Whenever needed (such as when a user clicks the "Question Statistics" link in each module) the browser sends 
+a request to the server to look up the relevant information in the database.  After retrieving the data, the 
+server sends the requested information back to the browser which can then be used to improve the user's 
+experience.
+    </p>
+    <div style="text-align: center;"> 
+        <img style="width:950px; height:400px" src="https://drive.google.com/uc?id=1TZBzemzlD9C9gOHRVoiVk1es9wVHYIOn" alt="software">
+
+        </div>
+
+<p>
+    In addition, we at Project Intuition have direct access to the contents of the database.  This allows us to make
+    adjustments to our modules (as a simple example, if a question is only correctly answered 5% of the time, this 
+    tells us the question is too difficult, worded poorly, or confusing for another reason and needs to be re-evaluated).
+    Since Project Intuition courses are designed to be taken corequisitely with their associated undergraduate math 
+    courses we plan to eventually link our own data to student performance metrics gathered by the instructor of the associated
+    in person math course including data such as test scores and class attendance.  In this way we can see if there
+    is a correlation between use of our product and improved performance, and, if so, exactly what aspects of our
+    product appear to be most helpful.
+
+</p>
+
+<p>
+The second type of research that we are engaging in involves reviewing the current literature in the 
+field of mathematics education to help inform the construction of our product.  
+
+
+</p>
+
+</body>
+
+
+
+</html>
