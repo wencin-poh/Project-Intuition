@@ -19,13 +19,11 @@ and strpos($nums, "9") == false)
 $new=1;}
 
 
-
 $add= "INSERT INTO modules VALUES($numstring)";
 $remove= "DELETE FROM modules WHERE user_time=$time";
 
 
-
-$link=mysqli_connect('ghawkes121733803.domaincommysql.com', 'ghawkes1217', 'Tessa#17','student_responses'); 
+$link=mysqli_connect('*****.domaincommysql.com', '*****', '*****','student_responses'); 
 
 if ($new==0){
 mysqli_query($link, $remove);}
