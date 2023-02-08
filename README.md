@@ -12,8 +12,11 @@ Each folder contains a Credit file which assigns credit to Graham, Wencin, and/o
 Additional contributions not specified within the folders:
 
 Wencin: Setting up MathJax for mathematical equations in the modules
+
 Wencin: Researching funding opportunities and applying for funding
+
 Jeff: Researching relevant literature in education
+
 Jeff: Creating instructional videos to accompany modules
 
 In addition all members attend weekly meetings to provide feedback to the other team members.
