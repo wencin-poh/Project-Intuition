@@ -14,7 +14,7 @@ $get= "SELECT $r, $w FROM `modules` WHERE module=$mod and ($r+$w>0)";
 
 
 
-$link=mysqli_connect('ghawkes121733803.domaincommysql.com', 'ghawkes1217', 'Tessa#17','student_responses'); 
+$link=mysqli_connect('*****.domaincommysql.com', '*****', '*****','student_responses'); 
 $right=0;
 $wrong=0;
 $users=0;
