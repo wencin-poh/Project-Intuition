@@ -1,8 +1,6 @@
-# Linear-Lab
-These are the files for the website projectintuition.org. 
+# Project Intuition
 
-These files are the property of Project Intution. Forking of this repository or use of any or all of this code in any way by anyone other than
-Graham Hawkes, Wencin Poh, or Jeff Nichols is prohibited. 
+These are the current files for the website projectintuition.org.  The authors of this project include Graham Hawkes, Wencin Poh, and Jeff Nichols. 
 
 The files in this repository belong to one of 5 folders:
 
