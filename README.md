@@ -15,9 +15,9 @@ The authors of this project include Graham Hawkes, Wencin Poh, and Jeff Nichols.
 Additional contributions not specified within the folders:
 
 Wencin: Setting up MathJax for mathematical equations in the modules <br>
-Wencin: Researching funding opportunities and applying for funding
-Jeff: Researching relevant literature in education
-Jeff: Creating instructional videos to accompany modules
+Wencin: Researching funding opportunities and applying for funding <br>
+Jeff: Researching relevant literature in education <br>
+Jeff: Creating instructional videos to accompany modules <br>
 In addition all members attend weekly meetings to provide feedback to the other team members.
 
 
